@@ -21,20 +21,20 @@
 	{
 		font-family: 'Source Sans Pro';
 		font-weight: 300;
-		background: #252122;
+		background: #20212B;
 		background-image: url('images/bg02.png');
 		color: #5d5d5d;
 	}
 
 	strong, b
 	{
-		color: #252122;
+		color: #20212B;
 		font-weight: 700;
 	}
 
 	h1, h2, h3, h4, h5, h6
 	{
-		color: #252122;
+		color: #20212B;
 		font-weight: 700;
 	}
 
@@ -177,7 +177,7 @@
 
 			.button-alt
 			{
-				background: #252122;
+				background: #20212B;
 			}
 
 				.button-alt:hover
@@ -530,12 +530,12 @@
 
 			.pennant-alt
 			{
-				background-color: #252122;
+				background-color: #20212B;
 			}
 
 				.pennant-alt:after
 				{
-					border-top-color: #252122;
+					border-top-color: #20212B;
 				}
 
 			.pennant-alt2
@@ -564,7 +564,7 @@
 
 		#banner header
 		{
-			background-color: #252122;
+			background-color: #20212B;
 			background-color: rgba(34,30,31,0.98);
 			text-align: center;
 		}
