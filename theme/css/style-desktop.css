@@ -14,12 +14,12 @@
 		line-height: 1.75em;
 		min-width: 1200px;
 	}
-	
+
 	h2
 	{
 		font-size: 1.5em;
 	}
-	
+
 	h3
 	{
 		font-size: 1.35em;
@@ -30,23 +30,23 @@
 		margin: 0.5em 0 0 0;
 		padding-bottom: 0.5em;
 	}
-	
+
 	header
 	{
 		margin: 0 0 1.5em 0;
 	}
-	
+
 	footer
 	{
 		margin: 2.25em 0 0 0;
 	}
-	
+
 	/* Actions */
 
 		.actions
 		{
 		}
-		
+
 			.actions .button
 			{
 				margin-right: 0.75em;
@@ -58,7 +58,7 @@
 		{
 			padding: 2.75em 1.75em 2.75em 1.75em;
 		}
-		
+
 			.box .image-full
 			{
 				left: 1.75em;
@@ -67,7 +67,7 @@
 			}
 
 	/* Button */
-	
+
 		.button
 		{
 			font-size: 1.1em;
@@ -81,17 +81,17 @@
 			}
 
 	/* Is-* */
-	
+
 		.is-post
 		{
 		}
-		
+
 			.is-post header
 			{
 				padding-top: 1em;
 				margin: 0 0 2em 0;
 			}
-		
+
 			.is-post h2
 			{
 				padding:0.5em 0;
@@ -101,7 +101,7 @@
 			.is-post p {
 				margin:1em 0;
 			}
-			
+
 			.is-post .byline
 			{
 				margin-top: 1.25em;
@@ -121,7 +121,7 @@
 				padding: 0 0 0 1em;
 				margin: 0 0 0 1em;
 			}
-			
+
 			ul.links li:first-child
 			{
 				border-left: 0;
@@ -159,13 +159,13 @@
 		{
 			height: 10em;
 		}
-	
+
 		#header-wrapper:after
 		{
 			height: 20em;
 			top: -2.5em;
 		}
-	
+
 	#main-wrapper
 	{
 		padding: 6em 0 6em 0;
@@ -175,7 +175,7 @@
 		{
 			height: 5em;
 		}
-	
+
 	#footer-wrapper
 	{
 		padding: 6em 0 6em 0;
@@ -190,12 +190,12 @@
 		{
 			margin: 0 0 3em 0;
 		}
-		
+
 			#footer-wrapper header h2
 			{
 				font-size: 1.75em;
 			}
-			
+
 		#footer-wrapper .row
 		{
 			padding-bottom: 2em;
@@ -209,7 +209,7 @@
 	{
 		text-align: center;
 	}
-	
+
 		#header h1
 		{
 			color: #252122;
@@ -243,7 +243,7 @@
 			font-style: italic;
 			margin: 0 0.35em 0 0.35em;
 		}
-		
+
 			#nav > ul > li > a
 			{
 				border-radius: 5px;
@@ -261,32 +261,32 @@
 		#nav > ul > li:hover
 		{
 		}
-		
+
 			#nav > ul > li:hover > a
 			{
 				background: #f3f3f3;
 			}
-			
+
 		#nav > ul > li.active
 		{
 		}
-		
+
 			#nav > ul > li.active > a
 			{
 				background: #f3f3f3;
 			}
-			
+
 		#nav > ul > li.current_page_item
 		{
 		}
-		
+
 			#nav > ul > li.current_page_item > a
 			{
-				background: #d52349;
+				background: #9CD7CA;
 				color: #fff !important;
 				font-weight: 700;
 			}
-			
+
 	.dropotron
 	{
 		border-radius: 5px;
@@ -298,7 +298,7 @@
 		box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.5);
 		text-align: left;
 	}
-	
+
 		.dropotron a,
 		.dropotron span
 		{
@@ -310,7 +310,7 @@
 			-ms-transition: color .25s ease-in-out;
 			transition: color .25s ease-in-out;
 		}
-		
+
 		.dropotron li
 		{
 			padding: 0.25em 0 0.25em 0;
@@ -327,7 +327,7 @@
 			margin-top: 2em;
 			margin-left: -0.51em;
 		}
-		
+
 			.dropotron-level-0:before
 			{
 				content: '';
@@ -350,7 +350,7 @@
 		position: relative;
 		margin-top: 1em;
 	}
-	
+
 		#banner header
 		{
 			border-radius: 5px;
@@ -365,14 +365,14 @@
 				To vertically center this we need to set a width/height for the header
 				overlay, then set a negative left/top margin set to half its width/height.
 			*/
-			
+
 			width: 50em;
 			height: 13em;
-			
+
 			margin-left: -25em;
 			margin-top: -6.5em;
 		}
-		
+
 			#banner header h2
 			{
 				font-size: 3em;
@@ -384,7 +384,7 @@
 			{
 				font-size: 1.75em;
 			}
-			
+
 /*********************************************************************************/
 /* Footer                                                                        */
 /*********************************************************************************/
@@ -409,7 +409,7 @@
 	{
 		padding: 3em 0 0 0;
 	}
-	
+
 		#intro section
 		{
 			padding: 2em 0 2em 0;
@@ -419,36 +419,36 @@
 		{
 			font-size: 1.75em;
 		}
-		
+
 		#intro p
 		{
 			font-size: 1.25em;
 			margin: 0;
 		}
-	
+
 		#intro .middle
 		{
 			box-shadow:	16px 0px 0px 0px #fff,
-						17px 0px 0px 0px #ccc, 
-						
-						-16px 0px 0px 0px #fff, 
-						-17px 0px 0px 0px #ccc, 
-						
-						-16px -45px 0px 0px #fff, 
-						16px -45px 0px 0px #fff, 
+						17px 0px 0px 0px #ccc,
 
-						-16px 45px 0px 0px #fff, 
-						16px 45px 0px 0px #fff, 
+						-16px 0px 0px 0px #fff,
+						-17px 0px 0px 0px #ccc,
+
+						-16px -45px 0px 0px #fff,
+						16px -45px 0px 0px #fff,
+
+						-16px 45px 0px 0px #fff,
+						16px 45px 0px 0px #fff,
 
 						-16px 0px 45px 0px rgba(0,0,0,0.15),
 						16px 0px 45px 0px rgba(0,0,0,0.15);
 		}
-		
+
 		#intro .actions
 		{
 			padding: 5em 0 0 0;
 		}
-		
+
 			#intro .actions .button
 			{
 				width: 12em;
@@ -458,12 +458,12 @@
 /*********************************************************************************/
 /* Copyright                                                                     */
 /*********************************************************************************/
-		
+
 	#copyright
 	{
 		margin: 3em 0 2em 0;
 	}
-	
+
 		#copyright .links
 		{
 			padding: 0.85em 2.25em 0.85em 2.25em;
