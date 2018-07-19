@@ -38,7 +38,7 @@
 		{
 			padding: 25px 15px 20px 15px;
 		}
-		
+
 			.box .image-full
 			{
 				left: 15px;
@@ -87,7 +87,7 @@
 		ul.divided
 		{
 		}
-		
+
 			ul.divided li
 			{
 				padding: 0.5em 0 0.5em 0;
@@ -96,7 +96,7 @@
 		ul.links
 		{
 		}
-		
+
 			ul.links li
 			{
 				display: block;
@@ -104,7 +104,7 @@
 				padding: 0.25em 0 0 0;
 				margin: 0.25em 0 0 0;
 			}
-			
+
 			ul.links li:first-child
 			{
 				border-top: 0;
@@ -199,7 +199,7 @@
 			padding: 0 1em 0 1em;
 			font-style: italic;
 		}
-		
+
 			#navPanel .link:first-child
 			{
 				border-top: 0;
@@ -232,7 +232,7 @@
 		{
 			height: 8em;
 		}
-	
+
 		#header-wrapper:after
 		{
 			height: 12em;
@@ -250,7 +250,7 @@
 		{
 			height: 3em;
 		}
-	
+
 /*********************************************************************************/
 /* Intro                                                                         */
 /*********************************************************************************/
@@ -259,7 +259,7 @@
 	{
 		padding: 0 25px 0 25px;
 	}
-	
+
 		#intro section
 		{
 			position: relative;
@@ -282,10 +282,10 @@
 	{
 		text-align: center;
 	}
-	
+
 		#header h1
 		{
-			color: #252122;
+			color: #20212B;
 			font-weight: 900;
 			font-size: 1.75em;
 			letter-spacing: -0.035em;
@@ -308,19 +308,19 @@
 	{
 		margin: 0 0 2.5em 0;
 	}
-	
+
 		#banner header
 		{
 			padding: 1.5em 1em 1.5em 1em;
 		}
-		
+
 		#banner h2
 		{
 			font-size: 1.5em;
 			line-height: 1.5em;
 			margin: 0 0 0.25em 0;
 		}
-		
+
 		#banner .byline
 		{
 			font-size: 1.2em;
@@ -329,12 +329,12 @@
 /*********************************************************************************/
 /* Copyright                                                                     */
 /*********************************************************************************/
-		
+
 	#copyright
 	{
 		margin: 3em 0 0 0;
 	}
-	
+
 		#copyright .links
 		{
 			padding: 0.75em 1.25em 0.75em 1.25em;
