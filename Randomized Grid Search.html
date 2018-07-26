@@ -68,7 +68,7 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Sat 02 June 2018</div>
+									<div class="pennant pennant-alt date">Fri 18 May 2018</div>
 									<h2>Randomized Grid Search</h2>
 									<style type="text/css">/*!
 *
@@ -1049,10 +1049,10 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">npimport</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">RandomizedSearchCV</span>
@@ -1085,7 +1085,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>RandomizedSearchCV(cv=10, error_score='raise',
           estimator=KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
@@ -1110,7 +1110,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'Best parameters: </span><span class="si">%s</span><span class="s1">'</span><span class="o">%</span><span class="k">random_search</span>.best_params_)
@@ -1124,7 +1124,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Best parameters: {'weights': 'distance', 'p': 1, 'n_neighbors': 7}
+<pre>Best parameters: {'weights': 'uniform', 'p': 2, 'n_neighbors': 5}
 CV Accuracy of best parameters: 0.967
 </pre>
 </div>
@@ -1153,7 +1153,7 @@ CV Accuracy of best parameters: 0.967
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">cross_val_score</span>
@@ -1167,24 +1167,9 @@ CV Accuracy of best parameters: 0.967
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/Kavi/anaconda/envs/tensorflow/lib/python3.6/site-packages/sklearn/cross_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  "This module will be removed in 0.20.", DeprecationWarning)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Baesline with default parameters: 0.967
 </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-3-538b49d96123&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">from</span> sklearn<span class="ansi-blue-fg">.</span>cross_validation <span class="ansi-green-fg">import</span> cross_val_score
-<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> print ('Baesline with default parameters: %.3f' %np.mean(
-</span><span class="ansi-green-intense-fg ansi-bold">      3</span>         cross_val_score(classifier, X, y, cv=10, scoring='accuracy', n_jobs=1)))
-
-<span class="ansi-red-fg">NameError</span>: name 'np' is not defined</pre>
 </div>
 </div>
 </div>
@@ -1200,7 +1185,7 @@ CV Accuracy of best parameters: 0.967
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The grid scores attribute is now depricated, </span>
@@ -1210,10 +1195,37 @@ CV Accuracy of best parameters: 0.967
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/Kavi/anaconda/envs/tensorflow/lib/python3.6/site-packages/sklearn/model_selection/_search.py:761: DeprecationWarning: The grid_scores_ attribute was deprecated in version 0.18 in favor of the more elaborate cv_results_ attribute. The grid_scores_ attribute will not be available from 0.20
+  DeprecationWarning)
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[mean: 0.96667, std: 0.04472, params: {'weights': 'uniform', 'p': 2, 'n_neighbors': 5},
+ mean: 0.96667, std: 0.04472, params: {'weights': 'uniform', 'p': 2, 'n_neighbors': 6},
+ mean: 0.94000, std: 0.06289, params: {'weights': 'uniform', 'p': 1, 'n_neighbors': 2},
+ mean: 0.96667, std: 0.04472, params: {'weights': 'uniform', 'p': 2, 'n_neighbors': 10},
+ mean: 0.96667, std: 0.04472, params: {'weights': 'distance', 'p': 2, 'n_neighbors': 3},
+ mean: 0.96667, std: 0.04472, params: {'weights': 'distance', 'p': 2, 'n_neighbors': 8},
+ mean: 0.96667, std: 0.04472, params: {'weights': 'distance', 'p': 2, 'n_neighbors': 4},
+ mean: 0.95333, std: 0.05207, params: {'weights': 'uniform', 'p': 1, 'n_neighbors': 7},
+ mean: 0.96000, std: 0.04422, params: {'weights': 'uniform', 'p': 1, 'n_neighbors': 10},
+ mean: 0.96000, std: 0.05333, params: {'weights': 'distance', 'p': 2, 'n_neighbors': 2}]</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The new cv_results attribute outpute our results in JSON</span>
@@ -1223,15 +1235,234 @@ CV Accuracy of best parameters: 0.967
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>mean_fit_time</th>
+<th>std_fit_time</th>
+<th>mean_score_time</th>
+<th>std_score_time</th>
+<th>param_weights</th>
+<th>param_p</th>
+<th>param_n_neighbors</th>
+<th>params</th>
+<th>split0_test_score</th>
+<th>split1_test_score</th>
+<th>...</th>
+<th>split2_train_score</th>
+<th>split3_train_score</th>
+<th>split4_train_score</th>
+<th>split5_train_score</th>
+<th>split6_train_score</th>
+<th>split7_train_score</th>
+<th>split8_train_score</th>
+<th>split9_train_score</th>
+<th>mean_train_score</th>
+<th>std_train_score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.000270</td>
+<td>0.000036</td>
+<td>0.000499</td>
+<td>0.000112</td>
+<td>uniform</td>
+<td>2</td>
+<td>5</td>
+<td>{'weights': 'uniform', 'p': 2, 'n_neighbors': 5}</td>
+<td>1.0</td>
+<td>0.933333</td>
+<td>...</td>
+<td>0.962963</td>
+<td>0.970370</td>
+<td>0.985185</td>
+<td>0.962963</td>
+<td>0.977778</td>
+<td>0.962963</td>
+<td>0.962963</td>
+<td>0.97037</td>
+<td>0.968889</td>
+<td>0.007258</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.000277</td>
+<td>0.000020</td>
+<td>0.000480</td>
+<td>0.000070</td>
+<td>uniform</td>
+<td>2</td>
+<td>6</td>
+<td>{'weights': 'uniform', 'p': 2, 'n_neighbors': 6}</td>
+<td>1.0</td>
+<td>0.933333</td>
+<td>...</td>
+<td>0.970370</td>
+<td>0.977778</td>
+<td>0.985185</td>
+<td>0.955556</td>
+<td>0.985185</td>
+<td>0.970370</td>
+<td>0.970370</td>
+<td>0.97037</td>
+<td>0.972593</td>
+<td>0.008148</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.000273</td>
+<td>0.000019</td>
+<td>0.000436</td>
+<td>0.000024</td>
+<td>uniform</td>
+<td>1</td>
+<td>2</td>
+<td>{'weights': 'uniform', 'p': 1, 'n_neighbors': 2}</td>
+<td>1.0</td>
+<td>0.933333</td>
+<td>...</td>
+<td>0.970370</td>
+<td>0.977778</td>
+<td>0.970370</td>
+<td>0.962963</td>
+<td>0.985185</td>
+<td>0.970370</td>
+<td>0.970370</td>
+<td>0.97037</td>
+<td>0.972593</td>
+<td>0.005785</td>
+</tr>
+</tbody>
+</table>
+<p>3 rows × 33 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Here is the raw output</span>
 <span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'mean_fit_time': array([0.00026991, 0.00027733, 0.00027254, 0.00025287, 0.0002615 ,
+        0.00026371, 0.0002893 , 0.00025344, 0.00025284, 0.00027139]),
+ 'std_fit_time': array([3.61297300e-05, 2.04961784e-05, 1.91800153e-05, 1.24148105e-05,
+        3.63166831e-05, 2.07953627e-05, 7.74256544e-05, 1.33292832e-05,
+        1.25028894e-05, 4.69197890e-05]),
+ 'mean_score_time': array([0.00049944, 0.00047967, 0.00043576, 0.00044491, 0.00044494,
+        0.00049927, 0.0004462 , 0.0004365 , 0.00044463, 0.00045156]),
+ 'std_score_time': array([1.11876495e-04, 6.98170411e-05, 2.39042539e-05, 2.31534885e-05,
+        2.36329944e-05, 6.97777868e-05, 2.43472535e-05, 2.11077342e-05,
+        2.22234893e-05, 4.22938700e-05]),
+ 'param_weights': masked_array(data=['uniform', 'uniform', 'uniform', 'uniform', 'distance',
+                    'distance', 'distance', 'uniform', 'uniform',
+                    'distance'],
+              mask=[False, False, False, False, False, False, False, False,
+                    False, False],
+        fill_value='?',
+             dtype=object),
+ 'param_p': masked_array(data=[2, 2, 1, 2, 2, 2, 2, 1, 1, 2],
+              mask=[False, False, False, False, False, False, False, False,
+                    False, False],
+        fill_value='?',
+             dtype=object),
+ 'param_n_neighbors': masked_array(data=[5, 6, 2, 10, 3, 8, 4, 7, 10, 2],
+              mask=[False, False, False, False, False, False, False, False,
+                    False, False],
+        fill_value='?',
+             dtype=object),
+ 'params': [{'weights': 'uniform', 'p': 2, 'n_neighbors': 5},
+  {'weights': 'uniform', 'p': 2, 'n_neighbors': 6},
+  {'weights': 'uniform', 'p': 1, 'n_neighbors': 2},
+  {'weights': 'uniform', 'p': 2, 'n_neighbors': 10},
+  {'weights': 'distance', 'p': 2, 'n_neighbors': 3},
+  {'weights': 'distance', 'p': 2, 'n_neighbors': 8},
+  {'weights': 'distance', 'p': 2, 'n_neighbors': 4},
+  {'weights': 'uniform', 'p': 1, 'n_neighbors': 7},
+  {'weights': 'uniform', 'p': 1, 'n_neighbors': 10},
+  {'weights': 'distance', 'p': 2, 'n_neighbors': 2}],
+ 'split0_test_score': array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
+ 'split1_test_score': array([0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.93333333,
+        0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.93333333]),
+ 'split2_test_score': array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
+ 'split3_test_score': array([1.        , 1.        , 0.93333333, 1.        , 0.93333333,
+        1.        , 0.93333333, 1.        , 0.93333333, 0.93333333]),
+ 'split4_test_score': array([0.86666667, 0.86666667, 0.86666667, 1.        , 0.86666667,
+        0.86666667, 0.86666667, 0.86666667, 1.        , 0.86666667]),
+ 'split5_test_score': array([0.93333333, 0.93333333, 1.        , 0.86666667, 1.        ,
+        0.93333333, 1.        , 0.86666667, 0.86666667, 1.        ]),
+ 'split6_test_score': array([0.93333333, 0.93333333, 0.8       , 0.93333333, 0.93333333,
+        0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.86666667]),
+ 'split7_test_score': array([1.        , 1.        , 0.93333333, 0.93333333, 1.        ,
+        1.        , 1.        , 0.93333333, 0.93333333, 1.        ]),
+ 'split8_test_score': array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
+ 'split9_test_score': array([1.        , 1.        , 0.93333333, 1.        , 1.        ,
+        1.        , 1.        , 1.        , 1.        , 1.        ]),
+ 'mean_test_score': array([0.96666667, 0.96666667, 0.94      , 0.96666667, 0.96666667,
+        0.96666667, 0.96666667, 0.95333333, 0.96      , 0.96      ]),
+ 'std_test_score': array([0.04472136, 0.04472136, 0.06289321, 0.04472136, 0.04472136,
+        0.04472136, 0.04472136, 0.05206833, 0.04422166, 0.05333333]),
+ 'rank_test_score': array([ 1,  1, 10,  1,  1,  1,  1,  9,  7,  7], dtype=int32),
+ 'split0_train_score': array([0.96296296, 0.97037037, 0.97037037, 0.97037037, 1.        ,
+        1.        , 1.        , 0.96296296, 0.95555556, 1.        ]),
+ 'split1_train_score': array([0.97037037, 0.97037037, 0.97777778, 0.98518519, 1.        ,
+        1.        , 1.        , 0.97777778, 0.96296296, 1.        ]),
+ 'split2_train_score': array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
+        1.        , 1.        , 0.96296296, 0.97037037, 1.        ]),
+ 'split3_train_score': array([0.97037037, 0.97777778, 0.97777778, 0.97777778, 1.        ,
+        1.        , 1.        , 0.97037037, 0.96296296, 1.        ]),
+ 'split4_train_score': array([0.98518519, 0.98518519, 0.97037037, 0.97777778, 1.        ,
+        1.        , 1.        , 0.98518519, 0.97037037, 1.        ]),
+ 'split5_train_score': array([0.96296296, 0.95555556, 0.96296296, 0.97037037, 1.        ,
+        1.        , 1.        , 0.96296296, 0.96296296, 1.        ]),
+ 'split6_train_score': array([0.97777778, 0.98518519, 0.98518519, 0.98518519, 1.        ,
+        1.        , 1.        , 0.97037037, 0.97037037, 1.        ]),
+ 'split7_train_score': array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
+        1.        , 1.        , 0.97037037, 0.97037037, 1.        ]),
+ 'split8_train_score': array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
+        1.        , 1.        , 0.97037037, 0.96296296, 1.        ]),
+ 'split9_train_score': array([0.97037037, 0.97037037, 0.97037037, 0.96296296, 1.        ,
+        1.        , 1.        , 0.95555556, 0.94074074, 1.        ]),
+ 'mean_train_score': array([0.96888889, 0.97259259, 0.97259259, 0.9762963 , 1.        ,
+        1.        , 1.        , 0.96888889, 0.96296296, 1.        ]),
+ 'std_train_score': array([0.00725775, 0.00814815, 0.00578537, 0.00645763, 0.        ,
+        0.        , 0.        , 0.00797802, 0.00876456, 0.        ])}</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1297,24 +1528,24 @@ CV Accuracy of best parameters: 0.967
 									</header>
 									<ul class="dates">
 										<li>
-											<span class="date">Tue 26 June 2018</span>
-											<h3><a href="https://kavisek.github.io/Plotting Histogram.html">Plotting Histogram</a></h3>
-											<p><p>Plotting histograms for distributions is a common task in every dataset. The basic blue histogram can be boring and dull in matplotlib. Therefo..</p></p>
+											<span class="date">Fri 22 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Correlation Matrices.html">Correlation Matrices</a></h3>
+											<p><p>Pandas has this great dataframe correlation function that can operate on the entire dataframe. The function support Pearson, Kendall, and Spearm..</p></p>
 										</li>
 										<li>
 											<span class="date">Tue 19 June 2018</span>
-											<h3><a href="https://kavisek.github.io/Barplots.html">Barplots</a></h3>
-											<p><p>Plotting barplots for distributions is a common task in every dataset. The basic blue barplots can be boring and dull in matplotlib. Therefore ..</p></p>
-										</li>
-										<li>
-											<span class="date">Tue 19 June 2018</span>
-											<h3><a href="https://kavisek.github.io/Resampling Datetime.html">Resampling Datetime</a></h3>
-											<p><p>When plotting times series data it becomes advantagous to reframe and aggergate the data by period of time. Data Scientist that deal with time ..</p></p>
-										</li>
-										<li>
-											<span class="date">Sat 16 June 2018</span>
 											<h3><a href="https://kavisek.github.io/Full Grid Search.html">Full Grid Search</a></h3>
 											<p><p>Finished the Randomized Grid Search, want to go farther? Scikit Lear full grid search function is next on the list, it that can give us the best..</p></p>
+										</li>
+										<li>
+											<span class="date">Sat 09 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Connecting to a Local Database.html">Connecting to a Local Database</a></h3>
+											<p><p>This notebook connects to a local database and runs an SQL query to wrangle some data that we require for your analysis. The parameters for thi..</p></p>
+										</li>
+										<li>
+											<span class="date">Wed 06 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Every Matplotlib Plot Linestyle.html">Every Matplotlib Plot Linestyle</a></h3>
+											<p><p>Matplotlib has many lifestyles for its line plots. Sometimes is hard to visualize each lifestyle from just its line marker. Therefore I created ..</p></p>
 										</li>
 									</ul>
 								</section>
