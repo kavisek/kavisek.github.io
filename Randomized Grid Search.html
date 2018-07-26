@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Tue 19 June 2018</div>
-									<h2>Import Data by Pandas</h2>
+									<div class="pennant pennant-alt date">Sat 02 June 2018</div>
+									<h2>Randomized Grid Search</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1042,8 +1042,69 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Import-Data-by-Pandas">Import Data by Pandas<a class="anchor-link" href="#Import-Data-by-Pandas">¶</a></h1><p><span> If you starting from scratch and are unfamiliar with import data to notebooks. The pandas *pd.read_csv()* is the most powerful command that you will come across this one function work really well and contains over 40+ parameter to adjust how you import the incoming data. A cool feature of this function is that you can place dropbox links (or any public link to a CSV file) inside the function and you can download the data right from the internet.</span></p>
-<h3 id="Import-Prelimnaries">Import Prelimnaries<a class="anchor-link" href="#Import-Prelimnaries">¶</a></h3>
+<h1 id="Randomized-Grid-Search">Randomized Grid Search<a class="anchor-link" href="#Randomized-Grid-Search">¶</a></h1><p><span>Manual hyperparameter searching? No way. Scikit Learn has a got an amazing random grid search function that can give us a hint into the best parameters by calling its class, setting up a dictionary with all parameters, and letting it fly. This example below his using a K-Nearest Neighbours model for its example. After the Randomize Grid Search is done, you can pull the best parameter for your model, and as well as take a look a the history of the previous combination of parameters.</span></p>
+<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">npimport</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">RandomizedSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
+
+
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">'uniform'</span><span class="p">,</span> 
+                                 <span class="n">metric</span> <span class="o">=</span><span class="s1">'minkowski'</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'n_neighbors'</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)),</span> <span class="s1">'weights'</span><span class="p">:[</span><span class="s1">'uniform'</span><span class="p">,</span> <span class="s1">'distance'</span><span class="p">],</span>
+       <span class="s1">'p'</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">}</span>
+
+
+<span class="n">random_search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">classifier</span><span class="p">,</span> 
+                                   <span class="n">param_distributions</span> <span class="o">=</span> <span class="n">grid</span><span class="p">,</span> 
+                                   <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">'accuracy'</span><span class="p">,</span> 
+                                   <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                                   <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">random_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>RandomizedSearchCV(cv=10, error_score='raise',
+          estimator=KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform'),
+          fit_params=None, iid=True, n_iter=10, n_jobs=1,
+          param_distributions={'n_neighbors': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'weights': ['uniform', 'distance'], 'p': [1, 2]},
+          pre_dispatch='2*n_jobs', random_state=None, refit=True,
+          return_train_score=True, scoring='accuracy', verbose=0)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Randomized-Grid-Search-Score">Randomized Grid Search Score<a class="anchor-link" href="#Randomized-Grid-Search-Score">¶</a></h3>
 </div>
 </div>
 </div>
@@ -1052,516 +1113,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import Modules</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'max_columns'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'max_rows'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Import-CSV">Import CSV<a class="anchor-link" href="#Import-CSV">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [3]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read CSV Data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'https://www.dropbox.com/s/5ui1and0j2dbdjh/pokemon.csv?dl=1'</span><span class="p">)</span>
-
-<span class="c1"># View the data</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>abilities</th>
-<th>against_bug</th>
-<th>against_dark</th>
-<th>against_dragon</th>
-<th>against_electric</th>
-<th>against_fairy</th>
-<th>against_fight</th>
-<th>against_fire</th>
-<th>against_flying</th>
-<th>against_ghost</th>
-<th>against_grass</th>
-<th>against_ground</th>
-<th>against_ice</th>
-<th>against_normal</th>
-<th>against_poison</th>
-<th>against_psychic</th>
-<th>against_rock</th>
-<th>against_steel</th>
-<th>against_water</th>
-<th>attack</th>
-<th>base_egg_steps</th>
-<th>base_happiness</th>
-<th>base_total</th>
-<th>capture_rate</th>
-<th>classfication</th>
-<th>defense</th>
-<th>experience_growth</th>
-<th>height_m</th>
-<th>hp</th>
-<th>japanese_name</th>
-<th>name</th>
-<th>percentage_male</th>
-<th>pokedex_number</th>
-<th>sp_attack</th>
-<th>sp_defense</th>
-<th>speed</th>
-<th>type1</th>
-<th>type2</th>
-<th>weight_kg</th>
-<th>generation</th>
-<th>is_legendary</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>['Overgrow', 'Chlorophyll']</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>0.5</td>
-<td>0.5</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>0.25</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>49</td>
-<td>5120</td>
-<td>70</td>
-<td>318</td>
-<td>45</td>
-<td>Seed Pokémon</td>
-<td>49</td>
-<td>1059860</td>
-<td>0.7</td>
-<td>45</td>
-<td>Fushigidaneフシギダネ</td>
-<td>Bulbasaur</td>
-<td>88.1</td>
-<td>1</td>
-<td>65</td>
-<td>65</td>
-<td>45</td>
-<td>grass</td>
-<td>poison</td>
-<td>6.9</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<th>1</th>
-<td>['Overgrow', 'Chlorophyll']</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>0.5</td>
-<td>0.5</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>0.25</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>62</td>
-<td>5120</td>
-<td>70</td>
-<td>405</td>
-<td>45</td>
-<td>Seed Pokémon</td>
-<td>63</td>
-<td>1059860</td>
-<td>1.0</td>
-<td>60</td>
-<td>Fushigisouフシギソウ</td>
-<td>Ivysaur</td>
-<td>88.1</td>
-<td>2</td>
-<td>80</td>
-<td>80</td>
-<td>60</td>
-<td>grass</td>
-<td>poison</td>
-<td>13.0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<th>2</th>
-<td>['Overgrow', 'Chlorophyll']</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>0.5</td>
-<td>0.5</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>0.25</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>100</td>
-<td>5120</td>
-<td>70</td>
-<td>625</td>
-<td>45</td>
-<td>Seed Pokémon</td>
-<td>123</td>
-<td>1059860</td>
-<td>2.0</td>
-<td>80</td>
-<td>Fushigibanaフシギバナ</td>
-<td>Venusaur</td>
-<td>88.1</td>
-<td>3</td>
-<td>122</td>
-<td>120</td>
-<td>80</td>
-<td>grass</td>
-<td>poison</td>
-<td>100.0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<th>3</th>
-<td>['Blaze', 'Solar Power']</td>
-<td>0.5</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.50</td>
-<td>2.0</td>
-<td>0.5</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>0.5</td>
-<td>2.0</td>
-<td>52</td>
-<td>5120</td>
-<td>70</td>
-<td>309</td>
-<td>45</td>
-<td>Lizard Pokémon</td>
-<td>43</td>
-<td>1059860</td>
-<td>0.6</td>
-<td>39</td>
-<td>Hitokageヒトカゲ</td>
-<td>Charmander</td>
-<td>88.1</td>
-<td>4</td>
-<td>60</td>
-<td>50</td>
-<td>65</td>
-<td>fire</td>
-<td>NaN</td>
-<td>8.5</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<th>4</th>
-<td>['Blaze', 'Solar Power']</td>
-<td>0.5</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>1.0</td>
-<td>0.5</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.50</td>
-<td>2.0</td>
-<td>0.5</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>0.5</td>
-<td>2.0</td>
-<td>64</td>
-<td>5120</td>
-<td>70</td>
-<td>405</td>
-<td>45</td>
-<td>Flame Pokémon</td>
-<td>58</td>
-<td>1059860</td>
-<td>1.1</td>
-<td>58</td>
-<td>Lizardoリザード</td>
-<td>Charmeleon</td>
-<td>88.1</td>
-<td>5</td>
-<td>80</td>
-<td>65</td>
-<td>80</td>
-<td>fire</td>
-<td>NaN</td>
-<td>19.0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Import-Excel-Document">Import Excel Document<a class="anchor-link" href="#Import-Excel-Document">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [6]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">'https://www.dropbox.com/s/v704fefrr3r0neo/weather.xls?dl=1'</span><span class="p">,</span> <span class="n">Sheeet</span><span class="o">=</span><span class="s1">'weather'</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Outlook</th>
-<th>Temp</th>
-<th>Humidity</th>
-<th>Windy</th>
-<th>Class</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>sunny</td>
-<td>75</td>
-<td>70</td>
-<td>yes</td>
-<td>Play</td>
-</tr>
-<tr>
-<th>1</th>
-<td>sunny</td>
-<td>80</td>
-<td>90</td>
-<td>yes</td>
-<td>DontPlay</td>
-</tr>
-<tr>
-<th>2</th>
-<td>sunny</td>
-<td>85</td>
-<td>85</td>
-<td>no</td>
-<td>DontPlay</td>
-</tr>
-<tr>
-<th>3</th>
-<td>sunny</td>
-<td>72</td>
-<td>95</td>
-<td>no</td>
-<td>DontPlay</td>
-</tr>
-<tr>
-<th>4</th>
-<td>sunny</td>
-<td>69</td>
-<td>70</td>
-<td>no</td>
-<td>Play</td>
-</tr>
-<tr>
-<th>5</th>
-<td>overcast</td>
-<td>72</td>
-<td>90</td>
-<td>yes</td>
-<td>Play</td>
-</tr>
-<tr>
-<th>6</th>
-<td>overcast</td>
-<td>83</td>
-<td>78</td>
-<td>no</td>
-<td>Play</td>
-</tr>
-<tr>
-<th>7</th>
-<td>overcast</td>
-<td>64</td>
-<td>65</td>
-<td>yes</td>
-<td>Play</td>
-</tr>
-<tr>
-<th>8</th>
-<td>overcast</td>
-<td>81</td>
-<td>75</td>
-<td>no</td>
-<td>Play</td>
-</tr>
-<tr>
-<th>9</th>
-<td>rain</td>
-<td>71</td>
-<td>80</td>
-<td>yes</td>
-<td>DontPlay</td>
-</tr>
-<tr>
-<th>10</th>
-<td>rain</td>
-<td>65</td>
-<td>70</td>
-<td>yes</td>
-<td>DontPlay</td>
-</tr>
-<tr>
-<th>11</th>
-<td>rain</td>
-<td>75</td>
-<td>80</td>
-<td>no</td>
-<td>Play</td>
-</tr>
-<tr>
-<th>12</th>
-<td>rain</td>
-<td>68</td>
-<td>80</td>
-<td>no</td>
-<td>Play</td>
-</tr>
-<tr>
-<th>13</th>
-<td>rain</td>
-<td>70</td>
-<td>96</td>
-<td>no</td>
-<td>Play</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Import-Text-Data">Import Text Data<a class="anchor-link" href="#Import-Text-Data">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [13]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'https://www.dropbox.com/s/q0ppmfbzlv0k9p4/ted_main.txt?dl=1'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'Best parameters: </span><span class="si">%s</span><span class="s1">'</span><span class="o">%</span><span class="k">random_search</span>.best_params_)
+<span class="nb">print</span><span class="p">(</span><span class="s1">'CV Accuracy of best parameters: </span><span class="si">%.3f</span><span class="s1">'</span><span class="o">%</span><span class="k">random_search</span>.best_score_)
 </pre></div>
 </div>
 </div>
@@ -1570,52 +1123,9 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ParserError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-13-219d77c2bf42&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>pd<span class="ansi-blue-fg">.</span>read_csv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'https://www.dropbox.com/s/q0ppmfbzlv0k9p4/ted_main.txt?dl=1'</span><span class="ansi-blue-fg">,</span> sep<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">" "</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/Users/Kavi/anaconda/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">parser_f</span><span class="ansi-blue-fg">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, escapechar, comment, encoding, dialect, tupleize_cols, error_bad_lines, warn_bad_lines, skipfooter, skip_footer, doublequote, delim_whitespace, as_recarray, compact_ints, use_unsigned, low_memory, buffer_lines, memory_map, float_precision)</span>
-<span class="ansi-green-intense-fg ansi-bold">    653</span>                     skip_blank_lines=skip_blank_lines)
-<span class="ansi-green-intense-fg ansi-bold">    654</span> 
-<span class="ansi-green-fg">--&gt; 655</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> _read<span class="ansi-blue-fg">(</span>filepath_or_buffer<span class="ansi-blue-fg">,</span> kwds<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    656</span> 
-<span class="ansi-green-intense-fg ansi-bold">    657</span>     parser_f<span class="ansi-blue-fg">.</span>__name__ <span class="ansi-blue-fg">=</span> name
-
-<span class="ansi-green-fg">/Users/Kavi/anaconda/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(filepath_or_buffer, kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">    409</span> 
-<span class="ansi-green-intense-fg ansi-bold">    410</span>     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 411</span><span class="ansi-red-fg">         </span>data <span class="ansi-blue-fg">=</span> parser<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    412</span>     <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    413</span>         parser<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/Users/Kavi/anaconda/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">read</span><span class="ansi-blue-fg">(self, nrows)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1003</span>                 <span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'skipfooter not supported for iteration'</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1004</span> 
-<span class="ansi-green-fg">-&gt; 1005</span><span class="ansi-red-fg">         </span>ret <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_engine<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1006</span> 
-<span class="ansi-green-intense-fg ansi-bold">   1007</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>options<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'as_recarray'</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/Users/Kavi/anaconda/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ansi-cyan-fg">read</span><span class="ansi-blue-fg">(self, nrows)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1746</span>     <span class="ansi-green-fg">def</span> read<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> nrows<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1747</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 1748</span><span class="ansi-red-fg">             </span>data <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_reader<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1749</span>         <span class="ansi-green-fg">except</span> StopIteration<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1750</span>             <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>_first_chunk<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader.read (pandas/_libs/parsers.c:10862)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._read_low_memory (pandas/_libs/parsers.c:11138)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._read_rows (pandas/_libs/parsers.c:11884)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._tokenize_rows (pandas/_libs/parsers.c:11755)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.raise_parser_error (pandas/_libs/parsers.c:28765)</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-red-fg">ParserError</span>: Error tokenizing data. C error: Expected 243 fields in line 3, saw 276
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Best parameters: {'weights': 'distance', 'p': 1, 'n_neighbors': 7}
+CV Accuracy of best parameters: 0.967
 </pre>
 </div>
 </div>
@@ -1626,16 +1136,29 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Import-JSON-Data">Import JSON Data<a class="anchor-link" href="#Import-JSON-Data">¶</a></h3>
+<ul>
+<li>This method is more computationaly visable then a full grid search</li>
+<li>The result will change each time the model is fitted</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Baseline-Cross-Validation-Score">Baseline Cross Validation Score<a class="anchor-link" href="#Baseline-Cross-Validation-Score">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [16]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">'https://www.dropbox.com/s/16twozc11mwgwtk/sampledata.json?dl=1'</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">'speakers'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">cross_val_score</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">'Baesline with default parameters: </span><span class="si">%.3f</span><span class="s1">'</span> <span class="o">%</span><span class="k">np</span>.mean(
+        <span class="n">cross_val_score</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">'accuracy'</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -1643,37 +1166,25 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[16]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>speakers</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>{'firstname': 'Ray', 'lastname': 'Villalobos',...</td>
-</tr>
-</tbody>
-</table>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/Kavi/anaconda/envs/tensorflow/lib/python3.6/site-packages/sklearn/cross_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+</pre>
 </div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-3-538b49d96123&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">from</span> sklearn<span class="ansi-blue-fg">.</span>cross_validation <span class="ansi-green-fg">import</span> cross_val_score
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> print ('Baesline with default parameters: %.3f' %np.mean(
+</span><span class="ansi-green-intense-fg ansi-bold">      3</span>         cross_val_score(classifier, X, y, cv=10, scoring='accuracy', n_jobs=1)))
+
+<span class="ansi-red-fg">NameError</span>: name 'np' is not defined</pre>
 </div>
 </div>
 </div>
@@ -1683,34 +1194,53 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Import-XML-Data">Import XML Data<a class="anchor-link" href="#Import-XML-Data">¶</a></h3>
+<h3 id="Viewing-Randomized-Grid-Score">Viewing Randomized Grid Score<a class="anchor-link" href="#Viewing-Randomized-Grid-Score">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [17]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_xml</span><span class="p">(</span><span class="s1">'https://www.w3schools.com/xml/note.xml'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The grid scores attribute is now depricated, </span>
+<span class="c1">#but I'll use it till its completely gone</span>
+<span class="n">random_search</span><span class="o">.</span><span class="n">grid_scores_</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-17-975dc359cc08&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>pd<span class="ansi-blue-fg">.</span>read_xml<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'https://www.w3schools.com/xml/note.xml'</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">AttributeError</span>: module 'pandas' has no attribute 'read_xml'</pre>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The new cv_results attribute outpute our results in JSON</span>
+<span class="c1"># Throw it in a dataframe to make some sense of it</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Here is the raw output</span>
+<span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Author: Kavi Sekhon</p>
 </div>
 </div>
 </div>
@@ -1767,24 +1297,24 @@ h6:hover .anchor-link {
 									</header>
 									<ul class="dates">
 										<li>
-											<span class="date">Wed 20 June 2018</span>
-											<h3><a href="https://kavisek.github.io/Connecting to a Local Database with SHH.html">Connecting to a Local Database with SHH</a></h3>
-											<p><p>This notebook connects to a local (or remote) database that uses an SSH tunnel and runs an SQL query to wrangle some data that we require for ou..</p></p>
+											<span class="date">Tue 26 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Plotting Histogram.html">Plotting Histogram</a></h3>
+											<p><p>Plotting histograms for distributions is a common task in every dataset. The basic blue histogram can be boring and dull in matplotlib. Therefo..</p></p>
 										</li>
 										<li>
 											<span class="date">Tue 19 June 2018</span>
-											<h3><a href="https://kavisek.github.io/Import Data by Pandas.html">Import Data by Pandas</a></h3>
-											<p><p>If you starting from scratch and are unfamiliar with import data to notebooks. The pandas <em>pd.read_csv()</em> is the most powerful command that you..</p></p>
+											<h3><a href="https://kavisek.github.io/Barplots.html">Barplots</a></h3>
+											<p><p>Plotting barplots for distributions is a common task in every dataset. The basic blue barplots can be boring and dull in matplotlib. Therefore ..</p></p>
 										</li>
 										<li>
-											<span class="date">Thu 14 June 2018</span>
-											<h3><a href="https://kavisek.github.io/Heatmaps.html">Heatmaps</a></h3>
-											<p><p>Heatmaps are crazy useful. I use them as diagnostic plots to take a look at the feature correlation in my data frame and to understand the cro..</p></p>
+											<span class="date">Tue 19 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Resampling Datetime.html">Resampling Datetime</a></h3>
+											<p><p>When plotting times series data it becomes advantagous to reframe and aggergate the data by period of time. Data Scientist that deal with time ..</p></p>
 										</li>
 										<li>
-											<span class="date">Thu 14 June 2018</span>
-											<h3><a href="https://kavisek.github.io/Styling a DataFrame.html">Styling a DataFrame</a></h3>
-											<p><p>Stylng a data frame is pleasant a surprising amount of times. You can define a coloring function for your data frame then apply the styling whe..</p></p>
+											<span class="date">Sat 16 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Full Grid Search.html">Full Grid Search</a></h3>
+											<p><p>Finished the Randomized Grid Search, want to go farther? Scikit Lear full grid search function is next on the list, it that can give us the best..</p></p>
 										</li>
 									</ul>
 								</section>
