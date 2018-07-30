@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Wed 02 May 2018</div>
-									<h2>Connecting to a Local Database with SHH</h2>
+									<div class="pennant pennant-alt date">Fri 18 May 2018</div>
+									<h2>Train-Test Split</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,28 +1046,20 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Connecting-to-a-Local-Database-with-SHH">Connecting to a Local Database with SHH<a class="anchor-link" href="#Connecting-to-a-Local-Database-with-SHH">&#182;</a></h1><p><span>This notebook connects to a local (or remote) database that uses an SSH tunnel and runs an SQL query to wrangle some data that we require for our analysis. The parameters for this notebook are easy to adjust so that you can change the values and connect to a production or slave database. Note that this SSH tunnel connection uses a ssh_key, so you'll need to know the location of this key on your local machine.</span></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Train-Test-Split">Train-Test Split<a class="anchor-link" href="#Train-Test-Split">&#182;</a></h1><p><span>Spliting your dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be used to split you data into a test and validation set. For kaggle competition since the trainin and testing data is often provide, I normally just use this function to split my data into a training and validation set</span></p>
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Connecting to the database so run a query at the database level</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import Modules</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="k">import</span> <span class="n">create_engine</span>
-<span class="kn">from</span> <span class="nn">sshtunnel</span> <span class="k">import</span> <span class="n">SSHTunnelForwarder</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_boston</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
 </pre></div>
 
 </div>
@@ -1079,62 +1071,25 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Create-SSH-Tunnel">Create SSH Tunnel<a class="anchor-link" href="#Create-SSH-Tunnel">&#182;</a></h3>
+<h3 id="Import-Data">Import Data<a class="anchor-link" href="#Import-Data">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ssh_host</span> <span class="o">=</span> <span class="s1">&#39;ssh_tunnel.devops.world.com&#39;</span>
-<span class="n">ssh_port</span> <span class="o">=</span> <span class="mi">22</span>
-<span class="n">sss_username</span> <span class="o">=</span> <span class="s2">&quot;root&quot;</span>
-<span class="n">ssh_key_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/root/.ssh/ssh_key&quot;</span>
-<span class="n">database_address</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>
-<span class="n">database_port</span> <span class="o">=</span> <span class="mi">8889</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Impor the data</span>
+<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
 
-<span class="n">server</span> <span class="o">=</span>  <span class="n">SSHTunnelForwarder</span><span class="p">(</span>
-     <span class="p">(</span><span class="n">ssh_host</span><span class="p">,</span><span class="n">ssh_port</span><span class="p">),</span>
-     <span class="n">ssh_username</span><span class="o">=</span><span class="n">sss_username</span><span class="p">,</span>
-     <span class="n">ssh_pkey</span><span class="o">=</span><span class="n">ssh_key_path</span><span class="p">,</span>
-     <span class="n">remote_bind_address</span><span class="o">=</span><span class="p">(</span><span class="n">database_address</span><span class="p">,</span><span class="n">database_port</span><span class="p">))</span>
+<span class="c1">#Shorten the Dataframe making the split easier</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">500</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span> 
 
-<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Connect-to-Database">Connect to Database<a class="anchor-link" href="#Connect-to-Database">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Set your local datbase parameters </span>
-<span class="n">db_username</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span>
-<span class="n">db_password</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span>
-<span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>
-<span class="n">port</span> <span class="o">=</span> <span class="s1">&#39;8889&#39;</span>
-<span class="n">db_name</span> <span class="o">=</span> <span class="s1">&#39;world&#39;</span>
-
-<span class="c1"># Create a MySQLEngine</span>
-<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;mysql+mysqldb://&#39;</span><span class="o">+</span><span class="n">db_username</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">db_password</span><span class="o">+</span><span class="s1">&#39;@</span><span class="se">\</span>
-<span class="s1">&#39;</span><span class="o">+</span><span class="n">host</span><span class="o">+</span><span class="s1">&#39;:</span><span class="si">%s</span><span class="s1">/&#39;</span><span class="o">+</span><span class="n">db_name</span> <span class="o">%</span><span class="k">server</span>.local_bind_port))
-
-<span class="c1"># Connect to database</span>
-<span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="c1"># Print the datafarme shape</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Dataframe Feature Shape: </span><span class="si">{X.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Dataframe Target Shape: </span><span class="si">{y.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1147,15 +1102,14 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;sqlalchemy.engine.base.Connection at 0x10efebb70&gt;</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dataframe Feature Shape: (500, 13)
+Dataframe Target Shape: (500,)
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -1166,20 +1120,24 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Query-Database">Query Database<a class="anchor-link" href="#Query-Database">&#182;</a></h3>
+<h3 id="Splitting-into-Training-and-Testing-Set">Splitting into Training and Testing Set<a class="anchor-link" href="#Splitting-into-Training-and-Testing-Set">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run a query on a local MAMP dataframe</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot; SELECT * FROM city&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 70% training, 30% testing</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="c1"># View dataframe </span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Feature Shape: </span><span class="si">{X_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Target Shape: </span><span class="si">{y_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Target Shape: </span><span class="si">{y_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1192,7 +1150,110 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training Feature Shape: (350, 13)
+Testing Feature Shape: (150, 13)
+Training Target Shape: (350,)
+Testing Target Shape: (150,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Splitting-into-Training-,Testing,-and-Validation-Set">Splitting into Training ,Testing, and Validation Set<a class="anchor-link" href="#Splitting-into-Training-,Testing,-and-Validation-Set">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 70% training, 20% testing, 20% validation</span>
+<span class="n">X_remain</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_remain</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X_remain</span><span class="p">,</span> <span class="n">y_remain</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Validation Feature Shape: </span><span class="si">{X_val.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Target Shape: </span><span class="si">{y_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Validation Target Shape: </span><span class="si">{X_val.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Target Shape: </span><span class="si">{y_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training Feature Shape: (300, 13)
+Validation Feature Shape: (100, 13)
+Testing Feature Shape: (300, 13)
+
+Training Target Shape: (300,)
+Validation Target Shape: (100, 13)
+Testing Target Shape: (100,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="View-the-Dataframe">View the Dataframe<a class="anchor-link" href="#View-the-Dataframe">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># You can import the data set into a dataframe afterwards</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -1215,53 +1276,101 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>ID</th>
-      <th>Name</th>
-      <th>CountryCode</th>
-      <th>District</th>
-      <th>Population</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
-      <td>Kabul</td>
-      <td>AFG</td>
-      <td>Kabol</td>
-      <td>1780000</td>
+      <td>0.10612</td>
+      <td>30.0</td>
+      <td>4.93</td>
+      <td>0.0</td>
+      <td>0.428</td>
+      <td>6.095</td>
+      <td>65.1</td>
+      <td>6.3361</td>
+      <td>6.0</td>
+      <td>300.0</td>
+      <td>16.6</td>
+      <td>394.62</td>
+      <td>12.40</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2</td>
-      <td>Qandahar</td>
-      <td>AFG</td>
-      <td>Qandahar</td>
-      <td>237500</td>
+      <td>9.32909</td>
+      <td>0.0</td>
+      <td>18.10</td>
+      <td>0.0</td>
+      <td>0.713</td>
+      <td>6.185</td>
+      <td>98.7</td>
+      <td>2.2616</td>
+      <td>24.0</td>
+      <td>666.0</td>
+      <td>20.2</td>
+      <td>396.90</td>
+      <td>18.13</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3</td>
-      <td>Herat</td>
-      <td>AFG</td>
-      <td>Herat</td>
-      <td>186800</td>
+      <td>0.09512</td>
+      <td>0.0</td>
+      <td>12.83</td>
+      <td>0.0</td>
+      <td>0.437</td>
+      <td>6.286</td>
+      <td>45.0</td>
+      <td>4.5026</td>
+      <td>5.0</td>
+      <td>398.0</td>
+      <td>18.7</td>
+      <td>383.23</td>
+      <td>8.94</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4</td>
-      <td>Mazar-e-Sharif</td>
-      <td>AFG</td>
-      <td>Balkh</td>
-      <td>127800</td>
+      <td>0.21719</td>
+      <td>0.0</td>
+      <td>10.59</td>
+      <td>1.0</td>
+      <td>0.489</td>
+      <td>5.807</td>
+      <td>53.8</td>
+      <td>3.6526</td>
+      <td>4.0</td>
+      <td>277.0</td>
+      <td>18.6</td>
+      <td>390.94</td>
+      <td>16.03</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5</td>
-      <td>Amsterdam</td>
-      <td>NLD</td>
-      <td>Noord-Holland</td>
-      <td>731200</td>
+      <td>5.70818</td>
+      <td>0.0</td>
+      <td>18.10</td>
+      <td>0.0</td>
+      <td>0.532</td>
+      <td>6.750</td>
+      <td>74.9</td>
+      <td>3.3317</td>
+      <td>24.0</td>
+      <td>666.0</td>
+      <td>20.2</td>
+      <td>393.07</td>
+      <td>7.74</td>
     </tr>
   </tbody>
 </table>
@@ -1270,28 +1379,6 @@ h6:hover .anchor-link {
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Stop-SSH-Connection">Stop SSH Connection<a class="anchor-link" href="#Stop-SSH-Connection">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Stop SSH Connection</span>
-<span class="n">server</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-</pre></div>
-
-</div>
 </div>
 </div>
 
