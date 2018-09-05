@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Thu 10 May 2018</div>
-									<h2>Using the OS Module</h2>
+									<div class="pennant pennant-alt date">Fri 22 June 2018</div>
+									<h2>Label Encoding</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,40 +1046,25 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Using-the-OS-Module">Using the OS Module<a class="anchor-link" href="#Using-the-OS-Module">&#182;</a></h1><p><span>This notebook is a combinations of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These tasks include remove files from directories, moving files from directories, parsing content from notebook, appending content to files, changing file types, etc. Hopefully you find some useful code below.</span></p>
+<h1 id="Label-Encoding">Label Encoding<a class="anchor-link" href="#Label-Encoding">&#182;</a></h1><p><span>Encoding a categorical feature into numeric values before processing the data through your machine learning model is now easier than ever, given that two methods now exist for a data scientist. You can use Pandas category datatype to quickly encode your data, or use the Skearn LabelEncoding class to encode your data. I generally prefer going the Pandas route as Pandas is involved in my main workflow.</span></p>
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">LabelEncoder</span>
 
-</div>
-</div>
-</div>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Matt&#39;</span><span class="p">,</span><span class="s1">&#39;24&#39;</span><span class="p">,</span><span class="s1">&#39;99&#39;</span><span class="p">],</span>
+                         <span class="p">[</span><span class="s1">&#39;Owen&#39;</span><span class="p">,</span><span class="s1">&#39;22&#39;</span><span class="p">,</span> <span class="s1">&#39;98&#39;</span><span class="p">],</span>
+                         <span class="p">[</span><span class="s1">&#39;Link&#39;</span><span class="p">,</span> <span class="s1">&#39;16&#39;</span><span class="p">,</span><span class="s1">&#39;100&#39;</span><span class="p">]],</span> 
+                  <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;score&#39;</span><span class="p">])</span>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Get-Current-Directory">Get Current Directory<a class="anchor-link" href="#Get-Current-Directory">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-<span class="n">cwd</span>
+<span class="n">df</span>
 </pre></div>
 
 </div>
@@ -1092,13 +1077,56 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[21]:</div>
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/Users/kavi/Documents/DataScience/Pipelines&#39;</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Matt</td>
+      <td>24</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Owen</td>
+      <td>22</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Link</td>
+      <td>16</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
@@ -1111,40 +1139,19 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Find-Path-Function">Find Path Function<a class="anchor-link" href="#Find-Path-Function">&#182;</a></h3><p>Search the given directory and it's subdirectory  for the first instance a specific file. Return the file path of this file.</p>
-
+<h3 id="Label-Encoding-with-Pandas">Label Encoding with Pandas<a class="anchor-link" href="#Label-Encoding-with-Pandas">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Search the given directory for the first instance a specific file. </span>
-<span class="sd">    Return the file path of this file.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our Find Path Punction</span>
-<span class="n">find_path</span><span class="p">(</span><span class="s1">&#39;10-15-17 Rescaling Features.ipynb&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pdf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">pdf</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span>
+<span class="n">pdf</span>
 </pre></div>
 
 </div>
@@ -1157,13 +1164,56 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[22]:</div>
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/Users/Kavi/Documents/DataScience/Guides/10-15-17 Rescaling Features.ipynb&#39;</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>24</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>22</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>16</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
@@ -1176,31 +1226,19 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Breaking-Down-the-Find-Path-Function">Breaking Down the Find Path Function<a class="anchor-link" href="#Breaking-Down-the-Find-Path-Function">&#182;</a></h3><p>The <code>os.walk(path)</code> function is pretty cool. Let's take a moment to break down each variable this function returns the <code>root</code> variable is the diretory we are searching, <code>dirs</code> are the recursive subdirectories that the function is searching, and <code>files</code> are the files that exist in the directory.</p>
-
+<h3 id="Label-Encoding-with-SkLearn">Label Encoding with SkLearn<a class="anchor-link" href="#Label-Encoding-with-SkLearn">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Breaking Down this Function</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span>
-<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;README.md&#39;</span>
-<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Root:&#39;</span><span class="p">,</span><span class="n">root</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dirs:&#39;</span><span class="p">,</span><span class="n">dirs</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Files:&#39;</span><span class="p">,</span><span class="n">files</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-    <span class="k">break</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">skdf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">skdf</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">skdf</span>
 </pre></div>
 
 </div>
@@ -1213,496 +1251,60 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
----------------
-Root: /Users/Kavi/Documents/DataScience
-
-
----------------
-Dirs: [&#39;Predictive Analysis&#39;, &#39;Kaggle&#39;, &#39;FlashCards&#39;, &#39;Whitepapers&#39;, &#39;Tesitng&#39;, &#39;Competitions&#39;, &#39;Descriptive Analysis&#39;, &#39;Pipelines&#39;, &#39;Books&#39;, &#39;Stack Overflow&#39;, &#39;Visualizations&#39;, &#39;Notes&#39;, &#39;Reading list&#39;, &#39;Guides&#39;, &#39;Economics&#39;, &#39;Tutorials&#39;, &#39;.ipynb_checkpoints&#39;, &#39;.git&#39;, &#39;BrainStation&#39;, &#39;Community&#39;, &#39;NoSQL&#39;, &#39;Interviews&#39;, &#39;Techniques&#39;, &#39;SQL&#39;]
-
-
----------------
-Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.gitignore&#39;]
-
-
----------------
-&lt;generator object walk at 0x106613570&gt;
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Find-All-Paths-Function">Find All Paths Function<a class="anchor-link" href="#Find-All-Paths-Function">&#182;</a></h3><p>Search the given directory and it's subdirectory for the every instance of a specific file. Return the all file paths of this file as a list.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_all_paths</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Search the given directory and it&#39;s subdirectory for the every </span>
-<span class="sd">    instance of a specific file. Return the all file paths of this </span>
-<span class="sd">    file as a list.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-            <span class="c1"># os.path.join(root, name) is a string</span>
-            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span> 
-            
-    <span class="k">return</span> <span class="n">result</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our Find All Paths Punction</span>
-<span class="n">find_all_paths</span><span class="p">(</span><span class="s1">&#39;README.md&#39;</span><span class="p">,</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;/Users/Kavi/Documents/DataScience/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Predictive Analysis/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Competitions/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Competitions/DonorsChoose Application/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Descriptive Analysis/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Pipelines/AWS Pipelines/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Notes/Readings/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Reading list/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/topmodel/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Community/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Techniques/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/SQL/README.md&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Find-All-Path-for-a-list-of-Files">Find All Path for a list of Files<a class="anchor-link" href="#Find-All-Path-for-a-list-of-Files">&#182;</a></h3><p>Search the given directory and it's subdirectory for the every instance of ever file in a list. Return the all file paths for every file as a list.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_all_paths_in_list</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Search the given directory and it&#39;s subdirectory for the every </span>
-<span class="sd">    instance of ever file in a list. Return the all file paths for </span>
-<span class="sd">    every file as a list.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">list_of_files</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-                <span class="c1"># os.path.join(root, name) is a string</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
-                
-    <span class="k">return</span> <span class="n">result</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generating a list of files</span>
-<span class="n">list_of_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;README.md&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;02-01-17 4 Time Saving Tricks in Pandas.ipynb&#39;</span><span class="p">]</span>
-
-<span class="c1"># Run our Find All Paths in List Punction</span>
-<span class="n">find_all_paths_in_list</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[9]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;/Users/Kavi/Documents/DataScience/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Predictive Analysis/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Competitions/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Competitions/DonorsChoose Application/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Descriptive Analysis/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Pipelines/AWS Pipelines/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Notes/Readings/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Reading list/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/topmodel/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Community/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Techniques/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/SQL/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Pandas/02-01-17 4 Time Saving Tricks in Pandas.ipynb&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Importing-Data-From-Text-File">Importing Data From Text File<a class="anchor-link" href="#Importing-Data-From-Text-File">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[10]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;17-08-01 Cross Validation and K-Folds.ipynb\n18-07-03 Writing a File to AWS S3.ipynb\n18-07-03 Reading a File from AWS S3.ipynb\n18-07-03 Connecting to a Local Database.ipynb\n18-07-03 Connecting to a Local Database with SHH.ipynb\n17-11-07 Dimensional Pivot Table.ipynb\n18-06-06 Every Matplotlib Plot Linestyle.ipynb\n18-06-06 Every Matplotlib Plot Marker.ipynb\n17-08-05 Histograms.ipynb\n15-02-02 Barplots.ipynb\n17-10-16 Wordclouds in Python.ipynb\n17-12-04 Heatmaps.ipynb\n18-07-07 Styling DataFrames.ipynb\n18-07-07 Resampling Datetime.ipynb\n18-07-24 Converting Notebook to Slides.ipynb\n18-07-24 Label Encoding.ipynb\n17-10-15 Plotting Residuals.ipynb\n17-10-15 Correlation Matricesipynb\n18-07-04 Select Dtypes.ipynb\n18-03-28 Creating Dummy Variables.ipynb\n17-10-09 Standardizations.ipynb\n17-08-01 Random Grid Search.ipynb\n17-08-01 Full Grid Search.ipynb\n18-07-28 Notebook Snippets.ipynb\n18-07-29 Iris Analysis.ipynb\n18-07-29 Classification Models.ipynb\n18-07-24 Binning Features.ipynb\n17-08-01 Train-Test Split.ipynb\n18-07-31 Fizzbuzz.ipynb\n17-10-02 Handling Missing Data.ipynb\n17-08-01 Recursive Feature Elimination.ipynb\n&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Import-Data-From-Text-FIle-into-a-List">Import Data From Text FIle into a List<a class="anchor-link" href="#Import-Data-From-Text-FIle-into-a-List">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># First Method</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-<span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[11]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;17-08-01 Cross Validation and K-Folds.ipynb\n&#39;,
- &#39;18-07-03 Writing a File to AWS S3.ipynb\n&#39;,
- &#39;18-07-03 Reading a File from AWS S3.ipynb\n&#39;,
- &#39;18-07-03 Connecting to a Local Database.ipynb\n&#39;,
- &#39;18-07-03 Connecting to a Local Database with SHH.ipynb\n&#39;,
- &#39;17-11-07 Dimensional Pivot Table.ipynb\n&#39;,
- &#39;18-06-06 Every Matplotlib Plot Linestyle.ipynb\n&#39;,
- &#39;18-06-06 Every Matplotlib Plot Marker.ipynb\n&#39;,
- &#39;17-08-05 Histograms.ipynb\n&#39;,
- &#39;15-02-02 Barplots.ipynb\n&#39;,
- &#39;17-10-16 Wordclouds in Python.ipynb\n&#39;,
- &#39;17-12-04 Heatmaps.ipynb\n&#39;,
- &#39;18-07-07 Styling DataFrames.ipynb\n&#39;,
- &#39;18-07-07 Resampling Datetime.ipynb\n&#39;,
- &#39;18-07-24 Converting Notebook to Slides.ipynb\n&#39;,
- &#39;18-07-24 Label Encoding.ipynb\n&#39;,
- &#39;17-10-15 Plotting Residuals.ipynb\n&#39;,
- &#39;17-10-15 Correlation Matricesipynb\n&#39;,
- &#39;18-07-04 Select Dtypes.ipynb\n&#39;,
- &#39;18-03-28 Creating Dummy Variables.ipynb\n&#39;,
- &#39;17-10-09 Standardizations.ipynb\n&#39;,
- &#39;17-08-01 Random Grid Search.ipynb\n&#39;,
- &#39;17-08-01 Full Grid Search.ipynb\n&#39;,
- &#39;18-07-28 Notebook Snippets.ipynb\n&#39;,
- &#39;18-07-29 Iris Analysis.ipynb\n&#39;,
- &#39;18-07-29 Classification Models.ipynb\n&#39;,
- &#39;18-07-24 Binning Features.ipynb\n&#39;,
- &#39;17-08-01 Train-Test Split.ipynb\n&#39;,
- &#39;18-07-31 Fizzbuzz.ipynb\n&#39;,
- &#39;17-10-02 Handling Missing Data.ipynb\n&#39;,
- &#39;17-08-01 Recursive Feature Elimination.ipynb\n&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Import-Data-From-Text-FIle-into-a-List">Import Data From Text FIle into a List<a class="anchor-link" href="#Import-Data-From-Text-FIle-into-a-List">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Second Method</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">mylist</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
-<span class="n">mylist</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[12]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;17-08-01 Cross Validation and K-Folds.ipynb&#39;,
- &#39;18-07-03 Writing a File to AWS S3.ipynb&#39;,
- &#39;18-07-03 Reading a File from AWS S3.ipynb&#39;,
- &#39;18-07-03 Connecting to a Local Database.ipynb&#39;,
- &#39;18-07-03 Connecting to a Local Database with SHH.ipynb&#39;,
- &#39;17-11-07 Dimensional Pivot Table.ipynb&#39;,
- &#39;18-06-06 Every Matplotlib Plot Linestyle.ipynb&#39;,
- &#39;18-06-06 Every Matplotlib Plot Marker.ipynb&#39;,
- &#39;17-08-05 Histograms.ipynb&#39;,
- &#39;15-02-02 Barplots.ipynb&#39;,
- &#39;17-10-16 Wordclouds in Python.ipynb&#39;,
- &#39;17-12-04 Heatmaps.ipynb&#39;,
- &#39;18-07-07 Styling DataFrames.ipynb&#39;,
- &#39;18-07-07 Resampling Datetime.ipynb&#39;,
- &#39;18-07-24 Converting Notebook to Slides.ipynb&#39;,
- &#39;18-07-24 Label Encoding.ipynb&#39;,
- &#39;17-10-15 Plotting Residuals.ipynb&#39;,
- &#39;17-10-15 Correlation Matricesipynb&#39;,
- &#39;18-07-04 Select Dtypes.ipynb&#39;,
- &#39;18-03-28 Creating Dummy Variables.ipynb&#39;,
- &#39;17-10-09 Standardizations.ipynb&#39;,
- &#39;17-08-01 Random Grid Search.ipynb&#39;,
- &#39;17-08-01 Full Grid Search.ipynb&#39;,
- &#39;18-07-28 Notebook Snippets.ipynb&#39;,
- &#39;18-07-29 Iris Analysis.ipynb&#39;,
- &#39;18-07-29 Classification Models.ipynb&#39;,
- &#39;18-07-24 Binning Features.ipynb&#39;,
- &#39;17-08-01 Train-Test Split.ipynb&#39;,
- &#39;18-07-31 Fizzbuzz.ipynb&#39;,
- &#39;17-10-02 Handling Missing Data.ipynb&#39;,
- &#39;17-08-01 Recursive Feature Elimination.ipynb&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Copying-Files-to-Another-Directory">Copying Files to Another Directory<a class="anchor-link" href="#Copying-Files-to-Another-Directory">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">copyfile</span>
-
-<span class="n">file_paths</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience/README.md&#39;</span><span class="p">]</span>
-
-<span class="k">for</span> <span class="n">filepaths</span> <span class="ow">in</span> <span class="n">file_paths</span><span class="p">:</span>
-  <span class="n">copyfile</span><span class="p">(</span><span class="n">filepaths</span><span class="p">,</span> <span class="s1">&#39;/Users/Kavi/Documents/DataScience/Pipelines/Data/copy_README.md&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Writing-a-File-to-Directory">Writing a File to Directory<a class="anchor-link" href="#Writing-a-File-to-Directory">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span>
-    <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;sample text&#39;</span><span class="p">)</span>
-    <span class="c1">#Close you filse to save memory when iterating files</span>
-    <span class="n">f2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
+<div class="prompt output_prompt">Out[23]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>24</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>22</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>16</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Appending-Data-to-a-File-and-Saving-it-Again">Appending Data to a File and Saving it Again<a class="anchor-link" href="#Appending-Data-to-a-File-and-Saving-it-Again">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file2.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span> 
-        <span class="c1"># Copy the text from the first file </span>
-        <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-        <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> You are the second version of the same file&quot;</span><span class="p">)</span>
-        <span class="n">f2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">f1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Deleting-Data-in-a-Diretory">Deleting Data in a Diretory<a class="anchor-link" href="#Deleting-Data-in-a-Diretory">&#182;</a></h3>
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Remove Text file from the directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Data/sample_file2.txt&quot;</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Data/sample_file.txt&quot;</span><span class="p">)</span>
-</pre></div>
 
-</div>
 </div>
 </div>
 

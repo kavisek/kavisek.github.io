@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Thu 10 May 2018</div>
-									<h2>Using the OS Module</h2>
+									<div class="pennant pennant-alt date">Mon 21 May 2018</div>
+									<h2>Randomized Grid Search</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,105 +1046,42 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Using-the-OS-Module">Using the OS Module<a class="anchor-link" href="#Using-the-OS-Module">&#182;</a></h1><p><span>This notebook is a combinations of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These tasks include remove files from directories, moving files from directories, parsing content from notebook, appending content to files, changing file types, etc. Hopefully you find some useful code below.</span></p>
+<h1 id="Randomized-Grid-Search">Randomized Grid Search<a class="anchor-link" href="#Randomized-Grid-Search">&#182;</a></h1><p><span>Manual hyperparameter searching? No way. Scikit Learn has a got an amazing random grid search function that can give us a hint into the best parameters by calling its class, setting up a dictionary with all parameters, and letting it fly. This example below his using a K-Nearest Neighbours model for its example. After the Randomize Grid Search is done, you can pull the best parameter for your model, and as well as take a look a the history of the previous combination of parameters.</span></p>
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Get-Current-Directory">Get Current Directory<a class="anchor-link" href="#Get-Current-Directory">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-<span class="n">cwd</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[2]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/Users/kavi/Documents/DataScience/Pipelines&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Find-Path-Function">Find Path Function<a class="anchor-link" href="#Find-Path-Function">&#182;</a></h3><p>Search the given directory and it's subdirectory  for the first instance a specific file. Return the file path of this file.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Search the given directory for the first instance a specific file. </span>
-<span class="sd">    Return the file path of this file.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our Find Path Punction</span>
-<span class="n">find_path</span><span class="p">(</span><span class="s1">&#39;10-15-17 Rescaling Features.ipynb&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">RandomizedSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
+
+
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> 
+                                 <span class="n">metric</span> <span class="o">=</span><span class="s1">&#39;minkowski&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_neighbors&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)),</span> <span class="s1">&#39;weights&#39;</span><span class="p">:[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">],</span>
+       <span class="s1">&#39;p&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">}</span>
+
+
+<span class="n">random_search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">classifier</span><span class="p">,</span> 
+                                   <span class="n">param_distributions</span> <span class="o">=</span> <span class="n">grid</span><span class="p">,</span> 
+                                   <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> 
+                                   <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                                   <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">random_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1163,7 +1100,14 @@ h6:hover .anchor-link {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/Users/Kavi/Documents/DataScience/Guides/10-15-17 Rescaling Features.ipynb&#39;</pre>
+<pre>RandomizedSearchCV(cv=10, error_score=&#39;raise&#39;,
+          estimator=KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkowski&#39;,
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights=&#39;uniform&#39;),
+          fit_params=None, iid=True, n_iter=10, n_jobs=1,
+          param_distributions={&#39;n_neighbors&#39;: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], &#39;weights&#39;: [&#39;uniform&#39;, &#39;distance&#39;], &#39;p&#39;: [1, 2]},
+          pre_dispatch=&#39;2*n_jobs&#39;, random_state=None, refit=True,
+          return_train_score=True, scoring=&#39;accuracy&#39;, verbose=0)</pre>
 </div>
 
 </div>
@@ -1176,9 +1120,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Breaking-Down-the-Find-Path-Function">Breaking Down the Find Path Function<a class="anchor-link" href="#Breaking-Down-the-Find-Path-Function">&#182;</a></h3><p>The <code>os.walk(path)</code> function is pretty cool. Let's take a moment to break down each variable this function returns the <code>root</code> variable is the diretory we are searching, <code>dirs</code> are the recursive subdirectories that the function is searching, and <code>files</code> are the files that exist in the directory.</p>
-
+<h3 id="Randomized-Grid-Search-Score">Randomized Grid Search Score<a class="anchor-link" href="#Randomized-Grid-Search-Score">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1187,20 +1129,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Breaking Down this Function</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span>
-<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;README.md&#39;</span>
-<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Root:&#39;</span><span class="p">,</span><span class="n">root</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dirs:&#39;</span><span class="p">,</span><span class="n">dirs</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Files:&#39;</span><span class="p">,</span><span class="n">files</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-    <span class="k">break</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best parameters: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">random_search</span>.best_params_)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CV Accuracy of best parameters: </span><span class="si">%.3f</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">random_search</span>.best_score_)
 </pre></div>
 
 </div>
@@ -1217,22 +1147,8 @@ h6:hover .anchor-link {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
----------------
-Root: /Users/Kavi/Documents/DataScience
-
-
----------------
-Dirs: [&#39;Predictive Analysis&#39;, &#39;Kaggle&#39;, &#39;FlashCards&#39;, &#39;Whitepapers&#39;, &#39;Tesitng&#39;, &#39;Competitions&#39;, &#39;Descriptive Analysis&#39;, &#39;Pipelines&#39;, &#39;Books&#39;, &#39;Stack Overflow&#39;, &#39;Visualizations&#39;, &#39;Notes&#39;, &#39;Reading list&#39;, &#39;Guides&#39;, &#39;Economics&#39;, &#39;Tutorials&#39;, &#39;.ipynb_checkpoints&#39;, &#39;.git&#39;, &#39;BrainStation&#39;, &#39;Community&#39;, &#39;NoSQL&#39;, &#39;Interviews&#39;, &#39;Techniques&#39;, &#39;SQL&#39;]
-
-
----------------
-Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.gitignore&#39;]
-
-
----------------
-&lt;generator object walk at 0x106613570&gt;
+<pre>Best parameters: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5}
+CV Accuracy of best parameters: 0.967
 </pre>
 </div>
 </div>
@@ -1245,9 +1161,19 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Find-All-Paths-Function">Find All Paths Function<a class="anchor-link" href="#Find-All-Paths-Function">&#182;</a></h3><p>Search the given directory and it's subdirectory for the every instance of a specific file. Return the all file paths of this file as a list.</p>
+<ul>
+<li>This method is more computationaly visable then a full grid search</li>
+<li>The result will change each time the model is fitted</li>
+</ul>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Baseline-Cross-Validation-Score">Baseline Cross Validation Score<a class="anchor-link" href="#Baseline-Cross-Validation-Score">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1256,33 +1182,9 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_all_paths</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Search the given directory and it&#39;s subdirectory for the every </span>
-<span class="sd">    instance of a specific file. Return the all file paths of this </span>
-<span class="sd">    file as a list.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-            <span class="c1"># os.path.join(root, name) is a string</span>
-            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span> 
-            
-    <span class="k">return</span> <span class="n">result</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our Find All Paths Punction</span>
-<span class="n">find_all_paths</span><span class="p">(</span><span class="s1">&#39;README.md&#39;</span><span class="p">,</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">cross_val_score</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Baesline with default parameters: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">np</span>.mean(
+        <span class="n">cross_val_score</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -1295,28 +1197,13 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;/Users/Kavi/Documents/DataScience/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Predictive Analysis/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Competitions/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Competitions/DonorsChoose Application/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Descriptive Analysis/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Pipelines/AWS Pipelines/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Notes/Readings/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Reading list/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/topmodel/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Community/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Techniques/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/SQL/README.md&#39;]</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Baesline with default parameters: 0.967
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -1327,34 +1214,213 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Find-All-Path-for-a-list-of-Files">Find All Path for a list of Files<a class="anchor-link" href="#Find-All-Path-for-a-list-of-Files">&#182;</a></h3><p>Search the given directory and it's subdirectory for the every instance of ever file in a list. Return the all file paths for every file as a list.</p>
+<h3 id="Viewing-Randomized-Grid-Score">Viewing Randomized Grid Score<a class="anchor-link" href="#Viewing-Randomized-Grid-Score">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The grid scores attribute is now depricated, </span>
+<span class="c1">#but I&#39;ll use it till its completely gone</span>
+<span class="n">random_search</span><span class="o">.</span><span class="n">grid_scores_</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/Kavi/anaconda/envs/tensorflow/lib/python3.6/site-packages/sklearn/model_selection/_search.py:761: DeprecationWarning: The grid_scores_ attribute was deprecated in version 0.18 in favor of the more elaborate cv_results_ attribute. The grid_scores_ attribute will not be available from 0.20
+  DeprecationWarning)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5},
+ mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 6},
+ mean: 0.94000, std: 0.06289, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 2},
+ mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10},
+ mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 3},
+ mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 8},
+ mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 4},
+ mean: 0.95333, std: 0.05207, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 7},
+ mean: 0.96000, std: 0.04422, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 10},
+ mean: 0.96000, std: 0.05333, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 2}]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_all_paths_in_list</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Search the given directory and it&#39;s subdirectory for the every </span>
-<span class="sd">    instance of ever file in a list. Return the all file paths for </span>
-<span class="sd">    every file as a list.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">list_of_files</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-                <span class="c1"># os.path.join(root, name) is a string</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
-                
-    <span class="k">return</span> <span class="n">result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The new cv_results attribute outpute our results in JSON</span>
+<span class="c1"># Throw it in a dataframe to make some sense of it</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_weights</th>
+      <th>param_p</th>
+      <th>param_n_neighbors</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>...</th>
+      <th>split2_train_score</th>
+      <th>split3_train_score</th>
+      <th>split4_train_score</th>
+      <th>split5_train_score</th>
+      <th>split6_train_score</th>
+      <th>split7_train_score</th>
+      <th>split8_train_score</th>
+      <th>split9_train_score</th>
+      <th>mean_train_score</th>
+      <th>std_train_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000270</td>
+      <td>0.000036</td>
+      <td>0.000499</td>
+      <td>0.000112</td>
+      <td>uniform</td>
+      <td>2</td>
+      <td>5</td>
+      <td>{'weights': 'uniform', 'p': 2, 'n_neighbors': 5}</td>
+      <td>1.0</td>
+      <td>0.933333</td>
+      <td>...</td>
+      <td>0.962963</td>
+      <td>0.970370</td>
+      <td>0.985185</td>
+      <td>0.962963</td>
+      <td>0.977778</td>
+      <td>0.962963</td>
+      <td>0.962963</td>
+      <td>0.97037</td>
+      <td>0.968889</td>
+      <td>0.007258</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000277</td>
+      <td>0.000020</td>
+      <td>0.000480</td>
+      <td>0.000070</td>
+      <td>uniform</td>
+      <td>2</td>
+      <td>6</td>
+      <td>{'weights': 'uniform', 'p': 2, 'n_neighbors': 6}</td>
+      <td>1.0</td>
+      <td>0.933333</td>
+      <td>...</td>
+      <td>0.970370</td>
+      <td>0.977778</td>
+      <td>0.985185</td>
+      <td>0.955556</td>
+      <td>0.985185</td>
+      <td>0.970370</td>
+      <td>0.970370</td>
+      <td>0.97037</td>
+      <td>0.972593</td>
+      <td>0.008148</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000273</td>
+      <td>0.000019</td>
+      <td>0.000436</td>
+      <td>0.000024</td>
+      <td>uniform</td>
+      <td>1</td>
+      <td>2</td>
+      <td>{'weights': 'uniform', 'p': 1, 'n_neighbors': 2}</td>
+      <td>1.0</td>
+      <td>0.933333</td>
+      <td>...</td>
+      <td>0.970370</td>
+      <td>0.977778</td>
+      <td>0.970370</td>
+      <td>0.962963</td>
+      <td>0.985185</td>
+      <td>0.970370</td>
+      <td>0.970370</td>
+      <td>0.97037</td>
+      <td>0.972593</td>
+      <td>0.005785</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 33 columns</p>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1364,12 +1430,8 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generating a list of files</span>
-<span class="n">list_of_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;README.md&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;02-01-17 4 Time Saving Tricks in Pandas.ipynb&#39;</span><span class="p">]</span>
-
-<span class="c1"># Run our Find All Paths in List Punction</span>
-<span class="n">find_all_paths_in_list</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Here is the raw output</span>
+<span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span>
 </pre></div>
 
 </div>
@@ -1388,321 +1450,93 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;/Users/Kavi/Documents/DataScience/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Predictive Analysis/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Competitions/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Competitions/DonorsChoose Application/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Descriptive Analysis/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Pipelines/AWS Pipelines/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Notes/Readings/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Reading list/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/topmodel/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Community/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Techniques/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/SQL/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Pandas/02-01-17 4 Time Saving Tricks in Pandas.ipynb&#39;]</pre>
+<pre>{&#39;mean_fit_time&#39;: array([0.00026991, 0.00027733, 0.00027254, 0.00025287, 0.0002615 ,
+        0.00026371, 0.0002893 , 0.00025344, 0.00025284, 0.00027139]),
+ &#39;std_fit_time&#39;: array([3.61297300e-05, 2.04961784e-05, 1.91800153e-05, 1.24148105e-05,
+        3.63166831e-05, 2.07953627e-05, 7.74256544e-05, 1.33292832e-05,
+        1.25028894e-05, 4.69197890e-05]),
+ &#39;mean_score_time&#39;: array([0.00049944, 0.00047967, 0.00043576, 0.00044491, 0.00044494,
+        0.00049927, 0.0004462 , 0.0004365 , 0.00044463, 0.00045156]),
+ &#39;std_score_time&#39;: array([1.11876495e-04, 6.98170411e-05, 2.39042539e-05, 2.31534885e-05,
+        2.36329944e-05, 6.97777868e-05, 2.43472535e-05, 2.11077342e-05,
+        2.22234893e-05, 4.22938700e-05]),
+ &#39;param_weights&#39;: masked_array(data=[&#39;uniform&#39;, &#39;uniform&#39;, &#39;uniform&#39;, &#39;uniform&#39;, &#39;distance&#39;,
+                    &#39;distance&#39;, &#39;distance&#39;, &#39;uniform&#39;, &#39;uniform&#39;,
+                    &#39;distance&#39;],
+              mask=[False, False, False, False, False, False, False, False,
+                    False, False],
+        fill_value=&#39;?&#39;,
+             dtype=object),
+ &#39;param_p&#39;: masked_array(data=[2, 2, 1, 2, 2, 2, 2, 1, 1, 2],
+              mask=[False, False, False, False, False, False, False, False,
+                    False, False],
+        fill_value=&#39;?&#39;,
+             dtype=object),
+ &#39;param_n_neighbors&#39;: masked_array(data=[5, 6, 2, 10, 3, 8, 4, 7, 10, 2],
+              mask=[False, False, False, False, False, False, False, False,
+                    False, False],
+        fill_value=&#39;?&#39;,
+             dtype=object),
+ &#39;params&#39;: [{&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5},
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 6},
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 2},
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10},
+  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 3},
+  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 8},
+  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 4},
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 7},
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 10},
+  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 2}],
+ &#39;split0_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
+ &#39;split1_test_score&#39;: array([0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.93333333,
+        0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.93333333]),
+ &#39;split2_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
+ &#39;split3_test_score&#39;: array([1.        , 1.        , 0.93333333, 1.        , 0.93333333,
+        1.        , 0.93333333, 1.        , 0.93333333, 0.93333333]),
+ &#39;split4_test_score&#39;: array([0.86666667, 0.86666667, 0.86666667, 1.        , 0.86666667,
+        0.86666667, 0.86666667, 0.86666667, 1.        , 0.86666667]),
+ &#39;split5_test_score&#39;: array([0.93333333, 0.93333333, 1.        , 0.86666667, 1.        ,
+        0.93333333, 1.        , 0.86666667, 0.86666667, 1.        ]),
+ &#39;split6_test_score&#39;: array([0.93333333, 0.93333333, 0.8       , 0.93333333, 0.93333333,
+        0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.86666667]),
+ &#39;split7_test_score&#39;: array([1.        , 1.        , 0.93333333, 0.93333333, 1.        ,
+        1.        , 1.        , 0.93333333, 0.93333333, 1.        ]),
+ &#39;split8_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
+ &#39;split9_test_score&#39;: array([1.        , 1.        , 0.93333333, 1.        , 1.        ,
+        1.        , 1.        , 1.        , 1.        , 1.        ]),
+ &#39;mean_test_score&#39;: array([0.96666667, 0.96666667, 0.94      , 0.96666667, 0.96666667,
+        0.96666667, 0.96666667, 0.95333333, 0.96      , 0.96      ]),
+ &#39;std_test_score&#39;: array([0.04472136, 0.04472136, 0.06289321, 0.04472136, 0.04472136,
+        0.04472136, 0.04472136, 0.05206833, 0.04422166, 0.05333333]),
+ &#39;rank_test_score&#39;: array([ 1,  1, 10,  1,  1,  1,  1,  9,  7,  7], dtype=int32),
+ &#39;split0_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97037037, 1.        ,
+        1.        , 1.        , 0.96296296, 0.95555556, 1.        ]),
+ &#39;split1_train_score&#39;: array([0.97037037, 0.97037037, 0.97777778, 0.98518519, 1.        ,
+        1.        , 1.        , 0.97777778, 0.96296296, 1.        ]),
+ &#39;split2_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
+        1.        , 1.        , 0.96296296, 0.97037037, 1.        ]),
+ &#39;split3_train_score&#39;: array([0.97037037, 0.97777778, 0.97777778, 0.97777778, 1.        ,
+        1.        , 1.        , 0.97037037, 0.96296296, 1.        ]),
+ &#39;split4_train_score&#39;: array([0.98518519, 0.98518519, 0.97037037, 0.97777778, 1.        ,
+        1.        , 1.        , 0.98518519, 0.97037037, 1.        ]),
+ &#39;split5_train_score&#39;: array([0.96296296, 0.95555556, 0.96296296, 0.97037037, 1.        ,
+        1.        , 1.        , 0.96296296, 0.96296296, 1.        ]),
+ &#39;split6_train_score&#39;: array([0.97777778, 0.98518519, 0.98518519, 0.98518519, 1.        ,
+        1.        , 1.        , 0.97037037, 0.97037037, 1.        ]),
+ &#39;split7_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
+        1.        , 1.        , 0.97037037, 0.97037037, 1.        ]),
+ &#39;split8_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
+        1.        , 1.        , 0.97037037, 0.96296296, 1.        ]),
+ &#39;split9_train_score&#39;: array([0.97037037, 0.97037037, 0.97037037, 0.96296296, 1.        ,
+        1.        , 1.        , 0.95555556, 0.94074074, 1.        ]),
+ &#39;mean_train_score&#39;: array([0.96888889, 0.97259259, 0.97259259, 0.9762963 , 1.        ,
+        1.        , 1.        , 0.96888889, 0.96296296, 1.        ]),
+ &#39;std_train_score&#39;: array([0.00725775, 0.00814815, 0.00578537, 0.00645763, 0.        ,
+        0.        , 0.        , 0.00797802, 0.00876456, 0.        ])}</pre>
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Importing-Data-From-Text-File">Importing Data From Text File<a class="anchor-link" href="#Importing-Data-From-Text-File">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[10]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;17-08-01 Cross Validation and K-Folds.ipynb\n18-07-03 Writing a File to AWS S3.ipynb\n18-07-03 Reading a File from AWS S3.ipynb\n18-07-03 Connecting to a Local Database.ipynb\n18-07-03 Connecting to a Local Database with SHH.ipynb\n17-11-07 Dimensional Pivot Table.ipynb\n18-06-06 Every Matplotlib Plot Linestyle.ipynb\n18-06-06 Every Matplotlib Plot Marker.ipynb\n17-08-05 Histograms.ipynb\n15-02-02 Barplots.ipynb\n17-10-16 Wordclouds in Python.ipynb\n17-12-04 Heatmaps.ipynb\n18-07-07 Styling DataFrames.ipynb\n18-07-07 Resampling Datetime.ipynb\n18-07-24 Converting Notebook to Slides.ipynb\n18-07-24 Label Encoding.ipynb\n17-10-15 Plotting Residuals.ipynb\n17-10-15 Correlation Matricesipynb\n18-07-04 Select Dtypes.ipynb\n18-03-28 Creating Dummy Variables.ipynb\n17-10-09 Standardizations.ipynb\n17-08-01 Random Grid Search.ipynb\n17-08-01 Full Grid Search.ipynb\n18-07-28 Notebook Snippets.ipynb\n18-07-29 Iris Analysis.ipynb\n18-07-29 Classification Models.ipynb\n18-07-24 Binning Features.ipynb\n17-08-01 Train-Test Split.ipynb\n18-07-31 Fizzbuzz.ipynb\n17-10-02 Handling Missing Data.ipynb\n17-08-01 Recursive Feature Elimination.ipynb\n&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Import-Data-From-Text-FIle-into-a-List">Import Data From Text FIle into a List<a class="anchor-link" href="#Import-Data-From-Text-FIle-into-a-List">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># First Method</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-<span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[11]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;17-08-01 Cross Validation and K-Folds.ipynb\n&#39;,
- &#39;18-07-03 Writing a File to AWS S3.ipynb\n&#39;,
- &#39;18-07-03 Reading a File from AWS S3.ipynb\n&#39;,
- &#39;18-07-03 Connecting to a Local Database.ipynb\n&#39;,
- &#39;18-07-03 Connecting to a Local Database with SHH.ipynb\n&#39;,
- &#39;17-11-07 Dimensional Pivot Table.ipynb\n&#39;,
- &#39;18-06-06 Every Matplotlib Plot Linestyle.ipynb\n&#39;,
- &#39;18-06-06 Every Matplotlib Plot Marker.ipynb\n&#39;,
- &#39;17-08-05 Histograms.ipynb\n&#39;,
- &#39;15-02-02 Barplots.ipynb\n&#39;,
- &#39;17-10-16 Wordclouds in Python.ipynb\n&#39;,
- &#39;17-12-04 Heatmaps.ipynb\n&#39;,
- &#39;18-07-07 Styling DataFrames.ipynb\n&#39;,
- &#39;18-07-07 Resampling Datetime.ipynb\n&#39;,
- &#39;18-07-24 Converting Notebook to Slides.ipynb\n&#39;,
- &#39;18-07-24 Label Encoding.ipynb\n&#39;,
- &#39;17-10-15 Plotting Residuals.ipynb\n&#39;,
- &#39;17-10-15 Correlation Matricesipynb\n&#39;,
- &#39;18-07-04 Select Dtypes.ipynb\n&#39;,
- &#39;18-03-28 Creating Dummy Variables.ipynb\n&#39;,
- &#39;17-10-09 Standardizations.ipynb\n&#39;,
- &#39;17-08-01 Random Grid Search.ipynb\n&#39;,
- &#39;17-08-01 Full Grid Search.ipynb\n&#39;,
- &#39;18-07-28 Notebook Snippets.ipynb\n&#39;,
- &#39;18-07-29 Iris Analysis.ipynb\n&#39;,
- &#39;18-07-29 Classification Models.ipynb\n&#39;,
- &#39;18-07-24 Binning Features.ipynb\n&#39;,
- &#39;17-08-01 Train-Test Split.ipynb\n&#39;,
- &#39;18-07-31 Fizzbuzz.ipynb\n&#39;,
- &#39;17-10-02 Handling Missing Data.ipynb\n&#39;,
- &#39;17-08-01 Recursive Feature Elimination.ipynb\n&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Import-Data-From-Text-FIle-into-a-List">Import Data From Text FIle into a List<a class="anchor-link" href="#Import-Data-From-Text-FIle-into-a-List">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Second Method</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">mylist</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
-<span class="n">mylist</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[12]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;17-08-01 Cross Validation and K-Folds.ipynb&#39;,
- &#39;18-07-03 Writing a File to AWS S3.ipynb&#39;,
- &#39;18-07-03 Reading a File from AWS S3.ipynb&#39;,
- &#39;18-07-03 Connecting to a Local Database.ipynb&#39;,
- &#39;18-07-03 Connecting to a Local Database with SHH.ipynb&#39;,
- &#39;17-11-07 Dimensional Pivot Table.ipynb&#39;,
- &#39;18-06-06 Every Matplotlib Plot Linestyle.ipynb&#39;,
- &#39;18-06-06 Every Matplotlib Plot Marker.ipynb&#39;,
- &#39;17-08-05 Histograms.ipynb&#39;,
- &#39;15-02-02 Barplots.ipynb&#39;,
- &#39;17-10-16 Wordclouds in Python.ipynb&#39;,
- &#39;17-12-04 Heatmaps.ipynb&#39;,
- &#39;18-07-07 Styling DataFrames.ipynb&#39;,
- &#39;18-07-07 Resampling Datetime.ipynb&#39;,
- &#39;18-07-24 Converting Notebook to Slides.ipynb&#39;,
- &#39;18-07-24 Label Encoding.ipynb&#39;,
- &#39;17-10-15 Plotting Residuals.ipynb&#39;,
- &#39;17-10-15 Correlation Matricesipynb&#39;,
- &#39;18-07-04 Select Dtypes.ipynb&#39;,
- &#39;18-03-28 Creating Dummy Variables.ipynb&#39;,
- &#39;17-10-09 Standardizations.ipynb&#39;,
- &#39;17-08-01 Random Grid Search.ipynb&#39;,
- &#39;17-08-01 Full Grid Search.ipynb&#39;,
- &#39;18-07-28 Notebook Snippets.ipynb&#39;,
- &#39;18-07-29 Iris Analysis.ipynb&#39;,
- &#39;18-07-29 Classification Models.ipynb&#39;,
- &#39;18-07-24 Binning Features.ipynb&#39;,
- &#39;17-08-01 Train-Test Split.ipynb&#39;,
- &#39;18-07-31 Fizzbuzz.ipynb&#39;,
- &#39;17-10-02 Handling Missing Data.ipynb&#39;,
- &#39;17-08-01 Recursive Feature Elimination.ipynb&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Copying-Files-to-Another-Directory">Copying Files to Another Directory<a class="anchor-link" href="#Copying-Files-to-Another-Directory">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">copyfile</span>
-
-<span class="n">file_paths</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience/README.md&#39;</span><span class="p">]</span>
-
-<span class="k">for</span> <span class="n">filepaths</span> <span class="ow">in</span> <span class="n">file_paths</span><span class="p">:</span>
-  <span class="n">copyfile</span><span class="p">(</span><span class="n">filepaths</span><span class="p">,</span> <span class="s1">&#39;/Users/Kavi/Documents/DataScience/Pipelines/Data/copy_README.md&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Writing-a-File-to-Directory">Writing a File to Directory<a class="anchor-link" href="#Writing-a-File-to-Directory">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span>
-    <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;sample text&#39;</span><span class="p">)</span>
-    <span class="c1">#Close you filse to save memory when iterating files</span>
-    <span class="n">f2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Appending-Data-to-a-File-and-Saving-it-Again">Appending Data to a File and Saving it Again<a class="anchor-link" href="#Appending-Data-to-a-File-and-Saving-it-Again">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file2.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span> 
-        <span class="c1"># Copy the text from the first file </span>
-        <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-        <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> You are the second version of the same file&quot;</span><span class="p">)</span>
-        <span class="n">f2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">f1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Deleting-Data-in-a-Diretory">Deleting Data in a Diretory<a class="anchor-link" href="#Deleting-Data-in-a-Diretory">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Remove Text file from the directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Data/sample_file2.txt&quot;</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Data/sample_file.txt&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
 </div>
 </div>
 
