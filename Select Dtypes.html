@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Fri 18 May 2018</div>
-									<h2>Handing Missing Dlata</h2>
+									<div class="pennant pennant-alt date">Wed 13 June 2018</div>
+									<h2>Select Dtypes</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,55 +1046,20 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Handing-Missing-Dlata">Handing Missing Dlata<a class="anchor-link" href="#Handing-Missing-Dlata">&#182;</a></h1><p><span>There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic methods to handle missing data. Again your strategy to handle missing data will different with contextual knowledge around the problem with your domain expertise.</span></p>
-<p><span style="text-decoration:underline">**BasicStategies**</span></p>
-<ol>
-<li>Removing observations</li>
-<li>Filling in NaN values with certain value</li>
-<li>Filling in NaN values with the mean</li>
-<li>Filling in NaN values with the median</li>
-<li>Dropping columns with missing values</li>
-</ol>
-<h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h3>
+<h1 id="Select-Dtypes">Select Dtypes<a class="anchor-link" href="#Select-Dtypes">&#182;</a></h1><p><span>Once you get used to using pandas, filtering dataframe for content quickly and efficiently can be a huge asset. Pandas introduced a new feature ".select_dtypes" function that allows you to filter dataframe quickly by dtype values. You can really get create and use this function to operate over you dataframe in more flexible ways, with this code. Check out some of the examples below.</span></p>
+<h3 id="Import-Preliminaies">Import Preliminaies<a class="anchor-link" href="#Import-Preliminaies">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
 
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Generating-Data">Generating Data<a class="anchor-link" href="#Generating-Data">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Justin&#39;</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="s1">&#39;Stephen&#39;</span><span class="p">,</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian&#39;</span><span class="p">,</span><span class="s1">&#39;John&#39;</span><span class="p">],</span>
-             <span class="s1">&#39;Midterm_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
-             <span class="s1">&#39;Final_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-             <span class="p">})</span>
-<span class="c1"># Create null value in for final scores</span>
-<span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">92</span><span class="p">,</span><span class="mi">97</span><span class="p">)),</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
-                            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">students</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Data/vgsales.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1107,7 +1072,53 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 16598 entries, 0 to 16597
+Data columns (total 11 columns):
+Rank            16598 non-null int64
+Name            16598 non-null object
+Platform        16598 non-null object
+Year            16327 non-null float64
+Genre           16598 non-null object
+Publisher       16540 non-null object
+NA_Sales        16598 non-null float64
+EU_Sales        16598 non-null float64
+JP_Sales        16598 non-null float64
+Other_Sales     16598 non-null float64
+Global_Sales    16598 non-null float64
+dtypes: float64(6), int64(1), object(4)
+memory usage: 1.4+ MB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[59]:</div>
 
 
 
@@ -1130,53 +1141,89 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>Rank</th>
       <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>Platform</th>
+      <th>Year</th>
+      <th>Genre</th>
+      <th>Publisher</th>
+      <th>NA_Sales</th>
+      <th>EU_Sales</th>
+      <th>JP_Sales</th>
+      <th>Other_Sales</th>
+      <th>Global_Sales</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <td>1</td>
+      <td>Wii Sports</td>
+      <td>Wii</td>
+      <td>2006.0</td>
+      <td>Sports</td>
+      <td>Nintendo</td>
+      <td>41.49</td>
+      <td>29.02</td>
+      <td>3.77</td>
+      <td>8.46</td>
+      <td>82.74</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>NaN</td>
+      <td>2</td>
+      <td>Super Mario Bros.</td>
+      <td>NES</td>
+      <td>1985.0</td>
+      <td>Platform</td>
+      <td>Nintendo</td>
+      <td>29.08</td>
+      <td>3.58</td>
+      <td>6.81</td>
+      <td>0.77</td>
+      <td>40.24</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>3</td>
+      <td>Mario Kart Wii</td>
+      <td>Wii</td>
+      <td>2008.0</td>
+      <td>Racing</td>
+      <td>Nintendo</td>
+      <td>15.85</td>
+      <td>12.88</td>
+      <td>3.79</td>
+      <td>3.31</td>
+      <td>35.82</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>NaN</td>
+      <td>4</td>
+      <td>Wii Sports Resort</td>
+      <td>Wii</td>
+      <td>2009.0</td>
+      <td>Sports</td>
+      <td>Nintendo</td>
+      <td>15.75</td>
+      <td>11.01</td>
+      <td>3.28</td>
+      <td>2.96</td>
+      <td>33.00</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <td>5</td>
+      <td>Pokemon Red/Pokemon Blue</td>
+      <td>GB</td>
+      <td>1996.0</td>
+      <td>Role-Playing</td>
+      <td>Nintendo</td>
+      <td>11.27</td>
+      <td>8.89</td>
+      <td>10.22</td>
+      <td>1.00</td>
+      <td>31.37</td>
     </tr>
   </tbody>
 </table>
@@ -1193,16 +1240,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.--Removing-Rows-with-NaN-Values">1.  Removing Rows with NaN Values<a class="anchor-link" href="#1.--Removing-Rows-with-NaN-Values">&#182;</a></h3>
+<h3 id="Using-the-Select-DTypes-Function">Using the Select DTypes Function<a class="anchor-link" href="#Using-the-Select-DTypes-Function">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1215,7 +1262,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[60]:</div>
 
 
 
@@ -1239,136 +1286,252 @@ h6:hover .anchor-link {
     <tr style="text-align: right;">
       <th></th>
       <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>Platform</th>
+      <th>Genre</th>
+      <th>Publisher</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Filling-NaN-Value-with-Zeros">2. Filling NaN Value with Zeros<a class="anchor-link" href="#2.-Filling-NaN-Value-with-Zeros">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <td>Wii Sports</td>
+      <td>Wii</td>
+      <td>Sports</td>
+      <td>Nintendo</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>0.0</td>
+      <td>Super Mario Bros.</td>
+      <td>NES</td>
+      <td>Platform</td>
+      <td>Nintendo</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>Mario Kart Wii</td>
+      <td>Wii</td>
+      <td>Racing</td>
+      <td>Nintendo</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>0.0</td>
+      <td>Wii Sports Resort</td>
+      <td>Wii</td>
+      <td>Sports</td>
+      <td>Nintendo</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>0.0</td>
+      <td>Pokemon Red/Pokemon Blue</td>
+      <td>GB</td>
+      <td>Role-Playing</td>
+      <td>Nintendo</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">,</span><span class="s1">&#39;int&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[61]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>NA_Sales</th>
+      <th>EU_Sales</th>
+      <th>JP_Sales</th>
+      <th>Other_Sales</th>
+      <th>Global_Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2006.0</td>
+      <td>41.49</td>
+      <td>29.02</td>
+      <td>3.77</td>
+      <td>8.46</td>
+      <td>82.74</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>0.0</td>
+      <th>1</th>
+      <td>1985.0</td>
+      <td>29.08</td>
+      <td>3.58</td>
+      <td>6.81</td>
+      <td>0.77</td>
+      <td>40.24</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <th>2</th>
+      <td>2008.0</td>
+      <td>15.85</td>
+      <td>12.88</td>
+      <td>3.79</td>
+      <td>3.31</td>
+      <td>35.82</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2009.0</td>
+      <td>15.75</td>
+      <td>11.01</td>
+      <td>3.28</td>
+      <td>2.96</td>
+      <td>33.00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1996.0</td>
+      <td>11.27</td>
+      <td>8.89</td>
+      <td>10.22</td>
+      <td>1.00</td>
+      <td>31.37</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[62]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Platform</th>
+      <th>Genre</th>
+      <th>Publisher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Wii Sports</td>
+      <td>Wii</td>
+      <td>Sports</td>
+      <td>Nintendo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Super Mario Bros.</td>
+      <td>NES</td>
+      <td>Platform</td>
+      <td>Nintendo</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Mario Kart Wii</td>
+      <td>Wii</td>
+      <td>Racing</td>
+      <td>Nintendo</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Wii Sports Resort</td>
+      <td>Wii</td>
+      <td>Sports</td>
+      <td>Nintendo</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Pokemon Red/Pokemon Blue</td>
+      <td>GB</td>
+      <td>Role-Playing</td>
+      <td>Nintendo</td>
     </tr>
   </tbody>
 </table>
@@ -1385,16 +1548,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Filling-NaN-Values-with-Mean">4. Filling NaN Values with Mean<a class="anchor-link" href="#4.-Filling-NaN-Values-with-Mean">&#182;</a></h3>
+<h3 id="Use-Case:-Describing-Only-Numeric-Features">Use Case: Describing Only Numeric Features<a class="anchor-link" href="#Use-Case:-Describing-Only-Numeric-Features">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float&#39;</span><span class="p">,</span><span class="s1">&#39;int&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1407,7 +1570,157 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[63]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rank</th>
+      <th>Year</th>
+      <th>NA_Sales</th>
+      <th>EU_Sales</th>
+      <th>JP_Sales</th>
+      <th>Other_Sales</th>
+      <th>Global_Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>16598.000000</td>
+      <td>16327.000000</td>
+      <td>16598.000000</td>
+      <td>16598.000000</td>
+      <td>16598.000000</td>
+      <td>16598.000000</td>
+      <td>16598.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>8300.605254</td>
+      <td>2006.406443</td>
+      <td>0.264667</td>
+      <td>0.146652</td>
+      <td>0.077782</td>
+      <td>0.048063</td>
+      <td>0.537441</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>4791.853933</td>
+      <td>5.828981</td>
+      <td>0.816683</td>
+      <td>0.505351</td>
+      <td>0.309291</td>
+      <td>0.188588</td>
+      <td>1.555028</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>1980.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.010000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>4151.250000</td>
+      <td>2003.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.060000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>8300.500000</td>
+      <td>2007.000000</td>
+      <td>0.080000</td>
+      <td>0.020000</td>
+      <td>0.000000</td>
+      <td>0.010000</td>
+      <td>0.170000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>12449.750000</td>
+      <td>2010.000000</td>
+      <td>0.240000</td>
+      <td>0.110000</td>
+      <td>0.040000</td>
+      <td>0.040000</td>
+      <td>0.470000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>16600.000000</td>
+      <td>2020.000000</td>
+      <td>41.490000</td>
+      <td>29.020000</td>
+      <td>10.220000</td>
+      <td>10.570000</td>
+      <td>82.740000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Use-Case:-Encoding-Objects-Values">Use Case: Encoding Objects Values<a class="anchor-link" href="#Use-Case:-Encoding-Objects-Values">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[64]:</div>
 
 
 
@@ -1431,52 +1744,46 @@ h6:hover .anchor-link {
     <tr style="text-align: right;">
       <th></th>
       <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>Platform</th>
+      <th>Genre</th>
+      <th>Publisher</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.000000</td>
+      <td>Wii Sports</td>
+      <td>Wii</td>
+      <td>Sports</td>
+      <td>Nintendo</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>98.333333</td>
+      <td>Super Mario Bros.</td>
+      <td>NES</td>
+      <td>Platform</td>
+      <td>Nintendo</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.000000</td>
+      <td>Mario Kart Wii</td>
+      <td>Wii</td>
+      <td>Racing</td>
+      <td>Nintendo</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>98.333333</td>
+      <td>Wii Sports Resort</td>
+      <td>Wii</td>
+      <td>Sports</td>
+      <td>Nintendo</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.000000</td>
+      <td>Pokemon Red/Pokemon Blue</td>
+      <td>GB</td>
+      <td>Role-Playing</td>
+      <td>Nintendo</td>
     </tr>
   </tbody>
 </table>
@@ -1489,20 +1796,15 @@ h6:hover .anchor-link {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Filling-NaN-Values-with-Median">5. Filling NaN Values with Median<a class="anchor-link" href="#5.-Filling-NaN-Values-with-Median">&#182;</a></h3>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]):</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1515,7 +1817,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[68]:</div>
 
 
 
@@ -1538,53 +1840,89 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>Rank</th>
       <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>Platform</th>
+      <th>Year</th>
+      <th>Genre</th>
+      <th>Publisher</th>
+      <th>NA_Sales</th>
+      <th>EU_Sales</th>
+      <th>JP_Sales</th>
+      <th>Other_Sales</th>
+      <th>Global_Sales</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <td>1</td>
+      <td>11007</td>
+      <td>26</td>
+      <td>2006.0</td>
+      <td>10</td>
+      <td>359</td>
+      <td>41.49</td>
+      <td>29.02</td>
+      <td>3.77</td>
+      <td>8.46</td>
+      <td>82.74</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>2</td>
+      <td>9327</td>
+      <td>11</td>
+      <td>1985.0</td>
+      <td>4</td>
+      <td>359</td>
+      <td>29.08</td>
+      <td>3.58</td>
+      <td>6.81</td>
+      <td>0.77</td>
+      <td>40.24</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>3</td>
+      <td>5573</td>
+      <td>26</td>
+      <td>2008.0</td>
+      <td>6</td>
+      <td>359</td>
+      <td>15.85</td>
+      <td>12.88</td>
+      <td>3.79</td>
+      <td>3.31</td>
+      <td>35.82</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>98.0</td>
+      <td>4</td>
+      <td>11009</td>
+      <td>26</td>
+      <td>2009.0</td>
+      <td>10</td>
+      <td>359</td>
+      <td>15.75</td>
+      <td>11.01</td>
+      <td>3.28</td>
+      <td>2.96</td>
+      <td>33.00</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <td>5</td>
+      <td>7346</td>
+      <td>5</td>
+      <td>1996.0</td>
+      <td>7</td>
+      <td>359</td>
+      <td>11.27</td>
+      <td>8.89</td>
+      <td>10.22</td>
+      <td>1.00</td>
+      <td>31.37</td>
     </tr>
   </tbody>
 </table>
@@ -1597,20 +1935,12 @@ h6:hover .anchor-link {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="6.-Dropping-Features-with-NaN">6. Dropping Features with NaN<a class="anchor-link" href="#6.-Dropping-Features-with-NaN">&#182;</a></h3>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1623,74 +1953,28 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt"></div>
 
 
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-    </tr>
-  </tbody>
-</table>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 16598 entries, 0 to 16597
+Data columns (total 11 columns):
+Rank            16598 non-null int64
+Name            16598 non-null int16
+Platform        16598 non-null int8
+Year            16327 non-null float64
+Genre           16598 non-null int8
+Publisher       16598 non-null int16
+NA_Sales        16598 non-null float64
+EU_Sales        16598 non-null float64
+JP_Sales        16598 non-null float64
+Other_Sales     16598 non-null float64
+Global_Sales    16598 non-null float64
+dtypes: float64(6), int16(2), int64(1), int8(2)
+memory usage: 1005.0 KB
+</pre>
 </div>
-</div>
-
 </div>
 
 </div>

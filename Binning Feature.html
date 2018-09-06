@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Fri 18 May 2018</div>
-									<h2>Handing Missing Dlata</h2>
+									<div class="pennant pennant-alt date">Sun 24 June 2018</div>
+									<h2>Binning Feature</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,16 +1046,318 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Handing-Missing-Dlata">Handing Missing Dlata<a class="anchor-link" href="#Handing-Missing-Dlata">&#182;</a></h1><p><span>There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic methods to handle missing data. Again your strategy to handle missing data will different with contextual knowledge around the problem with your domain expertise.</span></p>
-<p><span style="text-decoration:underline">**BasicStategies**</span></p>
-<ol>
-<li>Removing observations</li>
-<li>Filling in NaN values with certain value</li>
-<li>Filling in NaN values with the mean</li>
-<li>Filling in NaN values with the median</li>
-<li>Dropping columns with missing values</li>
-</ol>
-<h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h3>
+<h1 id="Binning-Feature">Binning Feature<a class="anchor-link" href="#Binning-Feature">&#182;</a></h1><p><span>The bining of data into a few categorical groups can help us see the summarize the sparse continuous values to a few data points. This can be useful in a few machine learning problems and makes it easy to plot data into a few points in a barplot. I use pandas' cut function to bin the data.</span></p>
+<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span> <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;feature_2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">feature_1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[1]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.333569</td>
+      <td>-1.333569</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.289372</td>
+      <td>-1.289372</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.423090</td>
+      <td>1.423090</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.255041</td>
+      <td>-0.255041</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.632775</td>
+      <td>-0.632775</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1.388692</td>
+      <td>1.388692</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>-1.373234</td>
+      <td>-1.373234</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Binning-into-N-Group">Binning into N Group<a class="anchor-link" href="#Binning-into-N-Group">&#182;</a></h3><p>Grouping the feature into a set number of bins using the bins parameter.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">feature_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">feature_1</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.333569</td>
+      <td>(-1.69, -0.575]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.289372</td>
+      <td>(-1.69, -0.575]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.423090</td>
+      <td>(0.541, 1.657]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.255041</td>
+      <td>(-0.575, 0.541]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.632775</td>
+      <td>(-1.69, -0.575]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1.388692</td>
+      <td>(0.541, 1.657]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>-1.373234</td>
+      <td>(-1.69, -0.575]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Binning-into-Predefined-Groups">Binning into Predefined Groups<a class="anchor-link" href="#Binning-into-Predefined-Groups">&#182;</a></h3><p>Grouping the feature into bins with a defined range for each bin. Again we pass a list to the bins parameter within the cuts function.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">feature_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">feature_1</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.333569</td>
+      <td>(-2, -1]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.289372</td>
+      <td>(-2, -1]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.423090</td>
+      <td>(1, 2]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.255041</td>
+      <td>(-1, 0]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.632775</td>
+      <td>(-1, 0]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1.388692</td>
+      <td>(1, 2]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>-1.373234</td>
+      <td>(-2, -1]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Counting-Bins">Counting Bins<a class="anchor-link" href="#Counting-Bins">&#182;</a></h3><p>After binning the data you can run the value_counts function on the feature to output the number of observations that fall into each bin.</p>
+
 </div>
 </div>
 </div>
@@ -1064,37 +1366,10 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Generating-Data">Generating Data<a class="anchor-link" href="#Generating-Data">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Justin&#39;</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="s1">&#39;Stephen&#39;</span><span class="p">,</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian&#39;</span><span class="p">,</span><span class="s1">&#39;John&#39;</span><span class="p">],</span>
-             <span class="s1">&#39;Midterm_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
-             <span class="s1">&#39;Final_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-             <span class="p">})</span>
-<span class="c1"># Create null value in for final scores</span>
-<span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">92</span><span class="p">,</span><span class="mi">97</span><span class="p">)),</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
-                            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">students</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">feature_2</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Bins&quot;</span>
+<span class="n">counts</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
+<span class="n">counts</span>
 </pre></div>
 
 </div>
@@ -1107,7 +1382,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -1130,561 +1405,45 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <th>count</th>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.--Removing-Rows-with-NaN-Values">1.  Removing Rows with NaN Values<a class="anchor-link" href="#1.--Removing-Rows-with-NaN-Values">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[6]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
+      <th>Bins</th>
       <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <th>(0, 1]</th>
+      <td>30</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <th>(-1, 0]</th>
+      <td>23</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Filling-NaN-Value-with-Zeros">2. Filling NaN Value with Zeros<a class="anchor-link" href="#2.-Filling-NaN-Value-with-Zeros">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <th>(-2, -1]</th>
+      <td>17</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>0.0</td>
+      <th>(1, 2]</th>
+      <td>14</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <th>(2, 3]</th>
+      <td>4</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>0.0</td>
+      <th>(-3, -2]</th>
+      <td>2</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>0.0</td>
+      <th>(3, 5]</th>
+      <td>0</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Filling-NaN-Values-with-Mean">4. Filling NaN Values with Mean<a class="anchor-link" href="#4.-Filling-NaN-Values-with-Mean">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[8]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.000000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.000000</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Filling-NaN-Values-with-Median">5. Filling NaN Values with Median<a class="anchor-link" href="#5.-Filling-NaN-Values-with-Median">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[9]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="6.-Dropping-Features-with-NaN">6. Dropping Features with NaN<a class="anchor-link" href="#6.-Dropping-Features-with-NaN">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[14]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
+      <th>(-5, -3]</th>
+      <td>0</td>
     </tr>
   </tbody>
 </table>

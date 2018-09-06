@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Fri 18 May 2018</div>
-									<h2>Handing Missing Dlata</h2>
+									<div class="pennant pennant-alt date">Mon 07 May 2018</div>
+									<h2>Resampling Datetime</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,55 +1046,24 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Handing-Missing-Dlata">Handing Missing Dlata<a class="anchor-link" href="#Handing-Missing-Dlata">&#182;</a></h1><p><span>There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic methods to handle missing data. Again your strategy to handle missing data will different with contextual knowledge around the problem with your domain expertise.</span></p>
-<p><span style="text-decoration:underline">**BasicStategies**</span></p>
-<ol>
-<li>Removing observations</li>
-<li>Filling in NaN values with certain value</li>
-<li>Filling in NaN values with the mean</li>
-<li>Filling in NaN values with the median</li>
-<li>Dropping columns with missing values</li>
-</ol>
-<h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h3>
+<h1 id="Resampling-Datetime">Resampling Datetime<a class="anchor-link" href="#Resampling-Datetime">&#182;</a></h1><p><span>When plotting times series data it becomes advantagous to reframe and aggergate the data by period of time. Data Scientist that deal with time series data love Pandas because resampling the data become really easy when your data is formatted in the corret manner. To resample a dataframe your datatime values should be in datetime data type and be set t the index of the dataframe.</span></p>
+<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
 
-</div>
-</div>
-</div>
+<span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/25/2018&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
+                      <span class="s1">&#39;feature_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Generating-Data">Generating Data<a class="anchor-link" href="#Generating-Data">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Justin&#39;</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="s1">&#39;Stephen&#39;</span><span class="p">,</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian&#39;</span><span class="p">,</span><span class="s1">&#39;John&#39;</span><span class="p">],</span>
-             <span class="s1">&#39;Midterm_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
-             <span class="s1">&#39;Final_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-             <span class="p">})</span>
-<span class="c1"># Create null value in for final scores</span>
-<span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">92</span><span class="p">,</span><span class="mi">97</span><span class="p">)),</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
-                            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">students</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1107,7 +1076,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt output_prompt">Out[81]:</div>
 
 
 
@@ -1130,53 +1099,41 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>datetime</th>
+      <th>feature_1</th>
+      <th>feature_2</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <td>2018-12-25</td>
+      <td>-0.042305</td>
+      <td>0.802248</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>NaN</td>
+      <td>2018-12-26</td>
+      <td>-0.503320</td>
+      <td>0.048699</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>2018-12-27</td>
+      <td>-0.140212</td>
+      <td>0.143350</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>NaN</td>
+      <td>2018-12-28</td>
+      <td>0.933979</td>
+      <td>0.736463</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <td>2018-12-29</td>
+      <td>-0.431505</td>
+      <td>0.765205</td>
     </tr>
   </tbody>
 </table>
@@ -1189,20 +1146,13 @@ h6:hover .anchor-link {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.--Removing-Rows-with-NaN-Values">1.  Removing Rows with NaN Values<a class="anchor-link" href="#1.--Removing-Rows-with-NaN-Values">&#182;</a></h3>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1215,7 +1165,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[82]:</div>
 
 
 
@@ -1238,29 +1188,40 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <th>2018-12-25</th>
+      <td>-0.042305</td>
+      <td>0.802248</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <th>2018-12-26</th>
+      <td>-0.503320</td>
+      <td>0.048699</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <th>2018-12-27</th>
+      <td>-0.140212</td>
+      <td>0.143350</td>
+    </tr>
+    <tr>
+      <th>2018-12-28</th>
+      <td>0.933979</td>
+      <td>0.736463</td>
+    </tr>
+    <tr>
+      <th>2018-12-29</th>
+      <td>-0.431505</td>
+      <td>0.765205</td>
     </tr>
   </tbody>
 </table>
@@ -1277,16 +1238,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Filling-NaN-Value-with-Zeros">2. Filling NaN Value with Zeros<a class="anchor-link" href="#2.-Filling-NaN-Value-with-Zeros">&#182;</a></h3>
+<h3 id="Dailly-Resampling">Dailly Resampling<a class="anchor-link" href="#Dailly-Resampling">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1299,7 +1260,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[84]:</div>
 
 
 
@@ -1322,53 +1283,40 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <th>2018-12-25</th>
+      <td>-0.042305</td>
+      <td>0.802248</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>0.0</td>
+      <th>2018-12-26</th>
+      <td>-0.503320</td>
+      <td>0.048699</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <th>2018-12-27</th>
+      <td>-0.140212</td>
+      <td>0.143350</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>0.0</td>
+      <th>2018-12-28</th>
+      <td>0.933979</td>
+      <td>0.736463</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <th>2018-12-29</th>
+      <td>-0.431505</td>
+      <td>0.765205</td>
     </tr>
   </tbody>
 </table>
@@ -1385,16 +1333,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Filling-NaN-Values-with-Mean">4. Filling NaN Values with Mean<a class="anchor-link" href="#4.-Filling-NaN-Values-with-Mean">&#182;</a></h3>
+<h2 id="Weekly-Resampling">Weekly Resampling<a class="anchor-link" href="#Weekly-Resampling">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1W&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1407,7 +1355,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[85]:</div>
 
 
 
@@ -1430,53 +1378,40 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.000000</td>
+      <th>2018-12-30</th>
+      <td>0.933979</td>
+      <td>0.802248</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>98.333333</td>
+      <th>2019-01-06</th>
+      <td>1.901840</td>
+      <td>0.908213</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.000000</td>
+      <th>2019-01-13</th>
+      <td>1.302976</td>
+      <td>0.819024</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>98.333333</td>
+      <th>2019-01-20</th>
+      <td>0.820549</td>
+      <td>0.954850</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.000000</td>
+      <th>2019-01-27</th>
+      <td>1.362464</td>
+      <td>0.839660</td>
     </tr>
   </tbody>
 </table>
@@ -1493,16 +1428,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Filling-NaN-Values-with-Median">5. Filling NaN Values with Median<a class="anchor-link" href="#5.-Filling-NaN-Values-with-Median">&#182;</a></h3>
+<h3 id="Monthly-Resampling">Monthly Resampling<a class="anchor-link" href="#Monthly-Resampling">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1515,7 +1450,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[34]:</div>
 
 
 
@@ -1538,53 +1473,35 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <th>2018-12-31</th>
+      <td>-1.481009</td>
+      <td>0.006430</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>98.0</td>
+      <th>2019-01-31</th>
+      <td>-2.043958</td>
+      <td>0.026396</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <th>2019-02-28</th>
+      <td>-1.805810</td>
+      <td>0.126203</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <th>2019-03-31</th>
+      <td>-1.834423</td>
+      <td>0.025337</td>
     </tr>
   </tbody>
 </table>
@@ -1601,16 +1518,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="6.-Dropping-Features-with-NaN">6. Dropping Features with NaN<a class="anchor-link" href="#6.-Dropping-Features-with-NaN">&#182;</a></h3>
+<h3 id="Yearly-Resampling">Yearly Resampling<a class="anchor-link" href="#Yearly-Resampling">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1623,7 +1540,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[59]:</div>
 
 
 
@@ -1646,45 +1563,25 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
+      <th>2018-12-31</th>
+      <td>7</td>
+      <td>7</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
+      <th>2019-12-31</th>
+      <td>83</td>
+      <td>83</td>
     </tr>
   </tbody>
 </table>
@@ -1701,10 +1598,291 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Author: Kavi Sekhon</p>
+<h3 id="Resampling-by-the-Hour">Resampling by the Hour<a class="anchor-link" href="#Resampling-by-the-Hour">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/25/2018&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
+                      <span class="s1">&#39;feature_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[73]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2018-12-25 00:00:00</th>
+      <td>0.039395</td>
+      <td>0.429378</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 02:00:00</th>
+      <td>-0.304945</td>
+      <td>1.618242</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 04:00:00</th>
+      <td>-0.999194</td>
+      <td>0.579101</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 06:00:00</th>
+      <td>0.250126</td>
+      <td>0.659269</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 08:00:00</th>
+      <td>-0.767738</td>
+      <td>0.534183</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Resampling-by-the-Mintue">Resampling by the Mintue<a class="anchor-link" href="#Resampling-by-the-Mintue">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/25/2018&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
+                      <span class="s1">&#39;feature_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;3T&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[76]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2018-12-25 00:00:00</th>
+      <td>1.771967</td>
+      <td>1.497531</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 00:03:00</th>
+      <td>-1.505933</td>
+      <td>1.013679</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 00:06:00</th>
+      <td>-1.036548</td>
+      <td>1.209083</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 00:09:00</th>
+      <td>1.538142</td>
+      <td>1.335962</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 00:12:00</th>
+      <td>2.369288</td>
+      <td>1.230875</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Resampling-by-the-Second">Resampling by the Second<a class="anchor-link" href="#Resampling-by-the-Second">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/25/2018&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
+                      <span class="s1">&#39;feature_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;30s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[79]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature_1</th>
+      <th>feature_2</th>
+    </tr>
+    <tr>
+      <th>datetime</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2018-12-25 00:00:00</th>
+      <td>4.627835</td>
+      <td>13.922530</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 00:00:30</th>
+      <td>7.560767</td>
+      <td>15.331102</td>
+    </tr>
+    <tr>
+      <th>2018-12-25 00:01:00</th>
+      <td>4.648913</td>
+      <td>15.442222</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
  
 

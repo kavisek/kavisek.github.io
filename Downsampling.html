@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Fri 18 May 2018</div>
-									<h2>Handing Missing Dlata</h2>
+									<div class="pennant pennant-alt date">Sun 27 May 2018</div>
+									<h2>Downsampling</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,26 +1046,30 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Handing-Missing-Dlata">Handing Missing Dlata<a class="anchor-link" href="#Handing-Missing-Dlata">&#182;</a></h1><p><span>There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic methods to handle missing data. Again your strategy to handle missing data will different with contextual knowledge around the problem with your domain expertise.</span></p>
-<p><span style="text-decoration:underline">**BasicStategies**</span></p>
-<ol>
-<li>Removing observations</li>
-<li>Filling in NaN values with certain value</li>
-<li>Filling in NaN values with the mean</li>
-<li>Filling in NaN values with the median</li>
-<li>Dropping columns with missing values</li>
-</ol>
-<h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h3>
+<h1 id="Downsampling">Downsampling<a class="anchor-link" href="#Downsampling">&#182;</a></h1><p><span> In supervised learning many datasets contain data that is class imbalanced. Therefore you will have to downsample the majority class to match the minority class shape. Below I have created a function that can downsample numpy data.</span></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">80</span><span class="p">],</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="mi">80</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -1077,24 +1081,136 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Generating-Data">Generating Data<a class="anchor-link" href="#Generating-Data">&#182;</a></h3>
+<h3 id="View-Class-Imbalance">View Class Imbalance<a class="anchor-link" href="#View-Class-Imbalance">&#182;</a></h3>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0    50
+1    30
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Retrieve-Downsampled-Class-Index">Retrieve Downsampled Class Index<a class="anchor-link" href="#Retrieve-Downsampled-Class-Index">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Indicies of each class&#39; observation</span>
+<span class="n">class_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">class_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">class_1</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">class_0</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(array([50, 51, 52, 53, 54]), array([0, 1, 2, 3, 4]))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Random select indices from the magority class to fit</span>
+<span class="c1"># the minority class</span>
+<span class="n">class_0_downsampled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">class_0</span><span class="p">,</span> 
+                                       <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">class_1</span><span class="p">),</span> 
+                                       <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">class_0_downsampled</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([17,  9, 19, 28,  7, 34, 18, 10, 14, 45, 42, 13, 30, 20, 44, 24, 26,
+        5, 43,  0, 35, 16,  1, 22,  8, 48,  4, 32, 38,  6])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Justin&#39;</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="s1">&#39;Stephen&#39;</span><span class="p">,</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian&#39;</span><span class="p">,</span><span class="s1">&#39;John&#39;</span><span class="p">],</span>
-             <span class="s1">&#39;Midterm_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
-             <span class="s1">&#39;Final_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-             <span class="p">})</span>
-<span class="c1"># Create null value in for final scores</span>
-<span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">92</span><span class="p">,</span><span class="mi">97</span><span class="p">)),</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
-                            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">students</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Stack the minority class index and dowmsampled majority class</span>
+<span class="n">downsampled_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">class_0_downsampled</span><span class="p">,</span> <span class="n">class_1</span><span class="p">))</span>
+<span class="n">downsampled_index</span>
 </pre></div>
 
 </div>
@@ -1111,76 +1227,12 @@ h6:hover .anchor-link {
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([17,  9, 19, 28,  7, 34, 18, 10, 14, 45, 42, 13, 30, 20, 44, 24, 26,
+        5, 43,  0, 35, 16,  1, 22,  8, 48,  4, 32, 38,  6, 50, 51, 52, 53,
+       54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
+       71, 72, 73, 74, 75, 76, 77, 78, 79])</pre>
 </div>
 
 </div>
@@ -1188,21 +1240,15 @@ h6:hover .anchor-link {
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.--Removing-Rows-with-NaN-Values">1.  Removing Rows with NaN Values<a class="anchor-link" href="#1.--Removing-Rows-with-NaN-Values">&#182;</a></h3>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Sort the index</span>
+<span class="n">downsampled_index</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="n">downsampled_index</span>
 </pre></div>
 
 </div>
@@ -1219,52 +1265,12 @@ h6:hover .anchor-link {
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([ 0,  1,  4,  5,  6,  7,  8,  9, 10, 13, 14, 16, 17, 18, 19, 20, 22,
+       24, 26, 28, 30, 32, 34, 35, 38, 42, 43, 44, 45, 48, 50, 51, 52, 53,
+       54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
+       71, 72, 73, 74, 75, 76, 77, 78, 79])</pre>
 </div>
 
 </div>
@@ -1277,7 +1283,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Filling-NaN-Value-with-Zeros">2. Filling NaN Value with Zeros<a class="anchor-link" href="#2.-Filling-NaN-Value-with-Zeros">&#182;</a></h3>
+<h3 id="Downsampling-Data">Downsampling Data<a class="anchor-link" href="#Downsampling-Data">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1286,7 +1292,12 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Down sample dataset</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">downsampled_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">downsampled_index</span><span class="p">]</span>
+
+<span class="c1"># View new dataset sizes</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;DataFrame Shape of X: {len(X)}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;DataFrame Shape of y: {len(y)}&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1299,102 +1310,27 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt"></div>
 
 
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>DataFrame Shape of X: 60
+DataFrame Shape of y: 60
+</pre>
 </div>
-</div>
-
 </div>
 
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Filling-NaN-Values-with-Mean">4. Filling NaN Values with Mean<a class="anchor-link" href="#4.-Filling-NaN-Values-with-Mean">&#182;</a></h3>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># View the class counts of y</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1411,76 +1347,11 @@ h6:hover .anchor-link {
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.000000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.000000</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>98.333333</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>1    30
+0    30
+dtype: int64</pre>
 </div>
 
 </div>
@@ -1493,7 +1364,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Filling-NaN-Values-with-Median">5. Filling NaN Values with Median<a class="anchor-link" href="#5.-Filling-NaN-Values-with-Median">&#182;</a></h3>
+<h3 id="Creating-a-Function-for-Downsampling">Creating a Function for Downsampling<a class="anchor-link" href="#Creating-a-Function-for-Downsampling">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1502,97 +1373,46 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">binary_random_downsample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Function conduct downsampling for binary crossentropy problem</span>
+<span class="sd">    between to classes</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X: numpy matrix containing all the features of the dataset</span>
+<span class="sd">    y: numpy 1D array containing all target values of the dataset </span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    ----------</span>
+<span class="sd">    &gt;&gt;&gt;&gt; X, y = binary_random_downsample(X,y)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s1">&#39;Make sure X is a numpy array&#39;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;Make sure y is a numpy array&quot;</span>
+    
+    <span class="n">class_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">class_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">class_0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">class_1</span><span class="p">):</span>
+        <span class="n">magc</span> <span class="o">=</span> <span class="n">class_0</span>
+        <span class="n">minc</span> <span class="o">=</span> <span class="n">class_1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">magc</span> <span class="o">=</span> <span class="n">class_1</span>
+        <span class="n">minc</span> <span class="o">=</span> <span class="n">class_0</span>
+    
+    <span class="n">mag_class_downsampled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">magc</span><span class="p">,</span> 
+                                       <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">minc</span><span class="p">),</span> 
+                                       <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="n">downsampled_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">mag_class_downsampled</span><span class="p">,</span> <span class="n">minc</span><span class="p">))</span>
+    <span class="n">downsampled_index</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">downsampled_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">downsampled_index</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span><span class="n">y</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[9]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-      <th>Final_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -1601,16 +1421,21 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="6.-Dropping-Features-with-NaN">6. Dropping Features with NaN<a class="anchor-link" href="#6.-Dropping-Features-with-NaN">&#182;</a></h3>
+<h3 id="Testing-our-Function">Testing our Function<a class="anchor-link" href="#Testing-our-Function">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">80</span><span class="p">],</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="mi">80</span><span class="p">]</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">binary_random_downsample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;DataFrame Shape of X: {len(X)}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;DataFrame Shape of y: {len(y)}&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1623,74 +1448,14 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt"></div>
 
 
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Midterm_Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kim</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Paul</td>
-      <td>95</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Jean</td>
-      <td>75</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Brian</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
-    </tr>
-  </tbody>
-</table>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>DataFrame Shape of X: 60
+DataFrame Shape of y: 60
+</pre>
 </div>
-</div>
-
 </div>
 
 </div>

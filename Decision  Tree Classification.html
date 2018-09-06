@@ -1,0 +1,2044 @@
+
+<!DOCTYPE HTML>
+<!--
+	Dopetrope 2.0 by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+			<title>Kavi Sekhon</title>
+			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+			<meta charset="utf-8" />
+			<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic" rel="stylesheet" />
+			<link rel="stylesheet" href="/theme/css/pygment.css" />
+			<noscript>
+				<link rel="stylesheet" href="/theme/css/skel-noscript.css" />
+				<link rel="stylesheet" href="/theme/css/style.css" />
+				<link rel="stylesheet" href="/theme/css/style-desktop.css" />
+			</noscript>
+			<script>
+				window.SITEURL = "https://kavisek.github.io"
+			</script>
+	</head>
+	<body class="no-sidebar">
+		<!-- Header Wrapper -->
+			<div id="header-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="12u">
+
+							<!-- Header -->
+								<section id="header">
+
+									<!-- Logo -->
+									<h1><a href="https://kavisek.github.io/">Kavi Sekhon</a></h1>
+
+									<!-- Nav -->
+										<nav id="nav">
+											<ul>
+											</ul>
+										</nav>
+
+								</section>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- Main Wrapper -->
+			<div id="main-wrapper">
+				<div class="container">
+<div class="row">
+	<div class="12u">
+			<section>
+				<div>
+					<div class="row">
+						<div class="12u skel-cell-mainContent">
+							<!-- Content -->
+								<article class="box is-post">
+									<div class="post-infos">
+										<ul class="tags">
+											<li><a class="button" href="category/novice.html">Novice</a></li>
+											<!-- Add Translation Function -->
+											<!-- End Translation Function -->
+												<li><a class="button button-alt" href="tag/python.html">Python</a></li>
+
+										</ul>
+									</div>
+
+									<div class="pennant pennant-alt date">Tue 05 June 2018</div>
+									<h2>Decision  Tree Classification</h2>
+									<style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Decision--Tree-Classification">Decision  Tree Classification<a class="anchor-link" href="#Decision--Tree-Classification">&#182;</a></h1><p><span>A decision tree classier is a very simple tree-like model. The classifier will build a decision tree and split the classes by layer heuristics and the consequences of each path in the decision tree. The methodology is both used in operations and machine learning research. Using the sklearn the model can be trained with various parameter adjustments such a tree depth and minimum number of samples in each layer.</span></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Import-Dataset">Import Dataset<a class="anchor-link" href="#Import-Dataset">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">pylab</span> inline
+ 
+<span class="kn">import</span> <span class="nn">graphviz</span> 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">tree</span>
+ 
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;max_columns&#39;</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;max_rows&#39;</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+ 
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Populating the interactive namespace from numpy and matplotlib
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Import-Data">Import Data<a class="anchor-link" href="#Import-Data">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_breast_cancer</span>
+
+<span class="n">breast_cancer</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">()</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">target</span>
+
+
+<span class="n">train_x</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">text_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Define-the-Model">Define the Model<a class="anchor-link" href="#Define-the-Model">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Fit-the-Model">Fit the Model<a class="anchor-link" href="#Fit-the-Model">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cross-Validation-Score">Cross Validation Score<a class="anchor-link" href="#Cross-Validation-Score">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+               <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Cross Validation Score: {scores.mean():.5f}&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Cross Validation Score: 0.92275
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Confustion-Matrix">Confustion Matrix<a class="anchor-link" href="#Confustion-Matrix">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Training Confusion Matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">confusion_matrix</span>
+<span class="n">cmatrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">train_y</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">train_x</span><span class="p">)))</span>
+<span class="n">cmatrix</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;class&#39;</span>
+
+<span class="n">cmatrix</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;actual&#39;</span>
+<span class="n">cmatrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cmatrix</span> <span class="o">=</span> <span class="n">cmatrix</span><span class="o">.</span><span class="n">reorder_levels</span><span class="p">([</span><span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">])</span>
+<span class="n">cmatrix</span> <span class="o">=</span> <span class="n">cmatrix</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">cmatrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cmatrix</span><span class="p">)</span>
+<span class="n">cmatrix</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
+<span class="n">cmatrix</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="2" halign="left">prediction</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>result</th>
+      <th>class</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">actual</th>
+      <th>0</th>
+      <td>153</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>270</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Predict-Results">Predict Results<a class="anchor-link" href="#Predict-Results">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">))</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0    0
+1    1
+2    1
+3    1
+4    0
+5    1
+6    0
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Viewing-our-Results-in-Graphviz">Viewing our Results in Graphviz<a class="anchor-link" href="#Viewing-our-Results-in-Graphviz">&#182;</a></h3><p>You might have troubling viewing the output of the decision tree on mobile device. Attempt reviewing the image on a desktop.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">breast_cancer</span><span class="o">.</span><span class="n">feature_names</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([&#39;mean radius&#39;, &#39;mean texture&#39;, &#39;mean perimeter&#39;, &#39;mean area&#39;,
+       &#39;mean smoothness&#39;, &#39;mean compactness&#39;, &#39;mean concavity&#39;,
+       &#39;mean concave points&#39;, &#39;mean symmetry&#39;, &#39;mean fractal dimension&#39;,
+       &#39;radius error&#39;, &#39;texture error&#39;, &#39;perimeter error&#39;, &#39;area error&#39;,
+       &#39;smoothness error&#39;, &#39;compactness error&#39;, &#39;concavity error&#39;,
+       &#39;concave points error&#39;, &#39;symmetry error&#39;, &#39;fractal dimension error&#39;,
+       &#39;worst radius&#39;, &#39;worst texture&#39;, &#39;worst perimeter&#39;, &#39;worst area&#39;,
+       &#39;worst smoothness&#39;, &#39;worst compactness&#39;, &#39;worst concavity&#39;,
+       &#39;worst concave points&#39;, &#39;worst symmetry&#39;, &#39;worst fractal dimension&#39;],
+      dtype=&#39;&lt;U23&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">breast_cancer</span><span class="o">.</span><span class="n">target_names</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([&#39;malignant&#39;, &#39;benign&#39;],
+      dtype=&#39;&lt;U9&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot the decision hierachy of the model using graphiz</span>
+<span class="n">dot_data</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                         <span class="n">feature_names</span><span class="o">=</span><span class="n">breast_cancer</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>  
+                         <span class="n">class_names</span><span class="o">=</span><span class="n">breast_cancer</span><span class="o">.</span><span class="n">target_names</span><span class="p">,</span>  
+                         <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
+                         <span class="n">special_characters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span>  
+<span class="n">graph</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_svg output_subarea output_execute_result">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: Tree Pages: 1 -->
+<svg width="1083pt" height="671pt"
+ viewBox="0.00 0.00 1082.50 671.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 667)">
+<title>Tree</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-667 1078.5,-667 1078.5,4 -4,4"/>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<path fill="#399de5" fill-opacity="0.427451" stroke="#000000" d="M866,-663C866,-663 773,-663 773,-663 767,-663 761,-657 761,-651 761,-651 761,-592 761,-592 761,-586 767,-580 773,-580 773,-580 866,-580 866,-580 872,-580 878,-586 878,-592 878,-592 878,-651 878,-651 878,-657 872,-663 866,-663"/>
+<text text-anchor="start" x="769" y="-647.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">worst radius ≤ 16.795</text>
+<text text-anchor="start" x="792" y="-632.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.463</text>
+<text text-anchor="start" x="785" y="-617.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 426</text>
+<text text-anchor="start" x="777.5" y="-602.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [155, 271]</text>
+<text text-anchor="start" x="785.5" y="-587.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<path fill="#399de5" fill-opacity="0.901961" stroke="#000000" d="M757.5,-544C757.5,-544 629.5,-544 629.5,-544 623.5,-544 617.5,-538 617.5,-532 617.5,-532 617.5,-473 617.5,-473 617.5,-467 623.5,-461 629.5,-461 629.5,-461 757.5,-461 757.5,-461 763.5,-461 769.5,-467 769.5,-473 769.5,-473 769.5,-532 769.5,-532 769.5,-538 763.5,-544 757.5,-544"/>
+<text text-anchor="start" x="625.5" y="-528.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">worst concave points ≤ 0.136</text>
+<text text-anchor="start" x="666" y="-513.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.162</text>
+<text text-anchor="start" x="659" y="-498.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 292</text>
+<text text-anchor="start" x="654.5" y="-483.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [26, 266]</text>
+<text text-anchor="start" x="659.5" y="-468.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 0&#45;&gt;1 -->
+<g id="edge1" class="edge">
+<title>0&#45;&gt;1</title>
+<path fill="none" stroke="#000000" d="M775.4313,-579.8796C765.7045,-570.6931 755.3139,-560.8798 745.3121,-551.4336"/>
+<polygon fill="#000000" stroke="#000000" points="747.4301,-548.6198 737.7568,-544.2981 742.6237,-553.7089 747.4301,-548.6198"/>
+<text text-anchor="middle" x="738.4708" y="-565.5879" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">True</text>
+</g>
+<!-- 20 -->
+<g id="node21" class="node">
+<title>20</title>
+<path fill="#e58139" fill-opacity="0.960784" stroke="#000000" d="M944.5,-544C944.5,-544 848.5,-544 848.5,-544 842.5,-544 836.5,-538 836.5,-532 836.5,-532 836.5,-473 836.5,-473 836.5,-467 842.5,-461 848.5,-461 848.5,-461 944.5,-461 944.5,-461 950.5,-461 956.5,-467 956.5,-473 956.5,-473 956.5,-532 956.5,-532 956.5,-538 950.5,-544 944.5,-544"/>
+<text text-anchor="start" x="844.5" y="-528.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">worst texture ≤ 19.385</text>
+<text text-anchor="start" x="869" y="-513.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.072</text>
+<text text-anchor="start" x="862" y="-498.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 134</text>
+<text text-anchor="start" x="860" y="-483.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [129, 5]</text>
+<text text-anchor="start" x="855.5" y="-468.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 0&#45;&gt;20 -->
+<g id="edge20" class="edge">
+<title>0&#45;&gt;20</title>
+<path fill="none" stroke="#000000" d="M846.4309,-579.8796C852.0837,-571.1434 858.1033,-561.8404 863.9366,-552.8253"/>
+<polygon fill="#000000" stroke="#000000" points="866.9601,-554.5952 869.4542,-544.2981 861.0831,-550.7924 866.9601,-554.5952"/>
+<text text-anchor="middle" x="874.6924" y="-565.0431" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">False</text>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<path fill="#399de5" fill-opacity="0.988235" stroke="#000000" d="M499.5,-425C499.5,-425 415.5,-425 415.5,-425 409.5,-425 403.5,-419 403.5,-413 403.5,-413 403.5,-354 403.5,-354 403.5,-348 409.5,-342 415.5,-342 415.5,-342 499.5,-342 499.5,-342 505.5,-342 511.5,-348 511.5,-354 511.5,-354 511.5,-413 511.5,-413 511.5,-419 505.5,-425 499.5,-425"/>
+<text text-anchor="start" x="411.5" y="-409.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">radius error ≤ 0.643</text>
+<text text-anchor="start" x="430" y="-394.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.023</text>
+<text text-anchor="start" x="423" y="-379.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 254</text>
+<text text-anchor="start" x="421" y="-364.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [3, 251]</text>
+<text text-anchor="start" x="423.5" y="-349.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 1&#45;&gt;2 -->
+<g id="edge2" class="edge">
+<title>1&#45;&gt;2</title>
+<path fill="none" stroke="#000000" d="M617.2035,-464.0284C586.0822,-448.3359 550.5194,-430.4039 520.8646,-415.4508"/>
+<polygon fill="#000000" stroke="#000000" points="522.3674,-412.2888 511.8625,-410.9116 519.2157,-418.5392 522.3674,-412.2888"/>
+</g>
+<!-- 13 -->
+<g id="node14" class="node">
+<title>13</title>
+<path fill="#e58139" fill-opacity="0.349020" stroke="#000000" d="M736,-425C736,-425 651,-425 651,-425 645,-425 639,-419 639,-413 639,-413 639,-354 639,-354 639,-348 645,-342 651,-342 651,-342 736,-342 736,-342 742,-342 748,-348 748,-354 748,-354 748,-413 748,-413 748,-419 742,-425 736,-425"/>
+<text text-anchor="start" x="647" y="-409.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">worst texture ≤ 26.9</text>
+<text text-anchor="start" x="666" y="-394.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.478</text>
+<text text-anchor="start" x="662" y="-379.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 38</text>
+<text text-anchor="start" x="657" y="-364.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [23, 15]</text>
+<text text-anchor="start" x="652.5" y="-349.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 1&#45;&gt;13 -->
+<g id="edge13" class="edge">
+<title>1&#45;&gt;13</title>
+<path fill="none" stroke="#000000" d="M693.5,-460.8796C693.5,-452.6838 693.5,-443.9891 693.5,-435.5013"/>
+<polygon fill="#000000" stroke="#000000" points="697.0001,-435.298 693.5,-425.2981 690.0001,-435.2981 697.0001,-435.298"/>
+</g>
+<!-- 3 -->
+<g id="node4" class="node">
+<title>3</title>
+<path fill="#399de5" fill-opacity="0.992157" stroke="#000000" d="M334,-306C334,-306 237,-306 237,-306 231,-306 225,-300 225,-294 225,-294 225,-235 225,-235 225,-229 231,-223 237,-223 237,-223 334,-223 334,-223 340,-223 346,-229 346,-235 346,-235 346,-294 346,-294 346,-300 340,-306 334,-306"/>
+<text text-anchor="start" x="233" y="-290.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">mean concavity ≤ 0.12</text>
+<text text-anchor="start" x="258" y="-275.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.016</text>
+<text text-anchor="start" x="251" y="-260.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 251</text>
+<text text-anchor="start" x="249" y="-245.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [2, 249]</text>
+<text text-anchor="start" x="251.5" y="-230.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 2&#45;&gt;3 -->
+<g id="edge3" class="edge">
+<title>2&#45;&gt;3</title>
+<path fill="none" stroke="#000000" d="M403.0781,-345.8477C387.4894,-335.0625 370.2933,-323.1651 353.9761,-311.8759"/>
+<polygon fill="#000000" stroke="#000000" points="355.7515,-308.8483 345.5365,-306.0369 351.7688,-314.6048 355.7515,-308.8483"/>
+</g>
+<!-- 10 -->
+<g id="node11" class="node">
+<title>10</title>
+<path fill="#399de5" fill-opacity="0.498039" stroke="#000000" d="M507.5,-306C507.5,-306 407.5,-306 407.5,-306 401.5,-306 395.5,-300 395.5,-294 395.5,-294 395.5,-235 395.5,-235 395.5,-229 401.5,-223 407.5,-223 407.5,-223 507.5,-223 507.5,-223 513.5,-223 519.5,-229 519.5,-235 519.5,-235 519.5,-294 519.5,-294 519.5,-300 513.5,-306 507.5,-306"/>
+<text text-anchor="start" x="403.5" y="-290.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">perimeter error ≤ 4.249</text>
+<text text-anchor="start" x="430" y="-275.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.444</text>
+<text text-anchor="start" x="429" y="-260.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 3</text>
+<text text-anchor="start" x="427" y="-245.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [1, 2]</text>
+<text text-anchor="start" x="423.5" y="-230.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 2&#45;&gt;10 -->
+<g id="edge10" class="edge">
+<title>2&#45;&gt;10</title>
+<path fill="none" stroke="#000000" d="M457.5,-341.8796C457.5,-333.6838 457.5,-324.9891 457.5,-316.5013"/>
+<polygon fill="#000000" stroke="#000000" points="461.0001,-316.298 457.5,-306.2981 454.0001,-316.2981 461.0001,-316.298"/>
+</g>
+<!-- 4 -->
+<g id="node5" class="node">
+<title>4</title>
+<path fill="#399de5" fill-opacity="0.996078" stroke="#000000" d="M184.5,-187C184.5,-187 94.5,-187 94.5,-187 88.5,-187 82.5,-181 82.5,-175 82.5,-175 82.5,-116 82.5,-116 82.5,-110 88.5,-104 94.5,-104 94.5,-104 184.5,-104 184.5,-104 190.5,-104 196.5,-110 196.5,-116 196.5,-116 196.5,-175 196.5,-175 196.5,-181 190.5,-187 184.5,-187"/>
+<text text-anchor="start" x="90.5" y="-171.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">worst texture ≤ 33.35</text>
+<text text-anchor="start" x="112" y="-156.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.008</text>
+<text text-anchor="start" x="105" y="-141.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 246</text>
+<text text-anchor="start" x="103" y="-126.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [1, 245]</text>
+<text text-anchor="start" x="105.5" y="-111.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 3&#45;&gt;4 -->
+<g id="edge4" class="edge">
+<title>3&#45;&gt;4</title>
+<path fill="none" stroke="#000000" d="M234.4363,-222.8796C222.9445,-213.513 210.6532,-203.4948 198.855,-193.8784"/>
+<polygon fill="#000000" stroke="#000000" points="200.7444,-190.903 190.7817,-187.2981 196.3218,-196.329 200.7444,-190.903"/>
+</g>
+<!-- 7 -->
+<g id="node8" class="node">
+<title>7</title>
+<path fill="#399de5" fill-opacity="0.749020" stroke="#000000" d="M344,-187C344,-187 227,-187 227,-187 221,-187 215,-181 215,-175 215,-175 215,-116 215,-116 215,-110 221,-104 227,-104 227,-104 344,-104 344,-104 350,-104 356,-110 356,-116 356,-116 356,-175 356,-175 356,-181 350,-187 344,-187"/>
+<text text-anchor="start" x="223" y="-171.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">compactness error ≤ 0.041</text>
+<text text-anchor="start" x="261" y="-156.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.32</text>
+<text text-anchor="start" x="257" y="-141.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 5</text>
+<text text-anchor="start" x="255" y="-126.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [1, 4]</text>
+<text text-anchor="start" x="251.5" y="-111.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 3&#45;&gt;7 -->
+<g id="edge7" class="edge">
+<title>3&#45;&gt;7</title>
+<path fill="none" stroke="#000000" d="M285.5,-222.8796C285.5,-214.6838 285.5,-205.9891 285.5,-197.5013"/>
+<polygon fill="#000000" stroke="#000000" points="289.0001,-197.298 285.5,-187.2981 282.0001,-197.2981 289.0001,-197.298"/>
+</g>
+<!-- 5 -->
+<g id="node6" class="node">
+<title>5</title>
+<path fill="#399de5" stroke="#000000" d="M77,-68C77,-68 12,-68 12,-68 6,-68 0,-62 0,-56 0,-56 0,-12 0,-12 0,-6 6,0 12,0 12,0 77,0 77,0 83,0 89,-6 89,-12 89,-12 89,-56 89,-56 89,-62 83,-68 77,-68"/>
+<text text-anchor="start" x="23" y="-52.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="10" y="-37.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 233</text>
+<text text-anchor="start" x="8" y="-22.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [0, 233]</text>
+<text text-anchor="start" x="10.5" y="-7.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 4&#45;&gt;5 -->
+<g id="edge5" class="edge">
+<title>4&#45;&gt;5</title>
+<path fill="none" stroke="#000000" d="M104.1255,-103.9815C96.3732,-94.8828 88.1591,-85.242 80.3869,-76.1199"/>
+<polygon fill="#000000" stroke="#000000" points="82.8428,-73.6056 73.6933,-68.2637 77.5146,-78.1454 82.8428,-73.6056"/>
+</g>
+<!-- 6 -->
+<g id="node7" class="node">
+<title>6</title>
+<path fill="#399de5" fill-opacity="0.917647" stroke="#000000" d="M179.5,-68C179.5,-68 119.5,-68 119.5,-68 113.5,-68 107.5,-62 107.5,-56 107.5,-56 107.5,-12 107.5,-12 107.5,-6 113.5,0 119.5,0 119.5,0 179.5,0 179.5,0 185.5,0 191.5,-6 191.5,-12 191.5,-12 191.5,-56 191.5,-56 191.5,-62 185.5,-68 179.5,-68"/>
+<text text-anchor="start" x="122" y="-52.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.142</text>
+<text text-anchor="start" x="118" y="-37.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 13</text>
+<text text-anchor="start" x="116" y="-22.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [1, 12]</text>
+<text text-anchor="start" x="115.5" y="-7.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 4&#45;&gt;6 -->
+<g id="edge6" class="edge">
+<title>4&#45;&gt;6</title>
+<path fill="none" stroke="#000000" d="M143.2236,-103.9815C143.9737,-95.618 144.7649,-86.7965 145.5232,-78.3409"/>
+<polygon fill="#000000" stroke="#000000" points="149.0197,-78.5364 146.427,-68.2637 142.0477,-77.911 149.0197,-78.5364"/>
+</g>
+<!-- 8 -->
+<g id="node9" class="node">
+<title>8</title>
+<path fill="#e58139" stroke="#000000" d="M313.5,-68C313.5,-68 239.5,-68 239.5,-68 233.5,-68 227.5,-62 227.5,-56 227.5,-56 227.5,-12 227.5,-12 227.5,-6 233.5,0 239.5,0 239.5,0 313.5,0 313.5,0 319.5,0 325.5,-6 325.5,-12 325.5,-12 325.5,-56 325.5,-56 325.5,-62 319.5,-68 313.5,-68"/>
+<text text-anchor="start" x="255" y="-52.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="248" y="-37.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 1</text>
+<text text-anchor="start" x="246" y="-22.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [1, 0]</text>
+<text text-anchor="start" x="235.5" y="-7.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 7&#45;&gt;8 -->
+<g id="edge8" class="edge">
+<title>7&#45;&gt;8</title>
+<path fill="none" stroke="#000000" d="M282.1487,-103.9815C281.4737,-95.618 280.7616,-86.7965 280.0791,-78.3409"/>
+<polygon fill="#000000" stroke="#000000" points="283.559,-77.9496 279.2657,-68.2637 276.5817,-78.5129 283.559,-77.9496"/>
+</g>
+<!-- 9 -->
+<g id="node10" class="node">
+<title>9</title>
+<path fill="#399de5" stroke="#000000" d="M415.5,-68C415.5,-68 355.5,-68 355.5,-68 349.5,-68 343.5,-62 343.5,-56 343.5,-56 343.5,-12 343.5,-12 343.5,-6 349.5,0 355.5,0 355.5,0 415.5,0 415.5,0 421.5,0 427.5,-6 427.5,-12 427.5,-12 427.5,-56 427.5,-56 427.5,-62 421.5,-68 415.5,-68"/>
+<text text-anchor="start" x="364" y="-52.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="357" y="-37.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 4</text>
+<text text-anchor="start" x="355" y="-22.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [0, 4]</text>
+<text text-anchor="start" x="351.5" y="-7.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 7&#45;&gt;9 -->
+<g id="edge9" class="edge">
+<title>7&#45;&gt;9</title>
+<path fill="none" stroke="#000000" d="M322.7363,-103.9815C330.9791,-94.7908 339.7178,-85.0472 347.9721,-75.8436"/>
+<polygon fill="#000000" stroke="#000000" points="350.6991,-78.0451 354.7702,-68.2637 345.4879,-73.3714 350.6991,-78.0451"/>
+</g>
+<!-- 11 -->
+<g id="node12" class="node">
+<title>11</title>
+<path fill="#e58139" stroke="#000000" d="M460.5,-179.5C460.5,-179.5 386.5,-179.5 386.5,-179.5 380.5,-179.5 374.5,-173.5 374.5,-167.5 374.5,-167.5 374.5,-123.5 374.5,-123.5 374.5,-117.5 380.5,-111.5 386.5,-111.5 386.5,-111.5 460.5,-111.5 460.5,-111.5 466.5,-111.5 472.5,-117.5 472.5,-123.5 472.5,-123.5 472.5,-167.5 472.5,-167.5 472.5,-173.5 466.5,-179.5 460.5,-179.5"/>
+<text text-anchor="start" x="402" y="-164.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="395" y="-149.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 1</text>
+<text text-anchor="start" x="393" y="-134.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [1, 0]</text>
+<text text-anchor="start" x="382.5" y="-119.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 10&#45;&gt;11 -->
+<g id="edge11" class="edge">
+<title>10&#45;&gt;11</title>
+<path fill="none" stroke="#000000" d="M445.6084,-222.8796C442.5295,-212.1034 439.2042,-200.4647 436.0908,-189.5677"/>
+<polygon fill="#000000" stroke="#000000" points="439.4169,-188.4686 433.3043,-179.8149 432.6862,-190.3917 439.4169,-188.4686"/>
+</g>
+<!-- 12 -->
+<g id="node13" class="node">
+<title>12</title>
+<path fill="#399de5" stroke="#000000" d="M562.5,-179.5C562.5,-179.5 502.5,-179.5 502.5,-179.5 496.5,-179.5 490.5,-173.5 490.5,-167.5 490.5,-167.5 490.5,-123.5 490.5,-123.5 490.5,-117.5 496.5,-111.5 502.5,-111.5 502.5,-111.5 562.5,-111.5 562.5,-111.5 568.5,-111.5 574.5,-117.5 574.5,-123.5 574.5,-123.5 574.5,-167.5 574.5,-167.5 574.5,-173.5 568.5,-179.5 562.5,-179.5"/>
+<text text-anchor="start" x="511" y="-164.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="504" y="-149.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 2</text>
+<text text-anchor="start" x="502" y="-134.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [0, 2]</text>
+<text text-anchor="start" x="498.5" y="-119.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 10&#45;&gt;12 -->
+<g id="edge12" class="edge">
+<title>10&#45;&gt;12</title>
+<path fill="none" stroke="#000000" d="M483.7314,-222.8796C490.731,-211.7735 498.308,-199.7513 505.3556,-188.5691"/>
+<polygon fill="#000000" stroke="#000000" points="508.502,-190.1411 510.8729,-179.8149 502.58,-186.4087 508.502,-190.1411"/>
+</g>
+<!-- 14 -->
+<g id="node15" class="node">
+<title>14</title>
+<path fill="#399de5" fill-opacity="0.533333" stroke="#000000" d="M708.5,-306C708.5,-306 580.5,-306 580.5,-306 574.5,-306 568.5,-300 568.5,-294 568.5,-294 568.5,-235 568.5,-235 568.5,-229 574.5,-223 580.5,-223 580.5,-223 708.5,-223 708.5,-223 714.5,-223 720.5,-229 720.5,-235 720.5,-235 720.5,-294 720.5,-294 720.5,-300 714.5,-306 708.5,-306"/>
+<text text-anchor="start" x="576.5" y="-290.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">worst concave points ≤ 0.181</text>
+<text text-anchor="start" x="617" y="-275.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.434</text>
+<text text-anchor="start" x="613" y="-260.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 22</text>
+<text text-anchor="start" x="611" y="-245.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [7, 15]</text>
+<text text-anchor="start" x="610.5" y="-230.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 13&#45;&gt;14 -->
+<g id="edge14" class="edge">
+<title>13&#45;&gt;14</title>
+<path fill="none" stroke="#000000" d="M676.3622,-341.8796C672.8762,-333.4136 669.171,-324.4153 665.5669,-315.6626"/>
+<polygon fill="#000000" stroke="#000000" points="668.7549,-314.2122 661.711,-306.2981 662.2822,-316.8775 668.7549,-314.2122"/>
+</g>
+<!-- 19 -->
+<g id="node20" class="node">
+<title>19</title>
+<path fill="#e58139" stroke="#000000" d="M824.5,-298.5C824.5,-298.5 750.5,-298.5 750.5,-298.5 744.5,-298.5 738.5,-292.5 738.5,-286.5 738.5,-286.5 738.5,-242.5 738.5,-242.5 738.5,-236.5 744.5,-230.5 750.5,-230.5 750.5,-230.5 824.5,-230.5 824.5,-230.5 830.5,-230.5 836.5,-236.5 836.5,-242.5 836.5,-242.5 836.5,-286.5 836.5,-286.5 836.5,-292.5 830.5,-298.5 824.5,-298.5"/>
+<text text-anchor="start" x="766" y="-283.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="756" y="-268.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 16</text>
+<text text-anchor="start" x="754" y="-253.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [16, 0]</text>
+<text text-anchor="start" x="746.5" y="-238.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 13&#45;&gt;19 -->
+<g id="edge19" class="edge">
+<title>13&#45;&gt;19</title>
+<path fill="none" stroke="#000000" d="M726.3766,-341.8796C735.3232,-330.5536 745.0224,-318.2748 754.0029,-306.9058"/>
+<polygon fill="#000000" stroke="#000000" points="756.942,-308.8316 760.3941,-298.8149 751.449,-304.4926 756.942,-308.8316"/>
+</g>
+<!-- 15 -->
+<g id="node16" class="node">
+<title>15</title>
+<path fill="#399de5" fill-opacity="0.733333" stroke="#000000" d="M684,-187C684,-187 605,-187 605,-187 599,-187 593,-181 593,-175 593,-175 593,-116 593,-116 593,-110 599,-104 605,-104 605,-104 684,-104 684,-104 690,-104 696,-110 696,-116 696,-116 696,-175 696,-175 696,-181 690,-187 684,-187"/>
+<text text-anchor="start" x="601" y="-171.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">worst area ≤ 811.1</text>
+<text text-anchor="start" x="617" y="-156.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.332</text>
+<text text-anchor="start" x="613" y="-141.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 19</text>
+<text text-anchor="start" x="611" y="-126.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [4, 15]</text>
+<text text-anchor="start" x="610.5" y="-111.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 14&#45;&gt;15 -->
+<g id="edge15" class="edge">
+<title>14&#45;&gt;15</title>
+<path fill="none" stroke="#000000" d="M644.5,-222.8796C644.5,-214.6838 644.5,-205.9891 644.5,-197.5013"/>
+<polygon fill="#000000" stroke="#000000" points="648.0001,-197.298 644.5,-187.2981 641.0001,-197.2981 648.0001,-197.298"/>
+</g>
+<!-- 18 -->
+<g id="node19" class="node">
+<title>18</title>
+<path fill="#e58139" stroke="#000000" d="M800.5,-179.5C800.5,-179.5 726.5,-179.5 726.5,-179.5 720.5,-179.5 714.5,-173.5 714.5,-167.5 714.5,-167.5 714.5,-123.5 714.5,-123.5 714.5,-117.5 720.5,-111.5 726.5,-111.5 726.5,-111.5 800.5,-111.5 800.5,-111.5 806.5,-111.5 812.5,-117.5 812.5,-123.5 812.5,-123.5 812.5,-167.5 812.5,-167.5 812.5,-173.5 806.5,-179.5 800.5,-179.5"/>
+<text text-anchor="start" x="742" y="-164.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="735" y="-149.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 3</text>
+<text text-anchor="start" x="733" y="-134.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [3, 0]</text>
+<text text-anchor="start" x="722.5" y="-119.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 14&#45;&gt;18 -->
+<g id="edge18" class="edge">
+<title>14&#45;&gt;18</title>
+<path fill="none" stroke="#000000" d="M686.1204,-222.8796C697.7763,-211.2237 710.4413,-198.5587 722.0852,-186.9148"/>
+<polygon fill="#000000" stroke="#000000" points="724.5889,-189.3609 729.1851,-179.8149 719.6391,-184.4111 724.5889,-189.3609"/>
+</g>
+<!-- 16 -->
+<g id="node17" class="node">
+<title>16</title>
+<path fill="#399de5" fill-opacity="0.929412" stroke="#000000" d="M619.5,-68C619.5,-68 559.5,-68 559.5,-68 553.5,-68 547.5,-62 547.5,-56 547.5,-56 547.5,-12 547.5,-12 547.5,-6 553.5,0 559.5,0 559.5,0 619.5,0 619.5,0 625.5,0 631.5,-6 631.5,-12 631.5,-12 631.5,-56 631.5,-56 631.5,-62 625.5,-68 619.5,-68"/>
+<text text-anchor="start" x="562" y="-52.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.124</text>
+<text text-anchor="start" x="558" y="-37.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 15</text>
+<text text-anchor="start" x="556" y="-22.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [1, 14]</text>
+<text text-anchor="start" x="555.5" y="-7.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 15&#45;&gt;16 -->
+<g id="edge16" class="edge">
+<title>15&#45;&gt;16</title>
+<path fill="none" stroke="#000000" d="M624.02,-103.9815C619.7585,-95.3423 615.256,-86.2144 610.9603,-77.5059"/>
+<polygon fill="#000000" stroke="#000000" points="613.9641,-75.6836 606.4014,-68.2637 607.6863,-78.7803 613.9641,-75.6836"/>
+</g>
+<!-- 17 -->
+<g id="node18" class="node">
+<title>17</title>
+<path fill="#e58139" fill-opacity="0.666667" stroke="#000000" d="M735.5,-68C735.5,-68 661.5,-68 661.5,-68 655.5,-68 649.5,-62 649.5,-56 649.5,-56 649.5,-12 649.5,-12 649.5,-6 655.5,0 661.5,0 661.5,0 735.5,0 735.5,0 741.5,0 747.5,-6 747.5,-12 747.5,-12 747.5,-56 747.5,-56 747.5,-62 741.5,-68 735.5,-68"/>
+<text text-anchor="start" x="671" y="-52.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.375</text>
+<text text-anchor="start" x="670" y="-37.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 4</text>
+<text text-anchor="start" x="668" y="-22.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [3, 1]</text>
+<text text-anchor="start" x="657.5" y="-7.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 15&#45;&gt;17 -->
+<g id="edge17" class="edge">
+<title>15&#45;&gt;17</title>
+<path fill="none" stroke="#000000" d="M664.6076,-103.9815C668.7916,-95.3423 673.2123,-86.2144 677.4299,-77.5059"/>
+<polygon fill="#000000" stroke="#000000" points="680.6971,-78.7893 681.9059,-68.2637 674.3971,-75.7382 680.6971,-78.7893"/>
+</g>
+<!-- 21 -->
+<g id="node22" class="node">
+<title>21</title>
+<path fill="#399de5" fill-opacity="0.200000" stroke="#000000" d="M946,-425C946,-425 847,-425 847,-425 841,-425 835,-419 835,-413 835,-413 835,-354 835,-354 835,-348 841,-342 847,-342 847,-342 946,-342 946,-342 952,-342 958,-348 958,-354 958,-354 958,-413 958,-413 958,-419 952,-425 946,-425"/>
+<text text-anchor="start" x="843" y="-409.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">concavity error ≤ 0.033</text>
+<text text-anchor="start" x="869" y="-394.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.494</text>
+<text text-anchor="start" x="868" y="-379.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 9</text>
+<text text-anchor="start" x="866" y="-364.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [4, 5]</text>
+<text text-anchor="start" x="862.5" y="-349.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 20&#45;&gt;21 -->
+<g id="edge21" class="edge">
+<title>20&#45;&gt;21</title>
+<path fill="none" stroke="#000000" d="M896.5,-460.8796C896.5,-452.6838 896.5,-443.9891 896.5,-435.5013"/>
+<polygon fill="#000000" stroke="#000000" points="900.0001,-435.298 896.5,-425.2981 893.0001,-435.2981 900.0001,-435.298"/>
+</g>
+<!-- 24 -->
+<g id="node25" class="node">
+<title>24</title>
+<path fill="#e58139" stroke="#000000" d="M1062.5,-417.5C1062.5,-417.5 988.5,-417.5 988.5,-417.5 982.5,-417.5 976.5,-411.5 976.5,-405.5 976.5,-405.5 976.5,-361.5 976.5,-361.5 976.5,-355.5 982.5,-349.5 988.5,-349.5 988.5,-349.5 1062.5,-349.5 1062.5,-349.5 1068.5,-349.5 1074.5,-355.5 1074.5,-361.5 1074.5,-361.5 1074.5,-405.5 1074.5,-405.5 1074.5,-411.5 1068.5,-417.5 1062.5,-417.5"/>
+<text text-anchor="start" x="1004" y="-402.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="991" y="-387.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 125</text>
+<text text-anchor="start" x="989" y="-372.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [125, 0]</text>
+<text text-anchor="start" x="984.5" y="-357.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 20&#45;&gt;24 -->
+<g id="edge24" class="edge">
+<title>20&#45;&gt;24</title>
+<path fill="none" stroke="#000000" d="M941.6179,-460.8796C954.2533,-449.2237 967.9826,-436.5587 980.605,-424.9148"/>
+<polygon fill="#000000" stroke="#000000" points="983.3244,-427.168 988.3015,-417.8149 978.578,-422.0228 983.3244,-427.168"/>
+</g>
+<!-- 22 -->
+<g id="node23" class="node">
+<title>22</title>
+<path fill="#399de5" stroke="#000000" d="M926.5,-298.5C926.5,-298.5 866.5,-298.5 866.5,-298.5 860.5,-298.5 854.5,-292.5 854.5,-286.5 854.5,-286.5 854.5,-242.5 854.5,-242.5 854.5,-236.5 860.5,-230.5 866.5,-230.5 866.5,-230.5 926.5,-230.5 926.5,-230.5 932.5,-230.5 938.5,-236.5 938.5,-242.5 938.5,-242.5 938.5,-286.5 938.5,-286.5 938.5,-292.5 932.5,-298.5 926.5,-298.5"/>
+<text text-anchor="start" x="875" y="-283.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="868" y="-268.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 5</text>
+<text text-anchor="start" x="866" y="-253.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [0, 5]</text>
+<text text-anchor="start" x="862.5" y="-238.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = benign</text>
+</g>
+<!-- 21&#45;&gt;22 -->
+<g id="edge22" class="edge">
+<title>21&#45;&gt;22</title>
+<path fill="none" stroke="#000000" d="M896.5,-341.8796C896.5,-331.2134 896.5,-319.7021 896.5,-308.9015"/>
+<polygon fill="#000000" stroke="#000000" points="900.0001,-308.8149 896.5,-298.8149 893.0001,-308.815 900.0001,-308.8149"/>
+</g>
+<!-- 23 -->
+<g id="node24" class="node">
+<title>23</title>
+<path fill="#e58139" stroke="#000000" d="M1042.5,-298.5C1042.5,-298.5 968.5,-298.5 968.5,-298.5 962.5,-298.5 956.5,-292.5 956.5,-286.5 956.5,-286.5 956.5,-242.5 956.5,-242.5 956.5,-236.5 962.5,-230.5 968.5,-230.5 968.5,-230.5 1042.5,-230.5 1042.5,-230.5 1048.5,-230.5 1054.5,-236.5 1054.5,-242.5 1054.5,-242.5 1054.5,-286.5 1054.5,-286.5 1054.5,-292.5 1048.5,-298.5 1042.5,-298.5"/>
+<text text-anchor="start" x="984" y="-283.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">gini = 0.0</text>
+<text text-anchor="start" x="977" y="-268.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">samples = 4</text>
+<text text-anchor="start" x="975" y="-253.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">value = [4, 0]</text>
+<text text-anchor="start" x="964.5" y="-238.3" font-family="Helvetica,sans-Serif" font-size="14.00" fill="#000000">class = malignant</text>
+</g>
+<!-- 21&#45;&gt;23 -->
+<g id="edge23" class="edge">
+<title>21&#45;&gt;23</title>
+<path fill="none" stroke="#000000" d="M934.6229,-341.8796C945.1986,-330.3337 956.6812,-317.7976 967.2633,-306.2446"/>
+<polygon fill="#000000" stroke="#000000" points="969.8951,-308.5531 974.0687,-298.8149 964.7333,-303.825 969.8951,-308.5531"/>
+</g>
+</g>
+</svg>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Author: Kavi Sekhon</p>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+								</article>
+						</div>
+					</div>
+				</div>
+			</section>
+	</div>
+</div>
+
+				</div>
+			</div>
+
+		<!-- Footer Wrapper -->
+			<div id="footer-wrapper">
+				<!-- Footer -->
+					<section id="footer" class="container">
+						<div class="row">
+							<div class="8u">
+								<section>
+									<header>
+										<h2>Latest articles</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Wed 27 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Cross Validation and K-Fold.html">Cross Validation and K-Fold</a></h3>
+											<p><p>Cross-Validation is the general scoring technique for the model using only the training data set. The K-Fold cross-validation is a better heuri..</p></p>
+										</li>
+										<li>
+											<span class="date">Wed 27 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Train-Test Split.html">Train-Test Split</a></h3>
+											<p><p>Spliting your dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be ..</p></p>
+										</li>
+										<li>
+											<span class="date">Tue 26 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Random Forest Classificaiton.html">Random Forest Classificaiton</a></h3>
+											<p><p>The Random Forest Classifications algorithim use a ensemble of Decision Trees to find and train its model. Each decision tree in the ensemble i..</p></p>
+										</li>
+										<li>
+											<span class="date">Sun 24 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Binning Feature.html">Binning Feature</a></h3>
+											<p><p>The bining of data into a few categorical groups can help us see the summarize the sparse continuous values to a few data points. This can be u..</p></p>
+										</li>
+									</ul>
+								</section>
+							</div>
+								<div class="4u">
+									<section>
+										<header>
+											<h2>What's this about?</h2>
+										</header>
+											<a href="https://stackexchange.com/users/12639256/kavi-sek" class="image image-full"><img src="https://kavisek.github.io/images/kavi.png" alt="" /></a>
+										<p>
+										 Recently relocated to Toronto Ontario, currently seeking employment at firm that uses Data Science for good. You can check out my stackoverflow account below.
+
+
+										</p>
+										<footer>
+												<a href="https://stackexchange.com/users/12639256/kavi-sek" class="button">Find out more</a>
+										</footer>
+									</section>
+								</div>
+						</div>
+						<div class="row">
+							<div class="4u">
+								<section>
+									<header>
+										<h2>Profiles</h2>
+									</header>
+									<ul class="divided">
+											<li><a href="http://github.com/kavisek">Github</a></li>
+											<li><a href="https://www.kaggle.com/kavisek/">Kaggle</a></li>
+											<li><a href="https://stackexchange.com/users/12639256/kavi-sek">StackExchange</a></li>
+									</ul>
+								</section>
+							</div>
+							<div class="4u">
+								<section>
+									<header>
+										<h2>Groups</h2>
+									</header>
+									<ul class="divided">
+											<li><a href="https://kavisek.github.io/category/novice.html">Novice</a></li>
+									</ul>
+								</section>
+							</div>
+							<div class="4u">
+
+								<section>
+									<header>
+										<h2>Contact</h2>
+									</header>
+									<ul class="social">
+											<li class="twitter"><a href="http://twitter.com/kavisekh" class="icon48 icon48-2">Twitter</a></li>
+										<li class="linkedin"><a href="http://www.linkedin.com/in/kavisek" class="icon48 icon48-4">LinkedIn</a></li>
+									</ul>
+									<ul class="contact">
+											<li>
+												<h3>Mail</h3>
+												<p><a href="mailto:kavi.skhon@gmail.com">kavi.skhon@gmail.com</a></p>
+											</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+			</div>
+		<script src="/theme/js/jquery.min.js"></script>
+		<script src="/theme/js/jquery.dropotron.js"></script>
+		<script src="/theme/js/config.js"></script>
+		<script src="/theme/js/skel.min.js"></script>
+		<script src="/theme/js/skel-panels.min.js"></script>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="/theme/css/ie8.css" /><![endif]-->
+	</body>
+</html>
