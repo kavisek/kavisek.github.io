@@ -444,7 +444,7 @@
 			ul.divided li
 			{
 				border-top: solid 1px #ddd;
-				padding: 1em 0 1em 0;
+				padding: 3em 0 1em 0; /* padding: 1em 0 1em 0; */
 			}
 
 			ul.divided li:first-child
