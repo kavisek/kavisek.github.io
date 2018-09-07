@@ -621,7 +621,7 @@
 			background: url('images/bg01.png');
 			background-size: 100% 100%;
 			z-index: 0;
-			opacity: 0.25;
+			opacity: 0.40; /* opacity: 0.25; */
 		}
 
 		#header-wrapper > .container
