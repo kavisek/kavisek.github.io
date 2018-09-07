@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Mon 04 June 2018</div>
-									<h2>Resampling Datetime</h2>
+									<div class="pennant pennant-alt date">Wed 20 June 2018</div>
+									<h2>Dropping Features</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,23 +1046,42 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Resampling-Datetime">Resampling Datetime<a class="anchor-link" href="#Resampling-Datetime">&#182;</a></h1><p><span>When plotting times series data it becomes advantagous to reframe and aggergate the data by period of time. Data Scientist that deal with time series data love Pandas because resampling the data become really easy when your data is formatted in the corret manner. To resample a dataframe your datatime values should be in datetime data type and be set t the index of the dataframe.</span></p>
+<h1 id="Dropping-Features">Dropping Features<a class="anchor-link" href="#Dropping-Features">&#182;</a></h1><p><span>Dropping feature is a common and select tasks that is conduct on most datasets before training your model. I use Pandas to drop the majority of features and observations in my work flow. Below is an example of a column of drop statements in Python. You can find the full documentation on dropping null value on Pandas's documents (link below).</span></p>
+<p>Dropping Data Documentation:  <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.drop.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.drop.html</a></p>
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
 
-<span class="n">df</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/25/2018&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">),</span>
-                      <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
-                      <span class="s1">&#39;feature_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
+</div>
+</div>
+</div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Import-Data">Import Data<a class="anchor-link" href="#Import-Data">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Data/Pokemon.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># View the head of the dataframe </span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -1076,7 +1095,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[81]:</div>
+<div class="prompt output_prompt">Out[62]:</div>
 
 
 
@@ -1099,129 +1118,101 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>datetime</th>
-      <th>feature_1</th>
-      <th>feature_2</th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+      <th>Generation</th>
+      <th>Legendary</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>2018-12-25</td>
-      <td>-0.042305</td>
-      <td>0.802248</td>
+      <td>1</td>
+      <td>Bulbasaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2018-12-26</td>
-      <td>-0.503320</td>
-      <td>0.048699</td>
+      <td>2</td>
+      <td>Ivysaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2018-12-27</td>
-      <td>-0.140212</td>
-      <td>0.143350</td>
+      <td>3</td>
+      <td>Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+      <td>82</td>
+      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2018-12-28</td>
-      <td>0.933979</td>
-      <td>0.736463</td>
+      <td>3</td>
+      <td>VenusaurMega Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>625</td>
+      <td>80</td>
+      <td>100</td>
+      <td>123</td>
+      <td>122</td>
+      <td>120</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2018-12-29</td>
-      <td>-0.431505</td>
-      <td>0.765205</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[82]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>feature_1</th>
-      <th>feature_2</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2018-12-25</th>
-      <td>-0.042305</td>
-      <td>0.802248</td>
-    </tr>
-    <tr>
-      <th>2018-12-26</th>
-      <td>-0.503320</td>
-      <td>0.048699</td>
-    </tr>
-    <tr>
-      <th>2018-12-27</th>
-      <td>-0.140212</td>
-      <td>0.143350</td>
-    </tr>
-    <tr>
-      <th>2018-12-28</th>
-      <td>0.933979</td>
-      <td>0.736463</td>
-    </tr>
-    <tr>
-      <th>2018-12-29</th>
-      <td>-0.431505</td>
-      <td>0.765205</td>
+      <td>4</td>
+      <td>Charmander</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>309</td>
+      <td>39</td>
+      <td>52</td>
+      <td>43</td>
+      <td>60</td>
+      <td>50</td>
+      <td>65</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
   </tbody>
 </table>
@@ -1238,16 +1229,17 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Dailly-Resampling">Dailly Resampling<a class="anchor-link" href="#Dailly-Resampling">&#182;</a></h3>
+<h3 id="Dropping-Feature">Dropping Feature<a class="anchor-link" href="#Dropping-Feature">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop the &quot;name&quot; feature and view the head of the dataframe</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1260,7 +1252,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[84]:</div>
+<div class="prompt output_prompt">Out[63]:</div>
 
 
 
@@ -1283,305 +1275,95 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>feature_1</th>
-      <th>feature_2</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2018-12-25</th>
-      <td>-0.042305</td>
-      <td>0.802248</td>
-    </tr>
-    <tr>
-      <th>2018-12-26</th>
-      <td>-0.503320</td>
-      <td>0.048699</td>
-    </tr>
-    <tr>
-      <th>2018-12-27</th>
-      <td>-0.140212</td>
-      <td>0.143350</td>
-    </tr>
-    <tr>
-      <th>2018-12-28</th>
-      <td>0.933979</td>
-      <td>0.736463</td>
-    </tr>
-    <tr>
-      <th>2018-12-29</th>
-      <td>-0.431505</td>
-      <td>0.765205</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Weekly-Resampling">Weekly Resampling<a class="anchor-link" href="#Weekly-Resampling">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1W&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[85]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>feature_1</th>
-      <th>feature_2</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
+      <th>#</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+      <th>Generation</th>
+      <th>Legendary</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2018-12-30</th>
-      <td>0.933979</td>
-      <td>0.802248</td>
+      <th>0</th>
+      <td>1</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2019-01-06</th>
-      <td>1.901840</td>
-      <td>0.908213</td>
+      <th>1</th>
+      <td>2</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2019-01-13</th>
-      <td>1.302976</td>
-      <td>0.819024</td>
-    </tr>
-    <tr>
-      <th>2019-01-20</th>
-      <td>0.820549</td>
-      <td>0.954850</td>
-    </tr>
-    <tr>
-      <th>2019-01-27</th>
-      <td>1.362464</td>
-      <td>0.839660</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Monthly-Resampling">Monthly Resampling<a class="anchor-link" href="#Monthly-Resampling">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[34]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>feature_1</th>
-      <th>feature_2</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2018-12-31</th>
-      <td>-1.481009</td>
-      <td>0.006430</td>
-    </tr>
-    <tr>
-      <th>2019-01-31</th>
-      <td>-2.043958</td>
-      <td>0.026396</td>
-    </tr>
-    <tr>
-      <th>2019-02-28</th>
-      <td>-1.805810</td>
-      <td>0.126203</td>
-    </tr>
-    <tr>
-      <th>2019-03-31</th>
-      <td>-1.834423</td>
-      <td>0.025337</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Yearly-Resampling">Yearly Resampling<a class="anchor-link" href="#Yearly-Resampling">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[59]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>feature_1</th>
-      <th>feature_2</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2018-12-31</th>
-      <td>7</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>2019-12-31</th>
+      <th>2</th>
+      <td>3</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+      <td>82</td>
       <td>83</td>
-      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>625</td>
+      <td>80</td>
+      <td>100</td>
+      <td>123</td>
+      <td>122</td>
+      <td>120</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>309</td>
+      <td>39</td>
+      <td>52</td>
+      <td>43</td>
+      <td>60</td>
+      <td>50</td>
+      <td>65</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
   </tbody>
 </table>
@@ -1598,21 +1380,17 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Resampling-by-the-Hour">Resampling by the Hour<a class="anchor-link" href="#Resampling-by-the-Hour">&#182;</a></h3>
+<h3 id="Dropping-Observations">Dropping Observations<a class="anchor-link" href="#Dropping-Observations">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/25/2018&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">),</span>
-                      <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
-                      <span class="s1">&#39;feature_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop the third observations from the DataFrame </span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1625,7 +1403,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[73]:</div>
+<div class="prompt output_prompt">Out[64]:</div>
 
 
 
@@ -1648,40 +1426,101 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>feature_1</th>
-      <th>feature_2</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+      <th>Generation</th>
+      <th>Legendary</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2018-12-25 00:00:00</th>
-      <td>0.039395</td>
-      <td>0.429378</td>
+      <th>0</th>
+      <td>1</td>
+      <td>Bulbasaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2018-12-25 02:00:00</th>
-      <td>-0.304945</td>
-      <td>1.618242</td>
+      <th>1</th>
+      <td>2</td>
+      <td>Ivysaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2018-12-25 04:00:00</th>
-      <td>-0.999194</td>
-      <td>0.579101</td>
+      <th>2</th>
+      <td>3</td>
+      <td>Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+      <td>82</td>
+      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2018-12-25 06:00:00</th>
-      <td>0.250126</td>
-      <td>0.659269</td>
+      <th>4</th>
+      <td>4</td>
+      <td>Charmander</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>309</td>
+      <td>39</td>
+      <td>52</td>
+      <td>43</td>
+      <td>60</td>
+      <td>50</td>
+      <td>65</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2018-12-25 08:00:00</th>
-      <td>-0.767738</td>
-      <td>0.534183</td>
+      <th>5</th>
+      <td>5</td>
+      <td>Charmeleon</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>405</td>
+      <td>58</td>
+      <td>64</td>
+      <td>58</td>
+      <td>80</td>
+      <td>65</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
   </tbody>
 </table>
@@ -1698,21 +1537,709 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Resampling-by-the-Mintue">Resampling by the Mintue<a class="anchor-link" href="#Resampling-by-the-Mintue">&#182;</a></h3>
+<h5 id="Filtering-Observations">Filtering Observations<a class="anchor-link" href="#Filtering-Observations">&#182;</a></h5><p>While you can drop the observations using the drop function in Pandas, but its just faster to just use loc and list filtering available in the package.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># View the all the observations where the Type is not &#39;Grass&#39; via filtering</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Type 1&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;Grass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[65]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+      <th>Generation</th>
+      <th>Legendary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>Charmander</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>309</td>
+      <td>39</td>
+      <td>52</td>
+      <td>43</td>
+      <td>60</td>
+      <td>50</td>
+      <td>65</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>Charmeleon</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>405</td>
+      <td>58</td>
+      <td>64</td>
+      <td>58</td>
+      <td>80</td>
+      <td>65</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>Charizard</td>
+      <td>Fire</td>
+      <td>Flying</td>
+      <td>534</td>
+      <td>78</td>
+      <td>84</td>
+      <td>78</td>
+      <td>109</td>
+      <td>85</td>
+      <td>100</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>6</td>
+      <td>CharizardMega Charizard X</td>
+      <td>Fire</td>
+      <td>Dragon</td>
+      <td>634</td>
+      <td>78</td>
+      <td>130</td>
+      <td>111</td>
+      <td>130</td>
+      <td>85</td>
+      <td>100</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>6</td>
+      <td>CharizardMega Charizard Y</td>
+      <td>Fire</td>
+      <td>Flying</td>
+      <td>634</td>
+      <td>78</td>
+      <td>104</td>
+      <td>78</td>
+      <td>159</td>
+      <td>115</td>
+      <td>100</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Loc-Statements">Loc Statements<a class="anchor-link" href="#Loc-Statements">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Select only a subset of the datasets using the loc statement</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="s1">&#39;HP&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[66]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bulbasaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ivysaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dropping-Mulptile-Features">Dropping Mulptile Features<a class="anchor-link" href="#Dropping-Mulptile-Features">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop the &quot;Name&quot; feature and view the head of the dataframe</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;#&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Generation&#39;</span><span class="p">,</span><span class="s1">&#39;Legendary&#39;</span><span class="p">]</span> <span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[67]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+      <td>82</td>
+      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>625</td>
+      <td>80</td>
+      <td>100</td>
+      <td>123</td>
+      <td>122</td>
+      <td>120</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>309</td>
+      <td>39</td>
+      <td>52</td>
+      <td>43</td>
+      <td>60</td>
+      <td>50</td>
+      <td>65</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dropping-Columns-Inplace">Dropping Columns Inplace<a class="anchor-link" href="#Dropping-Columns-Inplace">&#182;</a></h3><p>By default the inplace parameter for all the drop functions is set to False, but your can pass in opposite Bollean value very easily.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Copy the DataFrame</span>
+<span class="n">df_copy</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Drop the Name column</span>
+<span class="n">df_copy</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># View the head of the dataframe </span>
+<span class="n">df_copy</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[68]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>#</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+      <th>Generation</th>
+      <th>Legendary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+      <td>82</td>
+      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>625</td>
+      <td>80</td>
+      <td>100</td>
+      <td>123</td>
+      <td>122</td>
+      <td>120</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>Fire</td>
+      <td>NaN</td>
+      <td>309</td>
+      <td>39</td>
+      <td>52</td>
+      <td>43</td>
+      <td>60</td>
+      <td>50</td>
+      <td>65</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dropping-Index">Dropping Index<a class="anchor-link" href="#Dropping-Index">&#182;</a></h3><p>If you want to reset your index the best way to do this would be to just use the reset index function. But if you have dataframe with the multindex we can also us the drop datapoints related to the index value</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Filtered dataframe for Grass Pokemon</span>
+<span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Type 1&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Grass&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Type 2&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Grass&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[75]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+      <th>Generation</th>
+      <th>Legendary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Bulbasaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Ivysaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+      <td>82</td>
+      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>VenusaurMega Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>625</td>
+      <td>80</td>
+      <td>100</td>
+      <td>123</td>
+      <td>122</td>
+      <td>120</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>43</td>
+      <td>Oddish</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>320</td>
+      <td>45</td>
+      <td>50</td>
+      <td>55</td>
+      <td>75</td>
+      <td>65</td>
+      <td>30</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/25/2018&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">),</span>
-                      <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
-                      <span class="s1">&#39;feature_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;3T&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Filtered dataframe for Grass Pokemon + reset index</span>
+<span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Type 1&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Grass&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Type 2&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Grass&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1748,40 +2275,107 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>feature_1</th>
-      <th>feature_2</th>
-    </tr>
-    <tr>
-      <th>datetime</th>
-      <th></th>
-      <th></th>
+      <th>index</th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+      <th>Generation</th>
+      <th>Legendary</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2018-12-25 00:00:00</th>
-      <td>1.771967</td>
-      <td>1.497531</td>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>Bulbasaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>318</td>
+      <td>45</td>
+      <td>49</td>
+      <td>49</td>
+      <td>65</td>
+      <td>65</td>
+      <td>45</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2018-12-25 00:03:00</th>
-      <td>-1.505933</td>
-      <td>1.013679</td>
+      <th>1</th>
+      <td>1</td>
+      <td>2</td>
+      <td>Ivysaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>405</td>
+      <td>60</td>
+      <td>62</td>
+      <td>63</td>
+      <td>80</td>
+      <td>80</td>
+      <td>60</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2018-12-25 00:06:00</th>
-      <td>-1.036548</td>
-      <td>1.209083</td>
+      <th>2</th>
+      <td>2</td>
+      <td>3</td>
+      <td>Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>525</td>
+      <td>80</td>
+      <td>82</td>
+      <td>83</td>
+      <td>100</td>
+      <td>100</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2018-12-25 00:09:00</th>
-      <td>1.538142</td>
-      <td>1.335962</td>
+      <th>3</th>
+      <td>3</td>
+      <td>3</td>
+      <td>VenusaurMega Venusaur</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>625</td>
+      <td>80</td>
+      <td>100</td>
+      <td>123</td>
+      <td>122</td>
+      <td>120</td>
+      <td>80</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
     <tr>
-      <th>2018-12-25 00:12:00</th>
-      <td>2.369288</td>
-      <td>1.230875</td>
+      <th>4</th>
+      <td>48</td>
+      <td>43</td>
+      <td>Oddish</td>
+      <td>Grass</td>
+      <td>Poison</td>
+      <td>320</td>
+      <td>45</td>
+      <td>50</td>
+      <td>55</td>
+      <td>75</td>
+      <td>65</td>
+      <td>30</td>
+      <td>1</td>
+      <td>False</td>
     </tr>
   </tbody>
 </table>
@@ -1794,25 +2388,15 @@ h6:hover .anchor-link {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Resampling-by-the-Second">Resampling by the Second<a class="anchor-link" href="#Resampling-by-the-Second">&#182;</a></h3>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/25/2018&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">),</span>
-                      <span class="s1">&#39;feature_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span>
-                      <span class="s1">&#39;feature_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">90</span><span class="p">)})</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;30s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Creating a Multindex DataFrame via the Group by Function</span>
+<span class="n">sum_stats</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Type 1&#39;</span><span class="p">,</span><span class="s1">&#39;Type 2&#39;</span><span class="p">])[</span><span class="s1">&#39;Total&#39;</span><span class="p">,</span> <span class="s1">&#39;HP&#39;</span><span class="p">,</span> <span class="s1">&#39;Attack&#39;</span><span class="p">,</span> <span class="s1">&#39;Defense&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Sp. Atk&#39;</span><span class="p">,</span> <span class="s1">&#39;Sp. Def&#39;</span><span class="p">,</span> <span class="s1">&#39;Speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">sum_stats</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1825,7 +2409,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[79]:</div>
+<div class="prompt output_prompt">Out[91]:</div>
 
 
 
@@ -1848,30 +2432,219 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>feature_1</th>
-      <th>feature_2</th>
+      <th></th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
     </tr>
     <tr>
-      <th>datetime</th>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2018-12-25 00:00:00</th>
-      <td>4.627835</td>
-      <td>13.922530</td>
+      <th rowspan="11" valign="top">Bug</th>
+      <th>Electric</th>
+      <td>395.500000</td>
+      <td>60.000000</td>
+      <td>62.000000</td>
+      <td>55.000000</td>
+      <td>77.000000</td>
+      <td>55.000000</td>
+      <td>86.500000</td>
     </tr>
     <tr>
-      <th>2018-12-25 00:00:30</th>
-      <td>7.560767</td>
-      <td>15.331102</td>
+      <th>Fighting</th>
+      <td>550.000000</td>
+      <td>80.000000</td>
+      <td>155.000000</td>
+      <td>95.000000</td>
+      <td>40.000000</td>
+      <td>100.000000</td>
+      <td>80.000000</td>
     </tr>
     <tr>
-      <th>2018-12-25 00:01:00</th>
-      <td>4.648913</td>
-      <td>15.442222</td>
+      <th>Fire</th>
+      <td>455.000000</td>
+      <td>70.000000</td>
+      <td>72.500000</td>
+      <td>60.000000</td>
+      <td>92.500000</td>
+      <td>80.000000</td>
+      <td>80.000000</td>
+    </tr>
+    <tr>
+      <th>Flying</th>
+      <td>419.500000</td>
+      <td>63.000000</td>
+      <td>70.142857</td>
+      <td>61.571429</td>
+      <td>72.857143</td>
+      <td>69.071429</td>
+      <td>82.857143</td>
+    </tr>
+    <tr>
+      <th>Ghost</th>
+      <td>236.000000</td>
+      <td>1.000000</td>
+      <td>90.000000</td>
+      <td>45.000000</td>
+      <td>30.000000</td>
+      <td>30.000000</td>
+      <td>40.000000</td>
+    </tr>
+    <tr>
+      <th>Grass</th>
+      <td>384.000000</td>
+      <td>55.000000</td>
+      <td>73.833333</td>
+      <td>76.666667</td>
+      <td>57.333333</td>
+      <td>76.666667</td>
+      <td>44.500000</td>
+    </tr>
+    <tr>
+      <th>Ground</th>
+      <td>345.000000</td>
+      <td>45.500000</td>
+      <td>62.000000</td>
+      <td>97.500000</td>
+      <td>44.500000</td>
+      <td>57.500000</td>
+      <td>38.000000</td>
+    </tr>
+    <tr>
+      <th>Poison</th>
+      <td>347.916667</td>
+      <td>53.750000</td>
+      <td>68.333333</td>
+      <td>58.083333</td>
+      <td>42.500000</td>
+      <td>59.333333</td>
+      <td>65.916667</td>
+    </tr>
+    <tr>
+      <th>Rock</th>
+      <td>435.000000</td>
+      <td>46.666667</td>
+      <td>56.666667</td>
+      <td>146.666667</td>
+      <td>36.666667</td>
+      <td>113.333333</td>
+      <td>35.000000</td>
+    </tr>
+    <tr>
+      <th>Steel</th>
+      <td>509.714286</td>
+      <td>67.714286</td>
+      <td>114.714286</td>
+      <td>112.428571</td>
+      <td>68.142857</td>
+      <td>83.285714</td>
+      <td>63.428571</td>
+    </tr>
+    <tr>
+      <th>Water</th>
+      <td>269.000000</td>
+      <td>40.000000</td>
+      <td>30.000000</td>
+      <td>32.000000</td>
+      <td>50.000000</td>
+      <td>52.000000</td>
+      <td>65.000000</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">Dark</th>
+      <th>Dragon</th>
+      <td>440.000000</td>
+      <td>72.000000</td>
+      <td>85.000000</td>
+      <td>70.000000</td>
+      <td>78.333333</td>
+      <td>70.000000</td>
+      <td>64.666667</td>
+    </tr>
+    <tr>
+      <th>Fighting</th>
+      <td>418.000000</td>
+      <td>57.500000</td>
+      <td>82.500000</td>
+      <td>92.500000</td>
+      <td>40.000000</td>
+      <td>92.500000</td>
+      <td>53.000000</td>
+    </tr>
+    <tr>
+      <th>Fire</th>
+      <td>476.666667</td>
+      <td>65.000000</td>
+      <td>80.000000</td>
+      <td>56.666667</td>
+      <td>110.000000</td>
+      <td>73.333333</td>
+      <td>91.666667</td>
+    </tr>
+    <tr>
+      <th>Flying</th>
+      <td>494.000000</td>
+      <td>93.200000</td>
+      <td>92.200000</td>
+      <td>73.800000</td>
+      <td>84.200000</td>
+      <td>70.400000</td>
+      <td>80.200000</td>
+    </tr>
+    <tr>
+      <th>Ghost</th>
+      <td>430.000000</td>
+      <td>50.000000</td>
+      <td>80.000000</td>
+      <td>100.000000</td>
+      <td>75.000000</td>
+      <td>90.000000</td>
+      <td>35.000000</td>
+    </tr>
+    <tr>
+      <th>Ice</th>
+      <td>470.000000</td>
+      <td>62.500000</td>
+      <td>107.500000</td>
+      <td>60.000000</td>
+      <td>40.000000</td>
+      <td>80.000000</td>
+      <td>120.000000</td>
+    </tr>
+    <tr>
+      <th>Psychic</th>
+      <td>385.000000</td>
+      <td>69.500000</td>
+      <td>73.000000</td>
+      <td>70.500000</td>
+      <td>52.500000</td>
+      <td>60.500000</td>
+      <td>59.000000</td>
+    </tr>
+    <tr>
+      <th>Steel</th>
+      <td>415.000000</td>
+      <td>55.000000</td>
+      <td>105.000000</td>
+      <td>85.000000</td>
+      <td>50.000000</td>
+      <td>55.000000</td>
+      <td>65.000000</td>
     </tr>
   </tbody>
 </table>
@@ -1883,6 +2656,551 @@ h6:hover .anchor-link {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop &quot;bug&quot; type  from first level of index</span>
+<span class="n">sum_stats</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Bug&#39;</span> <span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[105]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+    </tr>
+    <tr>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="8" valign="top">Dark</th>
+      <th>Dragon</th>
+      <td>440.000000</td>
+      <td>72.000000</td>
+      <td>85.000000</td>
+      <td>70.000000</td>
+      <td>78.333333</td>
+      <td>70.000000</td>
+      <td>64.666667</td>
+    </tr>
+    <tr>
+      <th>Fighting</th>
+      <td>418.000000</td>
+      <td>57.500000</td>
+      <td>82.500000</td>
+      <td>92.500000</td>
+      <td>40.000000</td>
+      <td>92.500000</td>
+      <td>53.000000</td>
+    </tr>
+    <tr>
+      <th>Fire</th>
+      <td>476.666667</td>
+      <td>65.000000</td>
+      <td>80.000000</td>
+      <td>56.666667</td>
+      <td>110.000000</td>
+      <td>73.333333</td>
+      <td>91.666667</td>
+    </tr>
+    <tr>
+      <th>Flying</th>
+      <td>494.000000</td>
+      <td>93.200000</td>
+      <td>92.200000</td>
+      <td>73.800000</td>
+      <td>84.200000</td>
+      <td>70.400000</td>
+      <td>80.200000</td>
+    </tr>
+    <tr>
+      <th>Ghost</th>
+      <td>430.000000</td>
+      <td>50.000000</td>
+      <td>80.000000</td>
+      <td>100.000000</td>
+      <td>75.000000</td>
+      <td>90.000000</td>
+      <td>35.000000</td>
+    </tr>
+    <tr>
+      <th>Ice</th>
+      <td>470.000000</td>
+      <td>62.500000</td>
+      <td>107.500000</td>
+      <td>60.000000</td>
+      <td>40.000000</td>
+      <td>80.000000</td>
+      <td>120.000000</td>
+    </tr>
+    <tr>
+      <th>Psychic</th>
+      <td>385.000000</td>
+      <td>69.500000</td>
+      <td>73.000000</td>
+      <td>70.500000</td>
+      <td>52.500000</td>
+      <td>60.500000</td>
+      <td>59.000000</td>
+    </tr>
+    <tr>
+      <th>Steel</th>
+      <td>415.000000</td>
+      <td>55.000000</td>
+      <td>105.000000</td>
+      <td>85.000000</td>
+      <td>50.000000</td>
+      <td>55.000000</td>
+      <td>65.000000</td>
+    </tr>
+    <tr>
+      <th rowspan="7" valign="top">Dragon</th>
+      <th>Electric</th>
+      <td>680.000000</td>
+      <td>100.000000</td>
+      <td>150.000000</td>
+      <td>120.000000</td>
+      <td>120.000000</td>
+      <td>100.000000</td>
+      <td>90.000000</td>
+    </tr>
+    <tr>
+      <th>Fairy</th>
+      <td>590.000000</td>
+      <td>75.000000</td>
+      <td>110.000000</td>
+      <td>110.000000</td>
+      <td>110.000000</td>
+      <td>105.000000</td>
+      <td>80.000000</td>
+    </tr>
+    <tr>
+      <th>Fire</th>
+      <td>680.000000</td>
+      <td>100.000000</td>
+      <td>120.000000</td>
+      <td>100.000000</td>
+      <td>150.000000</td>
+      <td>120.000000</td>
+      <td>90.000000</td>
+    </tr>
+    <tr>
+      <th>Flying</th>
+      <td>641.666667</td>
+      <td>94.333333</td>
+      <td>135.666667</td>
+      <td>97.500000</td>
+      <td>121.666667</td>
+      <td>94.166667</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>Ground</th>
+      <td>522.000000</td>
+      <td>90.000000</td>
+      <td>112.000000</td>
+      <td>88.200000</td>
+      <td>74.200000</td>
+      <td>75.000000</td>
+      <td>82.600000</td>
+    </tr>
+    <tr>
+      <th>Ice</th>
+      <td>686.666667</td>
+      <td>125.000000</td>
+      <td>140.000000</td>
+      <td>93.333333</td>
+      <td>140.000000</td>
+      <td>93.333333</td>
+      <td>95.000000</td>
+    </tr>
+    <tr>
+      <th>Psychic</th>
+      <td>650.000000</td>
+      <td>80.000000</td>
+      <td>100.000000</td>
+      <td>97.500000</td>
+      <td>135.000000</td>
+      <td>127.500000</td>
+      <td>110.000000</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">Electric</th>
+      <th>Dragon</th>
+      <td>610.000000</td>
+      <td>90.000000</td>
+      <td>95.000000</td>
+      <td>105.000000</td>
+      <td>165.000000</td>
+      <td>110.000000</td>
+      <td>45.000000</td>
+    </tr>
+    <tr>
+      <th>Fairy</th>
+      <td>431.000000</td>
+      <td>67.000000</td>
+      <td>58.000000</td>
+      <td>57.000000</td>
+      <td>81.000000</td>
+      <td>67.000000</td>
+      <td>101.000000</td>
+    </tr>
+    <tr>
+      <th>Fire</th>
+      <td>520.000000</td>
+      <td>50.000000</td>
+      <td>65.000000</td>
+      <td>107.000000</td>
+      <td>105.000000</td>
+      <td>107.000000</td>
+      <td>86.000000</td>
+    </tr>
+    <tr>
+      <th>Flying</th>
+      <td>537.600000</td>
+      <td>70.600000</td>
+      <td>90.000000</td>
+      <td>78.400000</td>
+      <td>115.000000</td>
+      <td>83.400000</td>
+      <td>100.200000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop &quot;fire&quot;  type from second level of index</span>
+<span class="n">sum_stats</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Fire&#39;</span> <span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[107]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Total</th>
+      <th>HP</th>
+      <th>Attack</th>
+      <th>Defense</th>
+      <th>Sp. Atk</th>
+      <th>Sp. Def</th>
+      <th>Speed</th>
+    </tr>
+    <tr>
+      <th>Type 1</th>
+      <th>Type 2</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="10" valign="top">Bug</th>
+      <th>Electric</th>
+      <td>395.500000</td>
+      <td>60.000000</td>
+      <td>62.000000</td>
+      <td>55.000000</td>
+      <td>77.000000</td>
+      <td>55.000000</td>
+      <td>86.500000</td>
+    </tr>
+    <tr>
+      <th>Fighting</th>
+      <td>550.000000</td>
+      <td>80.000000</td>
+      <td>155.000000</td>
+      <td>95.000000</td>
+      <td>40.000000</td>
+      <td>100.000000</td>
+      <td>80.000000</td>
+    </tr>
+    <tr>
+      <th>Flying</th>
+      <td>419.500000</td>
+      <td>63.000000</td>
+      <td>70.142857</td>
+      <td>61.571429</td>
+      <td>72.857143</td>
+      <td>69.071429</td>
+      <td>82.857143</td>
+    </tr>
+    <tr>
+      <th>Ghost</th>
+      <td>236.000000</td>
+      <td>1.000000</td>
+      <td>90.000000</td>
+      <td>45.000000</td>
+      <td>30.000000</td>
+      <td>30.000000</td>
+      <td>40.000000</td>
+    </tr>
+    <tr>
+      <th>Grass</th>
+      <td>384.000000</td>
+      <td>55.000000</td>
+      <td>73.833333</td>
+      <td>76.666667</td>
+      <td>57.333333</td>
+      <td>76.666667</td>
+      <td>44.500000</td>
+    </tr>
+    <tr>
+      <th>Ground</th>
+      <td>345.000000</td>
+      <td>45.500000</td>
+      <td>62.000000</td>
+      <td>97.500000</td>
+      <td>44.500000</td>
+      <td>57.500000</td>
+      <td>38.000000</td>
+    </tr>
+    <tr>
+      <th>Poison</th>
+      <td>347.916667</td>
+      <td>53.750000</td>
+      <td>68.333333</td>
+      <td>58.083333</td>
+      <td>42.500000</td>
+      <td>59.333333</td>
+      <td>65.916667</td>
+    </tr>
+    <tr>
+      <th>Rock</th>
+      <td>435.000000</td>
+      <td>46.666667</td>
+      <td>56.666667</td>
+      <td>146.666667</td>
+      <td>36.666667</td>
+      <td>113.333333</td>
+      <td>35.000000</td>
+    </tr>
+    <tr>
+      <th>Steel</th>
+      <td>509.714286</td>
+      <td>67.714286</td>
+      <td>114.714286</td>
+      <td>112.428571</td>
+      <td>68.142857</td>
+      <td>83.285714</td>
+      <td>63.428571</td>
+    </tr>
+    <tr>
+      <th>Water</th>
+      <td>269.000000</td>
+      <td>40.000000</td>
+      <td>30.000000</td>
+      <td>32.000000</td>
+      <td>50.000000</td>
+      <td>52.000000</td>
+      <td>65.000000</td>
+    </tr>
+    <tr>
+      <th rowspan="7" valign="top">Dark</th>
+      <th>Dragon</th>
+      <td>440.000000</td>
+      <td>72.000000</td>
+      <td>85.000000</td>
+      <td>70.000000</td>
+      <td>78.333333</td>
+      <td>70.000000</td>
+      <td>64.666667</td>
+    </tr>
+    <tr>
+      <th>Fighting</th>
+      <td>418.000000</td>
+      <td>57.500000</td>
+      <td>82.500000</td>
+      <td>92.500000</td>
+      <td>40.000000</td>
+      <td>92.500000</td>
+      <td>53.000000</td>
+    </tr>
+    <tr>
+      <th>Flying</th>
+      <td>494.000000</td>
+      <td>93.200000</td>
+      <td>92.200000</td>
+      <td>73.800000</td>
+      <td>84.200000</td>
+      <td>70.400000</td>
+      <td>80.200000</td>
+    </tr>
+    <tr>
+      <th>Ghost</th>
+      <td>430.000000</td>
+      <td>50.000000</td>
+      <td>80.000000</td>
+      <td>100.000000</td>
+      <td>75.000000</td>
+      <td>90.000000</td>
+      <td>35.000000</td>
+    </tr>
+    <tr>
+      <th>Ice</th>
+      <td>470.000000</td>
+      <td>62.500000</td>
+      <td>107.500000</td>
+      <td>60.000000</td>
+      <td>40.000000</td>
+      <td>80.000000</td>
+      <td>120.000000</td>
+    </tr>
+    <tr>
+      <th>Psychic</th>
+      <td>385.000000</td>
+      <td>69.500000</td>
+      <td>73.000000</td>
+      <td>70.500000</td>
+      <td>52.500000</td>
+      <td>60.500000</td>
+      <td>59.000000</td>
+    </tr>
+    <tr>
+      <th>Steel</th>
+      <td>415.000000</td>
+      <td>55.000000</td>
+      <td>105.000000</td>
+      <td>85.000000</td>
+      <td>50.000000</td>
+      <td>55.000000</td>
+      <td>65.000000</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Dragon</th>
+      <th>Electric</th>
+      <td>680.000000</td>
+      <td>100.000000</td>
+      <td>150.000000</td>
+      <td>120.000000</td>
+      <td>120.000000</td>
+      <td>100.000000</td>
+      <td>90.000000</td>
+    </tr>
+    <tr>
+      <th>Fairy</th>
+      <td>590.000000</td>
+      <td>75.000000</td>
+      <td>110.000000</td>
+      <td>110.000000</td>
+      <td>110.000000</td>
+      <td>105.000000</td>
+      <td>80.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Author: Kavi Sekhon</p>
+
+</div>
+</div>
 </div>
  
 
