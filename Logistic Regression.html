@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Thu 21 June 2018</div>
-									<h2>Cross Validation and K-Fold</h2>
+									<div class="pennant pennant-alt date">Tue 15 May 2018</div>
+									<h2>Logistic Regression</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,37 +1046,56 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Cross-Validation-and-K-Fold">Cross Validation and K-Fold<a class="anchor-link" href="#Cross-Validation-and-K-Fold">&#182;</a></h1><p><span>Cross-Validation is the general scoring technique for the model using only the training data set. The K-Fold cross-validation is a better heuristic for evaluating your model performance by running cross-validation on your training data multiple (K) times. Where each fold is unique from the last. Then taking the scores as the mean from al the cross validation scores.</span></p>
-<p>Cross Validation: First 80% train -&gt; Last 20% test</p>
-<p>K-Fold Cross (5 Sets):</p>
-<p>unique 80% train -&gt; unique 20% test -&gt; Score -\ <br>
-unique 80% train -&gt; unique 20% test -&gt; Score --\ <br>
-unique 80% train -&gt; unique 20% test -&gt; Score ----} Mean Score <br>
-unique 80% train -&gt; unique 20% test -&gt; Score --/ <br>
-unique 80% train -&gt; unique 20% test -&gt; Score -/<br></p>
-<p>You can implement the K-Fold cross in a startified manner where each sample with each validation set is randomly selected. Note, Shuffled K-Fold Cross Validation is not recommend on data with seasonality or time series data.</p>
-<h3 id="Import-Prelinimaries">Import Prelinimaries<a class="anchor-link" href="#Import-Prelinimaries">&#182;</a></h3>
+<h1 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression">&#182;</a></h1><p><span>Logistic Regression is only the most frequent model seen only, and often serves a basic benchmark for most models. Logistic Regressions use a sigmoid function and 50% threshold to classify the data into classes. We will look at different Logistic Regression models from a few packages.</span></p>
+<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import modules</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">pylab</span> inline
+  
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_boston</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LinearRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="kn">import</span> <span class="nn">seaborn</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="c1"># Import data</span>
-<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_wine</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">cross_val_score</span>
+ 
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;max_columns&#39;</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;max_rows&#39;</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+ 
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">);</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Populating the interactive namespace from numpy and matplotlib
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1085,7 +1104,176 @@ unique 80% train -&gt; unique 20% test -&gt; Score -/<br></p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Fit-Model">Fit Model<a class="anchor-link" href="#Fit-Model">&#182;</a></h3>
+<h3 id="Import-Data">Import Data<a class="anchor-link" href="#Import-Data">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wine</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">()</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+
+<span class="n">wdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="s1">&#39;feature_names&#39;</span><span class="p">])</span>
+<span class="n">wdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">wdf</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">wdf</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alcohol</th>
+      <th>malic_acid</th>
+      <th>ash</th>
+      <th>alcalinity_of_ash</th>
+      <th>magnesium</th>
+      <th>total_phenols</th>
+      <th>flavanoids</th>
+      <th>nonflavanoid_phenols</th>
+      <th>proanthocyanins</th>
+      <th>color_intensity</th>
+      <th>hue</th>
+      <th>od280/od315_of_diluted_wines</th>
+      <th>proline</th>
+      <th>target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>14.230</td>
+      <td>1.710</td>
+      <td>2.430</td>
+      <td>15.600</td>
+      <td>127.000</td>
+      <td>2.800</td>
+      <td>3.060</td>
+      <td>0.280</td>
+      <td>2.290</td>
+      <td>5.640</td>
+      <td>1.040</td>
+      <td>3.920</td>
+      <td>1065.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13.200</td>
+      <td>1.780</td>
+      <td>2.140</td>
+      <td>11.200</td>
+      <td>100.000</td>
+      <td>2.650</td>
+      <td>2.760</td>
+      <td>0.260</td>
+      <td>1.280</td>
+      <td>4.380</td>
+      <td>1.050</td>
+      <td>3.400</td>
+      <td>1050.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13.160</td>
+      <td>2.360</td>
+      <td>2.670</td>
+      <td>18.600</td>
+      <td>101.000</td>
+      <td>2.800</td>
+      <td>3.240</td>
+      <td>0.300</td>
+      <td>2.810</td>
+      <td>5.680</td>
+      <td>1.030</td>
+      <td>3.170</td>
+      <td>1185.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>14.370</td>
+      <td>1.950</td>
+      <td>2.500</td>
+      <td>16.800</td>
+      <td>113.000</td>
+      <td>3.850</td>
+      <td>3.490</td>
+      <td>0.240</td>
+      <td>2.180</td>
+      <td>7.800</td>
+      <td>0.860</td>
+      <td>3.450</td>
+      <td>1480.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>13.240</td>
+      <td>2.590</td>
+      <td>2.870</td>
+      <td>21.000</td>
+      <td>118.000</td>
+      <td>2.800</td>
+      <td>2.690</td>
+      <td>0.390</td>
+      <td>1.820</td>
+      <td>4.320</td>
+      <td>1.040</td>
+      <td>2.930</td>
+      <td>735.000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Fitting-the-Model">Fitting the Model<a class="anchor-link" href="#Fitting-the-Model">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1094,30 +1282,8 @@ unique 80% train -&gt; unique 20% test -&gt; Score -/<br></p>
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fit Regression model</span>
-<span class="n">regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">regression</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Cross-Validation-Score">Cross Validation Score<a class="anchor-link" href="#Cross-Validation-Score">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">regression</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1130,13 +1296,16 @@ unique 80% train -&gt; unique 20% test -&gt; Score -/<br></p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[12]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.7406077428649428</pre>
+<pre>LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class=&#39;ovr&#39;, n_jobs=1,
+          penalty=&#39;l2&#39;, random_state=None, solver=&#39;liblinear&#39;, tol=0.0001,
+          verbose=0, warm_start=False)</pre>
 </div>
 
 </div>
@@ -1144,29 +1313,21 @@ unique 80% train -&gt; unique 20% test -&gt; Score -/<br></p>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="K-Fol-Cross-Validation-Score">K-Fol Cross Validation Score<a class="anchor-link" href="#K-Fol-Cross-Validation-Score">&#182;</a></h3>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">crossvalidation</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">regression</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
-                         <span class="n">scoring</span> <span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> 
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> 
+                         <span class="n">scoring</span> <span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> 
                          <span class="n">cv</span><span class="o">=</span><span class="n">crossvalidation</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Folds: </span><span class="si">%i</span><span class="s1">, mean squared error: </span><span class="si">%.2f</span><span class="s1"> std: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span>
-                                                         <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scores</span><span class="p">)),</span>
-                                                         <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Folds: {len(scores)} </span><span class="se">\</span>
+<span class="s1">      accuracy: {np.mean(np.abs(scores))} </span><span class="se">\</span>
+<span class="s1">      std: {np.std(scores)}&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1183,7 +1344,38 @@ unique 80% train -&gt; unique 20% test -&gt; Score -/<br></p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Folds: 20, mean squared error: 31.92 std: 56.10
+<pre>Folds: 20       accuracy: 0.9380952380952381       std: 0.08857654875113463
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Set Score: {model.score(X_test, y_test)}&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training Set Score: 0.9777777777777777
 </pre>
 </div>
 </div>
@@ -1196,24 +1388,139 @@ unique 80% train -&gt; unique 20% test -&gt; Score -/<br></p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Shuffled-K-Fold-Cross-Validation-Score">Shuffled K-Fold Cross Validation Score<a class="anchor-link" href="#Shuffled-K-Fold-Cross-Validation-Score">&#182;</a></h3>
+<h3 id="Model-Attributes">Model Attributes<a class="anchor-link" href="#Model-Attributes">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crossvalidation</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
 
-<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">regression</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
-                         <span class="n">scoring</span> <span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> 
-                         <span class="n">cv</span><span class="o">=</span><span class="n">crossvalidation</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</div>
+</div>
+</div>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Folds: </span><span class="si">%i</span><span class="s1">, mean squared error: </span><span class="si">%.2f</span><span class="s1"> std: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span>
-                                                         <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scores</span><span class="p">)),</span>
-                                                         <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[ -4.31812013e-01,   3.54615862e-01,   8.75135840e-01,
+         -6.40579484e-01,  -3.50561799e-02,  -9.70185795e-02,
+          1.05414824e+00,   9.52263676e-02,  -1.37801438e-01,
+         -4.10819638e-02,  -5.32316515e-02,   9.34403823e-01,
+          1.73483923e-02],
+       [  8.49512653e-01,  -1.01989033e+00,  -1.04683463e+00,
+          2.35443066e-01,   4.73433545e-03,   4.45814107e-01,
+          5.55008974e-01,   2.81176722e-01,   5.82825880e-01,
+         -1.70338658e+00,   6.12062110e-01,  -3.40189341e-02,
+         -1.19730143e-02],
+       [ -3.43068855e-01,   6.38103714e-01,   1.21001419e-01,
+          1.29929646e-01,   1.77679253e-02,  -5.99217504e-01,
+         -1.82307617e+00,  -1.49682560e-01,  -6.91211424e-01,
+          1.04106076e+00,  -5.00075720e-01,  -1.08416148e+00,
+          7.10742866e-05]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([-0.24471806,  0.3487481 , -0.07812388])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">n_iter_</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([21], dtype=int32)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Stats-Models">Stats Models<a class="anchor-link" href="#Stats-Models">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">model</span>
 </pre></div>
 
 </div>
@@ -1229,9 +1536,23 @@ unique 80% train -&gt; unique 20% test -&gt; Score -/<br></p>
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Folds: 20, mean squared error: 23.79 std: 14.03
-</pre>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-14-bf89a013acfe&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">import</span> statsmodels<span class="ansi-blue-fg">.</span>formula<span class="ansi-blue-fg">.</span>api <span class="ansi-green-fg">as</span> sm
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>model <span class="ansi-blue-fg">=</span> sm<span class="ansi-blue-fg">.</span>Logit<span class="ansi-blue-fg">(</span>y<span class="ansi-blue-fg">,</span> X<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> model
+
+<span class="ansi-green-fg">~/anaconda3/envs/main/lib/python3.6/site-packages/statsmodels/discrete/discrete_model.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, endog, exog, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    419</span>         if (not issubclass(self.__class__, MultinomialModel) and
+<span class="ansi-green-intense-fg ansi-bold">    420</span>                 not np.all((self.endog &gt;= 0) &amp; (self.endog &lt;= 1))):
+<span class="ansi-green-fg">--&gt; 421</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;endog must be in the unit interval.&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    422</span> 
+<span class="ansi-green-intense-fg ansi-bold">    423</span> 
+
+<span class="ansi-red-fg">ValueError</span>: endog must be in the unit interval.</pre>
 </div>
 </div>
 
