@@ -69,7 +69,7 @@
 									</div>
 
 									<div class="pennant pennant-alt date">Wed 01 August 2018</div>
-									<h2>Train-Test Split</h2>
+									<h2>Handing Missing Dlata</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,20 +1046,26 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Train-Test-Split">Train-Test Split<a class="anchor-link" href="#Train-Test-Split">&#182;</a></h1><p><span>Spliting your dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be used to split you data into a test and validation set. For kaggle competition since the trainin and testing data is often provide, I normally just use this function to split my data into a training and validation set</span></p>
-<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
+<h1 id="Handing-Missing-Dlata">Handing Missing Dlata<a class="anchor-link" href="#Handing-Missing-Dlata">&#182;</a></h1><p><span>There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic methods to handle missing data. Again your strategy to handle missing data will different with contextual knowledge around the problem with your domain expertise.</span></p>
+<p><span style="text-decoration:underline">**BasicStategies**</span></p>
+<ol>
+<li>Removing observations</li>
+<li>Filling in NaN values with certain value</li>
+<li>Filling in NaN values with the mean</li>
+<li>Filling in NaN values with the median</li>
+<li>Dropping columns with missing values</li>
+</ol>
+<h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import Modules</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_boston</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 
 </div>
@@ -1071,25 +1077,24 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Import-Data">Import Data<a class="anchor-link" href="#Import-Data">&#182;</a></h3>
+<h3 id="Generating-Data">Generating Data<a class="anchor-link" href="#Generating-Data">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Impor the data</span>
-<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Justin&#39;</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="s1">&#39;Stephen&#39;</span><span class="p">,</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian&#39;</span><span class="p">,</span><span class="s1">&#39;John&#39;</span><span class="p">],</span>
+             <span class="s1">&#39;Midterm_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
+             <span class="s1">&#39;Final_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+             <span class="p">})</span>
+<span class="c1"># Create null value in for final scores</span>
+<span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">92</span><span class="p">,</span><span class="mi">97</span><span class="p">)),</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1">#Shorten the Dataframe making the split easier</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">500</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span> 
-
-<span class="c1"># Print the datafarme shape</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Dataframe Feature Shape: </span><span class="si">{X.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Dataframe Target Shape: </span><span class="si">{y.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">students</span>
 </pre></div>
 
 </div>
@@ -1102,158 +1107,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Dataframe Feature Shape: (500, 13)
-Dataframe Target Shape: (500,)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Splitting-into-Training-and-Testing-Set">Splitting into Training and Testing Set<a class="anchor-link" href="#Splitting-into-Training-and-Testing-Set">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 70% training, 30% testing</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
-                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> 
-                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Feature Shape: </span><span class="si">{X_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Target Shape: </span><span class="si">{y_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Target Shape: </span><span class="si">{y_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Training Feature Shape: (350, 13)
-Testing Feature Shape: (150, 13)
-Training Target Shape: (350,)
-Testing Target Shape: (150,)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Splitting-into-Training-,Testing,-and-Validation-Set">Splitting into Training ,Testing, and Validation Set<a class="anchor-link" href="#Splitting-into-Training-,Testing,-and-Validation-Set">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 70% training, 20% testing, 20% validation</span>
-<span class="n">X_remain</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_remain</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
-                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> 
-                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X_remain</span><span class="p">,</span> <span class="n">y_remain</span><span class="p">,</span> 
-                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> 
-                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Validation Feature Shape: </span><span class="si">{X_val.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">()</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Target Shape: </span><span class="si">{y_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Validation Target Shape: </span><span class="si">{X_val.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Target Shape: </span><span class="si">{y_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Training Feature Shape: (300, 13)
-Validation Feature Shape: (100, 13)
-Testing Feature Shape: (300, 13)
-
-Training Target Shape: (300,)
-Validation Target Shape: (100, 13)
-Testing Target Shape: (100,)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="View-the-Dataframe">View the Dataframe<a class="anchor-link" href="#View-the-Dataframe">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># You can import the data set into a dataframe afterwards</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[18]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -1276,101 +1130,561 @@ Testing Target Shape: (100,)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>10</th>
-      <th>11</th>
-      <th>12</th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.10612</td>
-      <td>30.0</td>
-      <td>4.93</td>
-      <td>0.0</td>
-      <td>0.428</td>
-      <td>6.095</td>
-      <td>65.1</td>
-      <td>6.3361</td>
-      <td>6.0</td>
-      <td>300.0</td>
-      <td>16.6</td>
-      <td>394.62</td>
-      <td>12.40</td>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>9.32909</td>
-      <td>0.0</td>
-      <td>18.10</td>
-      <td>0.0</td>
-      <td>0.713</td>
-      <td>6.185</td>
-      <td>98.7</td>
-      <td>2.2616</td>
-      <td>24.0</td>
-      <td>666.0</td>
-      <td>20.2</td>
-      <td>396.90</td>
-      <td>18.13</td>
+      <td>Kim</td>
+      <td>86</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.09512</td>
-      <td>0.0</td>
-      <td>12.83</td>
-      <td>0.0</td>
-      <td>0.437</td>
-      <td>6.286</td>
-      <td>45.0</td>
-      <td>4.5026</td>
-      <td>5.0</td>
-      <td>398.0</td>
-      <td>18.7</td>
-      <td>383.23</td>
-      <td>8.94</td>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.21719</td>
-      <td>0.0</td>
-      <td>10.59</td>
-      <td>1.0</td>
-      <td>0.489</td>
-      <td>5.807</td>
-      <td>53.8</td>
-      <td>3.6526</td>
-      <td>4.0</td>
-      <td>277.0</td>
-      <td>18.6</td>
-      <td>390.94</td>
-      <td>16.03</td>
+      <td>Paul</td>
+      <td>95</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5.70818</td>
+      <td>Jean</td>
+      <td>75</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.--Removing-Rows-with-NaN-Values">1.  Removing Rows with NaN Values<a class="anchor-link" href="#1.--Removing-Rows-with-NaN-Values">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Filling-NaN-Value-with-Zeros">2. Filling NaN Value with Zeros<a class="anchor-link" href="#2.-Filling-NaN-Value-with-Zeros">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[7]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
       <td>0.0</td>
-      <td>18.10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
       <td>0.0</td>
-      <td>0.532</td>
-      <td>6.750</td>
-      <td>74.9</td>
-      <td>3.3317</td>
-      <td>24.0</td>
-      <td>666.0</td>
-      <td>20.2</td>
-      <td>393.07</td>
-      <td>7.74</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Filling-NaN-Values-with-Mean">4. Filling NaN Values with Mean<a class="anchor-link" href="#4.-Filling-NaN-Values-with-Mean">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-Filling-NaN-Values-with-Median">5. Filling NaN Values with Median<a class="anchor-link" href="#5.-Filling-NaN-Values-with-Median">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[9]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-Dropping-Features-with-NaN">6. Dropping Features with NaN<a class="anchor-link" href="#6.-Dropping-Features-with-NaN">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
     </tr>
   </tbody>
 </table>
