@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Mon 03 September 2018</div>
-									<h2>Using TQDM</h2>
+									<div class="pennant pennant-alt date">Mon 02 October 2017</div>
+									<h2>Handing Missing Dlata</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,105 +1046,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Using-TQDM">Using TQDM<a class="anchor-link" href="#Using-TQDM">&#182;</a></h1><p><span>TQDM is awesome package. It's really buggy with its progress bar rendering for cells within notebooks, but it work great in Python script that your may be running in terminal. I use the package to track the progress of my for loop and my script as they scrape the internet for data. Below are a view example of the some use TQDM snippets.</span></p>
-<p>Conda Install Command: <a href="https://anaconda.org/conda-forge/tqdm">https://anaconda.org/conda-forge/tqdm</a> <br>
-Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tqdm</a></p>
-<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="o">*</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Simple-Progress-Bar">Simple Progress Bar<a class="anchor-link" href="#Simple-Progress-Bar">&#182;</a></h3><p>The simple progress is bar is only use alongside for loops in Python</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]):</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 5/5 [00:05&lt;00:00,  1.00s/it]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)):</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 5/5 [00:05&lt;00:00,  1.00s/it]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Manualy-Updating-Progress-Bar">Manualy Updating Progress Bar<a class="anchor-link" href="#Manualy-Updating-Progress-Bar">&#182;</a></h3>
+<h1 id="Handing-Missing-Dlata">Handing Missing Dlata<a class="anchor-link" href="#Handing-Missing-Dlata">&#182;</a></h1><p><span>There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic methods to handle missing data. Again your strategy to handle missing data will different with contextual knowledge around the problem with your domain expertise.</span></p>
+<p><span style="text-decoration:underline">**BasicStategies**</span></p>
+<ol>
+<li>Removing observations</li>
+<li>Filling in NaN values with certain value</li>
+<li>Filling in NaN values with the mean</li>
+<li>Filling in NaN values with the median</li>
+<li>Dropping columns with missing values</li>
+</ol>
+<h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1153,33 +1064,11 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
-    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span> 
-    <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">counter</span><span class="o">+=</span> <span class="mi">10</span>
-        <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 100/100 [00:10&lt;00:00,  9.96it/s]
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1188,7 +1077,7 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Updating-Progress-Bar-Description">Updating Progress Bar Description<a class="anchor-link" href="#Updating-Progress-Bar-Description">&#182;</a></h3>
+<h3 id="Generating-Data">Generating Data<a class="anchor-link" href="#Generating-Data">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1197,10 +1086,15 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Processing </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">char</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Justin&#39;</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="s1">&#39;Stephen&#39;</span><span class="p">,</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian&#39;</span><span class="p">,</span><span class="s1">&#39;John&#39;</span><span class="p">],</span>
+             <span class="s1">&#39;Midterm_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
+             <span class="s1">&#39;Final_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+             <span class="p">})</span>
+<span class="c1"># Create null value in for final scores</span>
+<span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">92</span><span class="p">,</span><span class="mi">97</span><span class="p">)),</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">students</span>
 </pre></div>
 
 </div>
@@ -1213,47 +1107,82 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Processing d: 100%|██████████| 4/4 [00:02&lt;00:00,  1.98it/s]
-</pre>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Processing Page: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">char</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Processing Page: 9: 100%|██████████| 10/10 [00:05&lt;00:00,  1.98it/s]
-</pre>
-</div>
 </div>
 
 </div>
@@ -1264,8 +1193,91 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Nested-TQDM-Progress-Bar">Nested TQDM Progress Bar<a class="anchor-link" href="#Nested-TQDM-Progress-Bar">&#182;</a></h3><p>There is current a small bug with nested for loop functions.</p>
+<h3 id="1.--Removing-Rows-with-NaN-Values">1.  Removing Rows with NaN Values<a class="anchor-link" href="#1.--Removing-Rows-with-NaN-Values">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
 
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Filling-NaN-Value-with-Zeros">2. Filling NaN Value with Zeros<a class="anchor-link" href="#2.-Filling-NaN-Value-with-Zeros">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1274,36 +1286,7 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for i in tqdm(range(2)):</span>
-<span class="c1">#     for i in tqdm(range(2)):</span>
-<span class="c1">#         time.sleep(1)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If you run the commented out codef from above you will notice that each time the progress bar updates in your Jupyter notebook a new line for the progress bar is created . We can get around this by using tqdm HTML progress bar that the team created for notebooks.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tnrange</span><span class="p">,</span> <span class="n">tqdm_notebook</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">sleep</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tnrange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;1st loop&#39;</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">tqdm_notebook</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;2nd loop&#39;</span><span class="p">):</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1316,66 +1299,396 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
- 
- 
-<div id="ccb465ff-b5b8-4c1f-8532-b95f2ddd8f54"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#ccb465ff-b5b8-4c1f-8532-b95f2ddd8f54');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "58429fce929145be89db554f9d752727", "version_major": 2, "version_minor": 0}
-</script>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Filling-NaN-Values-with-Mean">4. Filling NaN Values with Mean<a class="anchor-link" href="#4.-Filling-NaN-Values-with-Mean">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
- 
- 
-<div id="ef47b6b2-5c06-4c33-b0aa-1d863e86ee20"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#ef47b6b2-5c06-4c33-b0aa-1d863e86ee20');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "0303fca2adc4416e93b525755505caa3", "version_major": 2, "version_minor": 0}
-</script>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+      <td>98.333333</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-Filling-NaN-Values-with-Median">5. Filling NaN Values with Median<a class="anchor-link" href="#5.-Filling-NaN-Values-with-Median">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+      <th>Final_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-Dropping-Features-with-NaN">6. Dropping Features with NaN<a class="anchor-link" href="#6.-Dropping-Features-with-NaN">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
 
 
- 
- 
-<div id="f93a3b66-8857-4fb3-8a95-c2b0ffcae89b"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#f93a3b66-8857-4fb3-8a95-c2b0ffcae89b');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "85de84f51b1e454c91dd13985c016e94", "version_major": 2, "version_minor": 0}
-</script>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Midterm_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Justin</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kim</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Stephen</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jean</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Brian</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>John</td>
+      <td>81</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
