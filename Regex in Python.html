@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Mon 03 September 2018</div>
-									<h2>Using TQDM</h2>
+									<div class="pennant pennant-alt date">Tue 31 July 2018</div>
+									<h2>Regex in Python</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,9 +1046,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Using-TQDM">Using TQDM<a class="anchor-link" href="#Using-TQDM">&#182;</a></h1><p><span>TQDM is awesome package. It's really buggy with its progress bar rendering for cells within notebooks, but it work great in Python script that your may be running in terminal. I use the package to track the progress of my for loop and my script as they scrape the internet for data. Below are a view example of the some use TQDM snippets.</span></p>
-<p>Conda Install Command: <a href="https://anaconda.org/conda-forge/tqdm">https://anaconda.org/conda-forge/tqdm</a> <br>
-Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tqdm</a></p>
+<h1 id="Regex-in-Python">Regex in Python<a class="anchor-link" href="#Regex-in-Python">&#182;</a></h1><p><span>As you deal with more and messier string data, regex starts becoming a very valuable skill that can save you a lot of time. It also has a secondary benefit of making your code a bit more slick (simpler). Below you will find some simple regex that can be very powerful.</span></p>
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
@@ -1058,8 +1056,7 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="o">*</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
 </pre></div>
 
 </div>
@@ -1071,7 +1068,7 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Simple-Progress-Bar">Simple Progress Bar<a class="anchor-link" href="#Simple-Progress-Bar">&#182;</a></h3><p>The simple progress is bar is only use alongside for loops in Python</p>
+<h3 id="Regex">Regex<a class="anchor-link" href="#Regex">&#182;</a></h3><p>Note regex is case sensitive.</p>
 
 </div>
 </div>
@@ -1081,40 +1078,48 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]):</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Some random text from Wikipedias Feature Articlue  </span>
+
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;The octopus is a soft-bodied, eight-armed mollusc </span><span class="se">\</span>
+<span class="s1">of the order Octopoda, with around 300 known species. Along </span><span class="se">\</span>
+<span class="s1">with squids, cuttlefish and nautiloids, they are classed as </span><span class="se">\</span>
+<span class="s1">cephalopods. The mouth with its hard beak is at the base of </span><span class="se">\</span>
+<span class="s1">the arms, which trail behind the animal as it swims. A siphon </span><span class="se">\</span>
+<span class="s1">is used both for respiration and for locomotion, by expelling </span><span class="se">\</span>
+<span class="s1">a jet of water. Octopuses have a complex nervous system and </span><span class="se">\</span>
+<span class="s1">excellent sight, and are among the most intelligent and </span><span class="se">\</span>
+<span class="s1">behaviourally diverse of all invertebrates.&#39;</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 5/5 [00:05&lt;00:00,  1.00s/it]
-</pre>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>source: <a href="https://en.wikipedia.org/wiki/Octopus">https://en.wikipedia.org/wiki/Octopus</a></p>
 
 </div>
 </div>
-
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Regex-Statements">Regex Statements<a class="anchor-link" href="#Regex-Statements">&#182;</a></h3>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)):</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for the word octopus in the text</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;octopus&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1127,38 +1132,29 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 5/5 [00:05&lt;00:00,  1.00s/it]
-</pre>
-</div>
-</div>
 
-</div>
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;octopus&#39;]</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Manualy-Updating-Progress-Bar">Manualy Updating Progress Bar<a class="anchor-link" href="#Manualy-Updating-Progress-Bar">&#182;</a></h3>
+
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
-    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span> 
-    <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">counter</span><span class="o">+=</span> <span class="mi">10</span>
-        <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for a word that start with o and end with r, </span>
+<span class="c1"># with 3 charcater inbetween</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;o...r&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1171,36 +1167,28 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 100/100 [00:10&lt;00:00,  9.96it/s]
-</pre>
-</div>
-</div>
 
-</div>
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;order&#39;]</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Updating-Progress-Bar-Description">Updating Progress Bar Description<a class="anchor-link" href="#Updating-Progress-Bar-Description">&#182;</a></h3>
+
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Processing </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">char</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for a string that start with The</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;^The&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1213,13 +1201,15 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Processing d: 100%|██████████| 4/4 [00:02&lt;00:00,  1.98it/s]
-</pre>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;The&#39;]</pre>
 </div>
+
 </div>
 
 </div>
@@ -1231,10 +1221,11 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Processing Page: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">char</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Return a compound word with &quot;-&quot; that start with a vowel from a to x</span>
+<span class="c1"># with any number of characters following, then has a &quot;-&quot; present, </span>
+<span class="c1"># then starts with a charcter from a to z then has any number of similar </span>
+<span class="c1"># charcters afterwards</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[a-z]*-[a-z]*&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1247,63 +1238,29 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Processing Page: 9: 100%|██████████| 10/10 [00:05&lt;00:00,  1.98it/s]
-</pre>
-</div>
-</div>
 
-</div>
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;soft-bodied&#39;, &#39;eight-armed&#39;]</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Nested-TQDM-Progress-Bar">Nested TQDM Progress Bar<a class="anchor-link" href="#Nested-TQDM-Progress-Bar">&#182;</a></h3><p>There is current a small bug with nested for loop functions.</p>
 
 </div>
 </div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for i in tqdm(range(2)):</span>
-<span class="c1">#     for i in tqdm(range(2)):</span>
-<span class="c1">#         time.sleep(1)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If you run the commented out codef from above you will notice that each time the progress bar updates in your Jupyter notebook a new line for the progress bar is created . We can get around this by using tqdm HTML progress bar that the team created for notebooks.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tnrange</span><span class="p">,</span> <span class="n">tqdm_notebook</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">sleep</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tnrange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;1st loop&#39;</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">tqdm_notebook</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;2nd loop&#39;</span><span class="p">):</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Return parts of the string that contain 3 numerical digits from charcater</span>
+<span class="c1"># from 3 to 9</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[0-9][0-9][0-9]&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1316,66 +1273,13 @@ Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tq
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
 
-
- 
- 
-<div id="820fd7b3-ed57-4ef8-b4d7-855559d9cb5d"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#820fd7b3-ed57-4ef8-b4d7-855559d9cb5d');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "58429fce929145be89db554f9d752727", "version_major": 2, "version_minor": 0}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-
-
- 
- 
-<div id="a46f9825-98f4-4d2b-ad91-186288313893"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#a46f9825-98f4-4d2b-ad91-186288313893');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "0303fca2adc4416e93b525755505caa3", "version_major": 2, "version_minor": 0}
-</script>
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-
-
-
- 
- 
-<div id="460d5096-5d8d-4692-9ffc-88fde1446ded"></div>
-<div class="output_subarea output_widget_view ">
-<script type="text/javascript">
-var element = $('#460d5096-5d8d-4692-9ffc-88fde1446ded');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "85de84f51b1e454c91dd13985c016e94", "version_major": 2, "version_minor": 0}
-</script>
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;300&#39;]</pre>
 </div>
 
 </div>
