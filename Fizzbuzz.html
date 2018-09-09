@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Tue 31 July 2018</div>
-									<h2>Regex in Python</h2>
+									<div class="pennant pennant-alt date">Wed 23 May 2018</div>
+									<h2>Fizzbuzz</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,8 +1046,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Regex-in-Python">Regex in Python<a class="anchor-link" href="#Regex-in-Python">&#182;</a></h1><p><span>As you deal with more and messier string data, regex starts becoming a very valuable skill that can save you a lot of time. It also has a secondary benefit of making your code a bit more slick (simpler). Below you will find some simple regex that can be very powerful.</span></p>
-<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
+<h1 id="Fizzbuzz">Fizzbuzz<a class="anchor-link" href="#Fizzbuzz">&#182;</a></h1><p><span>Interview Question: Write some code that says 'Fizzbuzz' when a value is divisible by 15, 'fizz' when its divisible by 3, and 'buzz' when the value is divisible by 3.</span></p>
+<h3 id="Array-of-Values">Array of Values<a class="anchor-link" href="#Array-of-Values">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1056,70 +1056,10 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Regex">Regex<a class="anchor-link" href="#Regex">&#182;</a></h3><p>Note regex is case sensitive.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Some random text from Wikipedias Feature Articlue  </span>
-
-<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;The octopus is a soft-bodied, eight-armed mollusc </span><span class="se">\</span>
-<span class="s1">of the order Octopoda, with around 300 known species. Along </span><span class="se">\</span>
-<span class="s1">with squids, cuttlefish and nautiloids, they are classed as </span><span class="se">\</span>
-<span class="s1">cephalopods. The mouth with its hard beak is at the base of </span><span class="se">\</span>
-<span class="s1">the arms, which trail behind the animal as it swims. A siphon </span><span class="se">\</span>
-<span class="s1">is used both for respiration and for locomotion, by expelling </span><span class="se">\</span>
-<span class="s1">a jet of water. Octopuses have a complex nervous system and </span><span class="se">\</span>
-<span class="s1">excellent sight, and are among the most intelligent and </span><span class="se">\</span>
-<span class="s1">behaviourally diverse of all invertebrates.&#39;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>source: <a href="https://en.wikipedia.org/wiki/Octopus">https://en.wikipedia.org/wiki/Octopus</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Regex-Statements">Regex Statements<a class="anchor-link" href="#Regex-Statements">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for the word octopus in the text</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;octopus&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">values</span>
 </pre></div>
 
 </div>
@@ -1132,13 +1072,13 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[1]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;octopus&#39;]</pre>
+<pre>array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15])</pre>
 </div>
 
 </div>
@@ -1152,9 +1092,18 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for a word that start with o and end with r, </span>
-<span class="c1"># with 3 charcater inbetween</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;o...r&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, value is 0&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">5</span> ==0  and i%3 ==0:
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, fizzbuzz&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">5</span>:
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, buzz&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">3</span>:
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, fizz&#39;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, nothing&#39;</span><span class="p">)</span>
+    
 </pre></div>
 
 </div>
@@ -1167,126 +1116,42 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;order&#39;]</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Value: 0, value is 0
+Value: 1, buzz
+Value: 2, buzz
+Value: 3, buzz
+Value: 4, buzz
+Value: 5, fizz
+Value: 6, buzz
+Value: 7, buzz
+Value: 8, buzz
+Value: 9, buzz
+Value: 10, fizz
+Value: 11, buzz
+Value: 12, buzz
+Value: 13, buzz
+Value: 14, buzz
+Value: 15, fizzbuzz
+</pre>
+</div>
 </div>
 
 </div>
-
-</div>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for a string that start with The</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;^The&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some note around this problem, makes sure you check the remainder for 15, 5, and 3 in descending order. Secondly the remained of any value diviing 0 is zero. Thirdly f-strings are only support in Python 3.6 and up.</p>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;The&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Return a compound word with &quot;-&quot; that start with a vowel from a to x</span>
-<span class="c1"># with any number of characters following, then has a &quot;-&quot; present, </span>
-<span class="c1"># then starts with a charcter from a to z then has any number of similar </span>
-<span class="c1"># charcters afterwards</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[a-z]*-[a-z]*&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[6]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;soft-bodied&#39;, &#39;eight-armed&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Return parts of the string that contain 3 numerical digits from charcater</span>
-<span class="c1"># from 3 to 9</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[0-9][0-9][0-9]&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;300&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
