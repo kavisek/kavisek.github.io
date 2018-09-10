@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Wed 28 March 2018</div>
-									<h2>Create Dummy Variables</h2>
+									<div class="pennant pennant-alt date">Thu 08 March 2018</div>
+									<h2>Removing Outliers</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,52 +1046,27 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Create-Dummy-Variables">Create Dummy Variables<a class="anchor-link" href="#Create-Dummy-Variables">&#182;</a></h1><p><span>Pandas to the rescue again. The pandas "pd.to_dummies" function can be operated on dataframe to take one categorical feature and create a one-hot-encoded feature for each dimension in the original feature. The great part is that pandas will complete this actions for all object and categorical feature at one. So you can go from a dataframe 11 feature to 45 pretty quickly.</span></p>
+<h1 id="Removing-Outliers">Removing Outliers<a class="anchor-link" href="#Removing-Outliers">&#182;</a></h1><p><span>How to handle outliers in a dataset requires a bit of intuition and domain expertise to get right for descriptive and predictive analytics. Yet there are basic "go-to" methodologies that are used in machine learning to increase the predictive power of your models. Below I got over the basic methodology to remove outliers from your data. Which methodology you use, and whether you use one at all is up to you.</span></p>
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Data/pokemon.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of Features in DataFrame:&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;score&#39;</span><span class="p">],</span>
+                  <span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Matt&#39;</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mf">99.0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="s1">&#39;Chris&#39;</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span><span class="mf">10.0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="s1">&#39;Ashley&#39;</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span> <span class="mf">98.0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="s1">&#39;Link&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span><span class="mf">100.0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="s1">&#39;Avi&#39;</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span><span class="mf">100.0</span><span class="p">],</span>
+                         <span class="p">[</span><span class="s1">&#39;Steph&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mf">98.0</span><span class="p">]],)</span>
 
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Number of Features in DataFrame: 11
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span>
 </pre></div>
 
 </div>
@@ -1127,103 +1102,47 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Type 1</th>
-      <th>Type 2</th>
-      <th>Total</th>
-      <th>HP</th>
-      <th>Attack</th>
-      <th>Defense</th>
-      <th>Sp. Atk</th>
-      <th>Sp. Def</th>
-      <th>Speed</th>
-      <th>Generation</th>
-      <th>Legendary</th>
-    </tr>
-    <tr>
-      <th>#</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>score</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <th>0</th>
+      <td>Matt</td>
+      <td>24</td>
+      <td>99.0</td>
+    </tr>
+    <tr>
       <th>1</th>
-      <td>Grass</td>
-      <td>Poison</td>
-      <td>318</td>
-      <td>45</td>
-      <td>49</td>
-      <td>49</td>
-      <td>65</td>
-      <td>65</td>
-      <td>45</td>
-      <td>1</td>
-      <td>False</td>
+      <td>Chris</td>
+      <td>26</td>
+      <td>10.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Grass</td>
-      <td>Poison</td>
-      <td>405</td>
-      <td>60</td>
-      <td>62</td>
-      <td>63</td>
-      <td>80</td>
-      <td>80</td>
-      <td>60</td>
-      <td>1</td>
-      <td>False</td>
+      <td>Ashley</td>
+      <td>22</td>
+      <td>98.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Grass</td>
-      <td>Poison</td>
-      <td>525</td>
-      <td>80</td>
-      <td>82</td>
-      <td>83</td>
-      <td>100</td>
-      <td>100</td>
-      <td>80</td>
-      <td>1</td>
-      <td>False</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Grass</td>
-      <td>Poison</td>
-      <td>625</td>
-      <td>80</td>
-      <td>100</td>
-      <td>123</td>
-      <td>122</td>
-      <td>120</td>
-      <td>80</td>
-      <td>1</td>
-      <td>False</td>
+      <td>Link</td>
+      <td>16</td>
+      <td>100.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Fire</td>
-      <td>NaN</td>
-      <td>309</td>
-      <td>39</td>
-      <td>52</td>
-      <td>43</td>
-      <td>60</td>
-      <td>50</td>
-      <td>65</td>
+      <td>Avi</td>
+      <td>96</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Steph</td>
       <td>1</td>
-      <td>False</td>
+      <td>98.0</td>
     </tr>
   </tbody>
 </table>
@@ -1236,13 +1155,37 @@ h6:hover .anchor-link {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Remove-Outliers-by-Quantile">Remove Outliers by Quantile<a class="anchor-link" href="#Remove-Outliers-by-Quantile">&#182;</a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of Features in DataFrame:&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Remove numerical outliers by quantile</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">df1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;int64&#39;</span> <span class="ow">or</span> <span class="n">df1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;float64&#39;</span><span class="p">:</span>
+        
+      <span class="c1"># Set quantile limits and replacement mean</span>
+      <span class="n">upper_limit</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">90</span><span class="p">)</span>
+      <span class="n">lower_limit</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="o">.</span><span class="mi">10</span><span class="p">)</span>
+      <span class="n">mean</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+      <span class="c1"># replace outliers</span>
+      <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df1</span><span class="p">[</span><span class="n">col</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">upper_limit</span><span class="p">:</span> <span class="n">df1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">lower_limit</span><span class="p">:</span> <span class="n">df1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean</span>
+
+<span class="c1"># View the dataframe</span>
+<span class="n">df1</span>
 </pre></div>
 
 </div>
@@ -1255,25 +1198,101 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Number of Features in DataFrame: 45
-</pre>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Matt</td>
+      <td>24.000000</td>
+      <td>99.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Chris</td>
+      <td>26.000000</td>
+      <td>84.166667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ashley</td>
+      <td>22.000000</td>
+      <td>98.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Link</td>
+      <td>16.000000</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Avi</td>
+      <td>30.833333</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Steph</td>
+      <td>30.833333</td>
+      <td>98.000000</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 
 </div>
+
+</div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Removing-Oultiers-by-Value">Removing Oultiers by Value<a class="anchor-link" href="#Removing-Oultiers-by-Value">&#182;</a></h3>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Replacing Outliers Using Pandas&#39;s replace function</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">96</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">outliers</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># View DataFrame</span>
+<span class="n">df</span>
 </pre></div>
 
 </div>
@@ -1309,177 +1328,50 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Total</th>
-      <th>HP</th>
-      <th>Attack</th>
-      <th>Defense</th>
-      <th>Sp. Atk</th>
-      <th>Sp. Def</th>
-      <th>Speed</th>
-      <th>Generation</th>
-      <th>Legendary</th>
-      <th>Type 1_Bug</th>
-      <th>...</th>
-      <th>Type 2_Ghost</th>
-      <th>Type 2_Grass</th>
-      <th>Type 2_Ground</th>
-      <th>Type 2_Ice</th>
-      <th>Type 2_Normal</th>
-      <th>Type 2_Poison</th>
-      <th>Type 2_Psychic</th>
-      <th>Type 2_Rock</th>
-      <th>Type 2_Steel</th>
-      <th>Type 2_Water</th>
-    </tr>
-    <tr>
-      <th>#</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>score</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <th>0</th>
+      <td>Matt</td>
+      <td>24.000000</td>
+      <td>99.0</td>
+    </tr>
+    <tr>
       <th>1</th>
-      <td>318</td>
-      <td>45</td>
-      <td>49</td>
-      <td>49</td>
-      <td>65</td>
-      <td>65</td>
-      <td>45</td>
-      <td>1</td>
-      <td>False</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Chris</td>
+      <td>26.000000</td>
+      <td>10.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>405</td>
-      <td>60</td>
-      <td>62</td>
-      <td>63</td>
-      <td>80</td>
-      <td>80</td>
-      <td>60</td>
-      <td>1</td>
-      <td>False</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Ashley</td>
+      <td>22.000000</td>
+      <td>98.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>525</td>
-      <td>80</td>
-      <td>82</td>
-      <td>83</td>
-      <td>100</td>
-      <td>100</td>
-      <td>80</td>
-      <td>1</td>
-      <td>False</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>625</td>
-      <td>80</td>
-      <td>100</td>
-      <td>123</td>
-      <td>122</td>
-      <td>120</td>
-      <td>80</td>
-      <td>1</td>
-      <td>False</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Link</td>
+      <td>16.000000</td>
+      <td>100.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>309</td>
-      <td>39</td>
-      <td>52</td>
-      <td>43</td>
-      <td>60</td>
-      <td>50</td>
-      <td>65</td>
-      <td>1</td>
-      <td>False</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Avi</td>
+      <td>30.833333</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Steph</td>
+      <td>30.833333</td>
+      <td>98.0</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 45 columns</p>
 </div>
 </div>
 
@@ -1493,7 +1385,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Author: Kavi</p>
+<p>Author: Kavi Sekhon</p>
 
 </div>
 </div>
