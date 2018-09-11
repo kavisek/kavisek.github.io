@@ -1046,17 +1046,18 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Using-the-OS-Module">Using the OS Module<a class="anchor-link" href="#Using-the-OS-Module">&#182;</a></h1><p><span>This notebook is a combinations of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These tasks include remove files from directories, moving files from directories, parsing content from notebook, appending content to files, changing file types, etc. Hopefully you find some useful code below.</span></p>
+<h1 id="Using-the-OS-Module">Using the OS Module<a class="anchor-link" href="#Using-the-OS-Module">&#182;</a></h1><p><span>This notebook is a combination of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These tasks include removing files from directories, moving files from directories, parsing content from the notebook, appending content to files, changing file types, etc. Hopefully, you find some useful code below.</span></p>
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import module</span>
+<span class="kn">import</span> <span class="nn">os</span>
 </pre></div>
 
 </div>
@@ -1068,17 +1069,17 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
 <h3 id="Get-Current-Directory">Get Current Directory<a class="anchor-link" href="#Get-Current-Directory">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the current directory</span>
+<span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 <span class="n">cwd</span>
 </pre></div>
 
@@ -1092,7 +1093,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[34]:</div>
 
 
 
@@ -1111,21 +1112,31 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Find-Path-Function">Find Path Function<a class="anchor-link" href="#Find-Path-Function">&#182;</a></h3><p>Search the given directory and it's subdirectory  for the first instance a specific file. Return the file path of this file.</p>
+<h3 id="Find-Path-Function">Find Path Function<a class="anchor-link" href="#Find-Path-Function">&#182;</a></h3><p>Search the given directory and it's subdirectories for the first instance a specific file. Return the file path of this file.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define the find path function</span>
+<span class="k">def</span> <span class="nf">find_path</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Search the given directory for the first instance a specific file. </span>
 <span class="sd">    Return the file path of this file.</span>
+
+<span class="sd">    Parameter</span>
+<span class="sd">    ---------</span>
+<span class="sd">    name: name of the file (str)</span>
+<span class="sd">    path: absolute path to the directory to search withing (str)</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt;&gt; find_path(&#39;10-15-17 Rescaling Features.ipynb&#39;,</span>
+<span class="sd">          &#39;/Users/Kavi/Documents/DataScience&#39;)</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
@@ -1139,7 +1150,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our Find Path Punction</span>
@@ -1157,7 +1168,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[36]:</div>
 
 
 
@@ -1176,21 +1187,22 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Breaking-Down-the-Find-Path-Function">Breaking Down the Find Path Function<a class="anchor-link" href="#Breaking-Down-the-Find-Path-Function">&#182;</a></h3><p>The <code>os.walk(path)</code> function is pretty cool. Let's take a moment to break down each variable this function returns the <code>root</code> variable is the diretory we are searching, <code>dirs</code> are the recursive subdirectories that the function is searching, and <code>files</code> are the files that exist in the directory.</p>
+<h3 id="Breaking-Down-the-Find-Path-Function">Breaking Down the Find Path Function<a class="anchor-link" href="#Breaking-Down-the-Find-Path-Function">&#182;</a></h3><p>The <code>os.walk(path)</code> function is pretty cool. Let's take a moment to break down each variable this function returns the <code>root</code> variable is the directory we are searching, <code>dirs</code> are the recursive subdirectories that the function is searching, and <code>files</code> are the files that exist in the directory.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Breaking Down this Function</span>
 <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span>
 <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;README.md&#39;</span>
 <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Print the root, diretories, and files in our path</span>
 <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Root:&#39;</span><span class="p">,</span><span class="n">root</span><span class="p">)</span>
@@ -1224,7 +1236,7 @@ Root: /Users/Kavi/Documents/DataScience
 
 
 ---------------
-Dirs: [&#39;Predictive Analysis&#39;, &#39;Kaggle&#39;, &#39;FlashCards&#39;, &#39;Whitepapers&#39;, &#39;Tesitng&#39;, &#39;Competitions&#39;, &#39;Descriptive Analysis&#39;, &#39;Pipelines&#39;, &#39;Books&#39;, &#39;Stack Overflow&#39;, &#39;Visualizations&#39;, &#39;Notes&#39;, &#39;Reading list&#39;, &#39;Guides&#39;, &#39;Economics&#39;, &#39;Tutorials&#39;, &#39;.ipynb_checkpoints&#39;, &#39;.git&#39;, &#39;BrainStation&#39;, &#39;Community&#39;, &#39;NoSQL&#39;, &#39;Interviews&#39;, &#39;Techniques&#39;, &#39;SQL&#39;]
+Dirs: [&#39;Predictive Analysis&#39;, &#39;Kaggle&#39;, &#39;FlashCards&#39;, &#39;Whitepapers&#39;, &#39;DateTime&#39;, &#39;Articles&#39;, &#39;Other&#39;, &#39;Competitions&#39;, &#39;Descriptive Analysis&#39;, &#39;Pipelines&#39;, &#39;Books&#39;, &#39;Stack Overflow&#39;, &#39;Visualizations&#39;, &#39;Notes&#39;, &#39;Guides&#39;, &#39;Economics&#39;, &#39;Tutorials&#39;, &#39;.git&#39;, &#39;Brainstation&#39;, &#39;Community&#39;, &#39;Interviews&#39;, &#39;Techniques&#39;, &#39;SQL&#39;]
 
 
 ---------------
@@ -1232,7 +1244,7 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 
 
 ---------------
-&lt;generator object walk at 0x106613570&gt;
+&lt;generator object walk at 0x1128d0e08&gt;
 </pre>
 </div>
 </div>
@@ -1245,7 +1257,6 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
 <h3 id="Find-All-Paths-Function">Find All Paths Function<a class="anchor-link" href="#Find-All-Paths-Function">&#182;</a></h3><p>Search the given directory and it's subdirectory for the every instance of a specific file. Return the all file paths of this file as a list.</p>
 
 </div>
@@ -1253,21 +1264,32 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_all_paths</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define the find all paths function</span>
+<span class="k">def</span> <span class="nf">find_all_paths_one_file</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Search the given directory and it&#39;s subdirectory for the every </span>
 <span class="sd">    instance of a specific file. Return the all file paths of this </span>
 <span class="sd">    file as a list.</span>
+
+<span class="sd">        Parameter</span>
+<span class="sd">    ---------</span>
+<span class="sd">    name: name of the file (str)</span>
+<span class="sd">    path: absolute path to the directory to search withing (str)</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt;&gt; find_all_paths_one_file(&#39;README.md&#39;,&#39;/Users/Kavi/Documents/DataScience&#39;)</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
             <span class="c1"># os.path.join(root, name) is a string</span>
-            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span> 
-            
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+
     <span class="k">return</span> <span class="n">result</span>
 </pre></div>
 
@@ -1278,11 +1300,11 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our Find All Paths Punction</span>
-<span class="n">find_all_paths</span><span class="p">(</span><span class="s1">&#39;README.md&#39;</span><span class="p">,</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run our &quot;find all paths&quot; function</span>
+<span class="n">find_all_paths_one_file</span><span class="p">(</span><span class="s1">&#39;README.md&#39;</span><span class="p">,</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1295,7 +1317,7 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[39]:</div>
 
 
 
@@ -1308,10 +1330,10 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
  &#39;/Users/Kavi/Documents/DataScience/Descriptive Analysis/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Pipelines/AWS Pipelines/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Notes/Readings/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Reading list/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Tutorials/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/topmodel/README.md&#39;,
+ &#39;/Users/Kavi/Documents/DataScience/Brainstation/Other/WebDev Class Slack/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Community/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Techniques/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/SQL/README.md&#39;]</pre>
@@ -1327,7 +1349,6 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
 <h3 id="Find-All-Path-for-a-list-of-Files">Find All Path for a list of Files<a class="anchor-link" href="#Find-All-Path-for-a-list-of-Files">&#182;</a></h3><p>Search the given directory and it's subdirectory for the every instance of ever file in a list. Return the all file paths for every file as a list.</p>
 
 </div>
@@ -1335,14 +1356,25 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_all_paths_in_list</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define the &quot;find_all_paths_multi_file&quot; function</span>
+<span class="k">def</span> <span class="nf">find_all_paths_multil_files</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Search the given directory and it&#39;s subdirectory for the every </span>
 <span class="sd">    instance of ever file in a list. Return the all file paths for </span>
 <span class="sd">    every file as a list.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameter</span>
+<span class="sd">    ---------</span>
+<span class="sd">    list_of_files: list of names for the files we are searching for (list)</span>
+<span class="sd">    path: absolute path to the directory to search withing (str)</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt;&gt; find_all_paths_one_file(&#39;README.md&#39;,&#39;/Users/Kavi/Documents/DataScience&#39;)</span>
+<span class="sd">    </span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">list_of_files</span><span class="p">:</span>
@@ -1361,15 +1393,15 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generating a list of files</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Generating a list of files we all looking for</span>
 <span class="n">list_of_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;README.md&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;02-01-17 4 Time Saving Tricks in Pandas.ipynb&#39;</span><span class="p">]</span>
 
-<span class="c1"># Run our Find All Paths in List Punction</span>
-<span class="n">find_all_paths_in_list</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
+<span class="c1"># Run our &quot;find_all_paths_all_files&quot; function</span>
+<span class="n">find_all_paths_all_files</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">,</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1382,7 +1414,7 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[41]:</div>
 
 
 
@@ -1395,10 +1427,10 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
  &#39;/Users/Kavi/Documents/DataScience/Descriptive Analysis/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Pipelines/AWS Pipelines/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Notes/Readings/README.md&#39;,
- &#39;/Users/Kavi/Documents/DataScience/Reading list/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Tutorials/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Tutorials/Tutorial - Luigi/data-engineering-101-master/topmodel/README.md&#39;,
+ &#39;/Users/Kavi/Documents/DataScience/Brainstation/Other/WebDev Class Slack/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Community/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/Techniques/README.md&#39;,
  &#39;/Users/Kavi/Documents/DataScience/SQL/README.md&#39;,
@@ -1415,17 +1447,19 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
 <h3 id="Importing-Data-From-Text-File">Importing Data From Text File<a class="anchor-link" href="#Importing-Data-From-Text-File">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Open a text file (which is a list of notebook names)</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/Notebooks/notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+<span class="c1"># Read file</span>
 <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </pre></div>
 
@@ -1439,13 +1473,13 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[42]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;17-08-01 Cross Validation and K-Folds.ipynb\n18-07-03 Writing a File to AWS S3.ipynb\n18-07-03 Reading a File from AWS S3.ipynb\n18-07-03 Connecting to a Local Database.ipynb\n18-07-03 Connecting to a Local Database with SHH.ipynb\n17-11-07 Dimensional Pivot Table.ipynb\n18-06-06 Every Matplotlib Plot Linestyle.ipynb\n18-06-06 Every Matplotlib Plot Marker.ipynb\n17-08-05 Histograms.ipynb\n15-02-02 Barplots.ipynb\n17-10-16 Wordclouds in Python.ipynb\n17-12-04 Heatmaps.ipynb\n18-07-07 Styling DataFrames.ipynb\n18-07-07 Resampling Datetime.ipynb\n18-07-24 Converting Notebook to Slides.ipynb\n18-07-24 Label Encoding.ipynb\n17-10-15 Plotting Residuals.ipynb\n17-10-15 Correlation Matricesipynb\n18-07-04 Select Dtypes.ipynb\n18-03-28 Creating Dummy Variables.ipynb\n17-10-09 Standardizations.ipynb\n17-08-01 Random Grid Search.ipynb\n17-08-01 Full Grid Search.ipynb\n18-07-28 Notebook Snippets.ipynb\n18-07-29 Iris Analysis.ipynb\n18-07-29 Classification Models.ipynb\n18-07-24 Binning Features.ipynb\n17-08-01 Train-Test Split.ipynb\n18-07-31 Fizzbuzz.ipynb\n17-10-02 Handling Missing Data.ipynb\n17-08-01 Recursive Feature Elimination.ipynb\n&#39;</pre>
+<pre>&#39;18-09-15 Model Stacking.ipynb\n18-09-10 Linear Regression.ipynb\n18-09-05 Dropping Features.ipynb\n18-09-03 Using TQDM.ipynb\n18-09-03 Isolation Forest Classifier.ipynb\n18-08-31 Confusion Matrices.ipynb\n18-08-02 Downsampling.ipynb\n18-08-02 Import Matlab Data.ipynb\n18-08-01 Plotting Residuals.ipynb\n18-08-01 Histograms.ipynb\n18-08-01 Dimensional Pivot Table.ipynb\n18-08-01 Heatmaps.ipynb\n18-08-01 Standardizations.ipynb\n18-08-01 Handling Missing Data.ipynb\n18-08-01 K-Nearest Neighbours Classifier.ipynb\n18-08-01 Random Forest Classifier.ipynb\n18-08-01 Decision Tree Classifier.ipynb\n18-08-01 Cross Validation and K-Folds.ipynb\n18-08-01 Train-Test Split.ipynb\n18-08-01 Recursive Feature Elimination.ipynb\n18-08-01 Random Grid Search.ipynb\n18-08-01 Full Grid Search.ipynb\n18-08-01 DBSCAN.ipynb\n18-08-01 Tools of a Data Scientist.ipynb\n18-07-31 Fizzbuzz.ipynb\n18-07-31 Regex in Python.ipynb\n18-07-31 Logistic Regression.ipynb\n18-07-29 Iris Analysis.ipynb\n18-07-29 Classification Models.ipynb\n18-07-28 Notebook Snippets.ipynb\n18-07-24 Binning Features.ipynb\n18-07-24 Converting Notebook to Slides.ipynb\n18-07-24 Label Encoding.ipynb\n18-07-07 Styling DataFrames.ipynb\n18-07-07 Resampling Datetime.ipynb\n18-07-04 Select Dtypes.ipynb\n18-07-03 Writing a File to AWS S3.ipynb\n18-07-03 Reading a File from AWS S3.ipynb\n18-07-03 Connecting to a Local Database.ipynb\n18-07-03 Connecting to a Local Database with SHH.ipynb\n18-06-23 Using OS Module.ipynb\n18-06-06 Every Matplotlib Plot Linestyle.ipynb\n18-06-06 Every Matplotlib Plot Marker.ipynb\n18-03-28 Creating Dummy Variables.ipynb\n18-03-08 Removing Outliers.ipynb\n&#39;</pre>
 </div>
 
 </div>
@@ -1458,18 +1492,19 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
 <h3 id="Import-Data-From-Text-FIle-into-a-List">Import Data From Text FIle into a List<a class="anchor-link" href="#Import-Data-From-Text-FIle-into-a-List">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># First Method</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Open a text file (which is a list of notebook names)</span>
 <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+<span class="c1"># Read file lines instead</span>
 <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
 </pre></div>
 
@@ -1483,7 +1518,7 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[43]:</div>
 
 
 
@@ -1532,19 +1567,22 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Import-Data-From-Text-FIle-into-a-List">Import Data From Text FIle into a List<a class="anchor-link" href="#Import-Data-From-Text-FIle-into-a-List">&#182;</a></h3>
+<h3 id="Second-method-to-got-from-a-Text-FIle-into-a-List">Second method to got from a Text FIle into a List<a class="anchor-link" href="#Second-method-to-got-from-a-Text-FIle-into-a-List">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Second Method</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Open a text file (which is a list of notebook names) # Second Method</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/notebooks.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   
+    <span class="c1"># Use &quot;.read().splitlines()&quot; instead of  &quot;.readlines()&quot;</span>
     <span class="n">mylist</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    
+<span class="c1"># View list</span>
 <span class="n">mylist</span>
 </pre></div>
 
@@ -1558,7 +1596,7 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[12]:</div>
+<div class="prompt output_prompt">Out[44]:</div>
 
 
 
@@ -1607,22 +1645,24 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
 <h3 id="Copying-Files-to-Another-Directory">Copying Files to Another Directory<a class="anchor-link" href="#Copying-Files-to-Another-Directory">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">copyfile</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import mode modules</span>
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">copyfile</span>
 
+<span class="c1"># generate a list of file paths with one file</span>
 <span class="n">file_paths</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/Users/Kavi/Documents/DataScience/README.md&#39;</span><span class="p">]</span>
 
+<span class="c1"># copy file to a different destination for every file in our list</span>
 <span class="k">for</span> <span class="n">filepaths</span> <span class="ow">in</span> <span class="n">file_paths</span><span class="p">:</span>
-  <span class="n">copyfile</span><span class="p">(</span><span class="n">filepaths</span><span class="p">,</span> <span class="s1">&#39;/Users/Kavi/Documents/DataScience/Pipelines/Data/copy_README.md&#39;</span><span class="p">)</span>
+    <span class="n">copyfile</span><span class="p">(</span><span class="n">filepaths</span><span class="p">,</span> <span class="s1">&#39;/Users/Kavi/Documents/DataScience/Pipelines/Data/copy_README.md&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1634,19 +1674,22 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Writing-a-File-to-Directory">Writing a File to Directory<a class="anchor-link" href="#Writing-a-File-to-Directory">&#182;</a></h3>
+<h3 id="Writing-a-File-to-a-Directory">Writing a File to a Directory<a class="anchor-link" href="#Writing-a-File-to-a-Directory">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Open text file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span>
+    
+    <span class="c1"># Write some text in the file</span>
     <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;sample text&#39;</span><span class="p">)</span>
-    <span class="c1">#Close you filse to save memory when iterating files</span>
+    
+    <span class="c1"># Close the file</span>
     <span class="n">f2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 
@@ -1659,22 +1702,40 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><br><br></p>
-<h3 id="Appending-Data-to-a-File-and-Saving-it-Again">Appending Data to a File and Saving it Again<a class="anchor-link" href="#Appending-Data-to-a-File-and-Saving-it-Again">&#182;</a></h3>
+<p>Note: Close you filse to save memory when iterating files</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Appending-Data-to-a-File">Appending Data to a File<a class="anchor-link" href="#Appending-Data-to-a-File">&#182;</a></h3><p>Here we are open a file appending some data to it and saving it again as another file.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Open an existing file as &quot;f1&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+    <span class="c1"># Create a new file as &quot;f2</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Data/sample_file2.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span> 
+        
         <span class="c1"># Copy the text from the first file </span>
         <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        
+        <span class="c1"># Write a new string info the file </span>
         <span class="n">f2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> You are the second version of the same file&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Close the new file</span>
         <span class="n">f2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="c1"># Close the original file</span>
     <span class="n">f1</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 
@@ -1694,10 +1755,10 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Remove Text file from the directory</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Remove the text files from of data diretory</span>
 <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Data/sample_file2.txt&quot;</span><span class="p">)</span>
 <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Data/sample_file.txt&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1771,24 +1832,24 @@ Files: [&#39;.DS_Store&#39;, &#39;Portfolio.md&#39;, &#39;README.md&#39;, &#39;.
 									</header>
 									<ul class="dates">
 										<li>
+											<span class="date">Sat 15 September 2018</span>
+											<h3><a href="https://kavisek.github.io/Model Stacking.html">Model Stacking</a></h3>
+											<p><p>Modelstacking is the process is using a initial model to preprocess additional feature for both your training and testing set. The initial model..</p></p>
+										</li>
+										<li>
 											<span class="date">Wed 05 September 2018</span>
 											<h3><a href="https://kavisek.github.io/Dropping Features.html">Dropping Features</a></h3>
 											<p><p>Dropping feature is a common and select tasks that is conduct on most datasets before training your model. I use Pandas to drop the majority of ..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 03 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Isolation Forest Classifier.html">Isolation Forest Classifier</a></h3>
-											<p><p>The isolation forest algorithm is a simiiar to a random forest alogrithim but is modified to detect the anomolies within the data. The algorithm..</p></p>
+											<span class="date">Wed 01 August 2018</span>
+											<h3><a href="https://kavisek.github.io/DBSCAN.html">DBSCAN</a></h3>
+											<p><p>DBSCAN stands for density-based spatial clustering of applications with noise. The algorithim select random points on the hyperplane and if the ..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 03 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Using TQDM.html">Using TQDM</a></h3>
-											<p><p>TQDM is awesome package. It's really buggy with its progress bar rendering for cells within notebooks, but it work great in Python script that y..</p></p>
-										</li>
-										<li>
-											<span class="date">Fri 31 August 2018</span>
-											<h3><a href="https://kavisek.github.io/Confusion Matrices.html">Confusion Matrices</a></h3>
-											<p><p>Confusion matrices are commonly used in most classifications problems.  I used constantly in a recent fraud detection challenge to see the pote..</p></p>
+											<span class="date">Wed 01 August 2018</span>
+											<h3><a href="https://kavisek.github.io/Decision  Tree Classifier.html">Decision  Tree Classifier</a></h3>
+											<p><p>A decision tree classier is a very simple tree-like model. The classifier will build a decision tree and split the classes by layer heuristics ..</p></p>
 										</li>
 									</ul>
 								</section>
