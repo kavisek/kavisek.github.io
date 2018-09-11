@@ -68,7 +68,7 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Tue 31 July 2018</div>
+									<div class="pennant pennant-alt date">Sun 20 May 2018</div>
 									<h2>Fizzbuzz</h2>
 									<style type="text/css">/*!
 *
@@ -1046,18 +1046,20 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Fizzbuzz">Fizzbuzz<a class="anchor-link" href="#Fizzbuzz">&#182;</a></h1><p><span>Interview Question: Write some code that says 'Fizzbuzz' when a value is divisible by 15, 'fizz' when its divisible by 3, and 'buzz' when the value is divisible by 3.</span></p>
+<h1 id="Fizzbuzz">Fizzbuzz<a class="anchor-link" href="#Fizzbuzz">&#182;</a></h1><p><span>The fizzbuzz question is an basic interview question for coders. Basically write some code that says 'Fizzbuzz' when a value is divisible by 15, 'fizz' when its divisible by 3, and 'buzz' when the value is divisible by 3. Here is my response.</span></p>
 <h3 id="Array-of-Values">Array of Values<a class="anchor-link" href="#Array-of-Values">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import modules</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+<span class="c1"># Create some sets data</span>
 <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">values</span>
 </pre></div>
@@ -1072,7 +1074,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -1092,18 +1094,18 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
-  <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, value is 0&#39;</span><span class="p">)</span>
-  <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">5</span> ==0  and i%3 ==0:
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, fizzbuzz&#39;</span><span class="p">)</span>
-  <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">5</span>:
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, buzz&#39;</span><span class="p">)</span>
-  <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">3</span>:
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, fizz&#39;</span><span class="p">)</span>
-  <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, nothing&#39;</span><span class="p">)</span>
-    
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The an answer to the fizz buss question</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, value is 0&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">5</span> ==0  and i%3 ==0:
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, fizzbuzz&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">5</span>:
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, buzz&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="k">3</span>:
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, fizz&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Value: </span><span class="si">{i}</span><span class="s1">, nothing&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1143,15 +1145,6 @@ Value: 15, fizzbuzz
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Some note around this problem, makes sure you check the remainder for 15, 5, and 3 in descending order. Secondly the remained of any value diviing 0 is zero. Thirdly f-strings are only support in Python 3.6 and up.</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -1222,19 +1215,19 @@ Value: 15, fizzbuzz
 											<p><p>Modelstacking is the process is using a initial model to preprocess additional feature for both your training and testing set. The initial model..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 10 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Linear Regression.html">Linear Regression</a></h3>
-											<p><p>Below is an example of model using linear regression to predict house prices from a datasets provided on Kaggle. The dataest can be found at the..</p></p>
+											<span class="date">Wed 01 August 2018</span>
+											<h3><a href="https://kavisek.github.io/Tools of a Data Scientist.html">Tools of a Data Scientist</a></h3>
+											<p><p>This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. No..</p></p>
 										</li>
 										<li>
-											<span class="date">Wed 05 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Dropping Features.html">Dropping Features</a></h3>
-											<p><p>Dropping feature is a common and select tasks that is conduct on most datasets before training your model. I use Pandas to drop the majority of ..</p></p>
+											<span class="date">Wed 27 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Train-Test Split.html">Train-Test Split</a></h3>
+											<p><p>Spliting a dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be use..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 03 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Isolation Forest Classifier.html">Isolation Forest Classifier</a></h3>
-											<p><p>The isolation forest algorithm is a simiiar to a random forest alogrithim but is modified to detect the anomolies within the data. The algorithm..</p></p>
+											<span class="date">Mon 25 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Simple Pivot Table.html">Simple Pivot Table</a></h3>
+											<p><p>The panda's crosstab function is really useful for creating when you want to create pivot tables for dimensional features. with one line of code..</p></p>
 										</li>
 									</ul>
 								</section>

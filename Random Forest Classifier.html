@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Wed 01 August 2018</div>
-									<h2>Random Forest Classificaiton</h2>
+									<div class="pennant pennant-alt date">Sun 20 May 2018</div>
+									<h2>Random Forest Classifier</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,7 +1046,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Random-Forest-Classificaiton">Random Forest Classificaiton<a class="anchor-link" href="#Random-Forest-Classificaiton">&#182;</a></h1><p><span>The Random Forest Classifications algorithim use a ensemble of Decision Trees to find and train its model. Each decision tree in the ensemble is trained on a random subset of the features. Each decicision tree in the ensemble is meant to overfit the data in some manner. After each decisions tree is trained the ensemble averages the results between each all the trees to build its model.</span></p>
+<h1 id="Random-Forest-Classifier">Random Forest Classifier<a class="anchor-link" href="#Random-Forest-Classifier">&#182;</a></h1><p><span>The Random Forest Classifications algorithim use a ensemble of Decision Trees whent training its model. Each decision tree in the ensemble is trained on a random subset of the features. At the same time each decicision tree in the ensemble is meant to overfit the data in some manner. After each decisions tree is trained the ensemble averages the results between each all the trees to gets it's model.</span></p>
 
 </div>
 </div>
@@ -1061,26 +1061,33 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="o">%</span><span class="k">pylab</span> inline
  
+<span class="c1"># import modules</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 <span class="kn">import</span> <span class="nn">seaborn</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_breast_cancer</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span>
- 
+
+<span class="c1"># Set pandas options</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;max_columns&#39;</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;max_rows&#39;</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
- 
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
-<span class="n">pylab</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">)</span>
+
+<span class="c1"># Set plotting options</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">)</span>
+
+<span class="c1"># Set warning options</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">);</span>
 </pre></div>
 
@@ -1120,12 +1127,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_breast_cancer</span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import Breast cancer dataset</span>
 <span class="n">breast_cancer</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">()</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">breast_cancer</span><span class="o">.</span><span class="n">target</span>
 
-
+<span class="c1"># Train-test split the data</span>
 <span class="n">train_x</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">text_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 
@@ -1144,31 +1150,14 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Assing the models parameters </span>
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Fit-the-Model">Fit the Model<a class="anchor-link" href="#Fit-the-Model">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">);</span>
+<span class="c1"># Fit the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -1186,11 +1175,14 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Find out the models cross valdiation score on the training data</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+
+<span class="c1"># Print the cross validatino scores</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Cross Validation Score: {scores.mean():.5f}&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -1208,7 +1200,7 @@ h6:hover .anchor-link {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Cross Validation Score: 0.95299
+<pre>Cross Validation Score: 0.95061
 </pre>
 </div>
 </div>
@@ -1230,11 +1222,10 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Training Confusion Matrix</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># View the confusion matrix for the training data</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">confusion_matrix</span>
 <span class="n">cmatrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">train_y</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">train_x</span><span class="p">)))</span>
 <span class="n">cmatrix</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;class&#39;</span>
-
 <span class="n">cmatrix</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;actual&#39;</span>
 <span class="n">cmatrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">cmatrix</span> <span class="o">=</span> <span class="n">cmatrix</span><span class="o">.</span><span class="n">reorder_levels</span><span class="p">([</span><span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">])</span>
@@ -1330,10 +1321,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">))</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Predict the results from our test data</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">))</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1346,19 +1338,19 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0    1
+<pre>0    0
 1    1
 2    0
 3    1
-4    0
+4    1
 5    0
-6    0
+6    1
 dtype: int64</pre>
 </div>
 
@@ -1437,19 +1429,19 @@ dtype: int64</pre>
 											<p><p>Modelstacking is the process is using a initial model to preprocess additional feature for both your training and testing set. The initial model..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 10 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Linear Regression.html">Linear Regression</a></h3>
-											<p><p>Below is an example of model using linear regression to predict house prices from a datasets provided on Kaggle. The dataest can be found at the..</p></p>
+											<span class="date">Wed 01 August 2018</span>
+											<h3><a href="https://kavisek.github.io/Tools of a Data Scientist.html">Tools of a Data Scientist</a></h3>
+											<p><p>This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. No..</p></p>
 										</li>
 										<li>
-											<span class="date">Wed 05 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Dropping Features.html">Dropping Features</a></h3>
-											<p><p>Dropping feature is a common and select tasks that is conduct on most datasets before training your model. I use Pandas to drop the majority of ..</p></p>
+											<span class="date">Wed 27 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Train-Test Split.html">Train-Test Split</a></h3>
+											<p><p>Spliting a dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be use..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 03 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Isolation Forest Classifier.html">Isolation Forest Classifier</a></h3>
-											<p><p>The isolation forest algorithm is a simiiar to a random forest alogrithim but is modified to detect the anomolies within the data. The algorithm..</p></p>
+											<span class="date">Mon 25 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Simple Pivot Table.html">Simple Pivot Table</a></h3>
+											<p><p>The panda's crosstab function is really useful for creating when you want to create pivot tables for dimensional features. with one line of code..</p></p>
 										</li>
 									</ul>
 								</section>

@@ -68,7 +68,7 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Wed 01 August 2018</div>
+									<div class="pennant pennant-alt date">Tue 01 May 2018</div>
 									<h2>Randomized Grid Search</h2>
 									<style type="text/css">/*!
 *
@@ -1053,34 +1053,39 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import modulse</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">RandomizedSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
 
 
-
+<span class="c1"># Import iris dataset </span>
 <span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
 
-
+<span class="c1"># Assign classifier</span>
 <span class="n">classifier</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> 
                                  <span class="n">metric</span> <span class="o">=</span><span class="s1">&#39;minkowski&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
+<span class="c1"># Intiate a grid dictionary</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_neighbors&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)),</span> <span class="s1">&#39;weights&#39;</span><span class="p">:[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">],</span>
        <span class="s1">&#39;p&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">}</span>
 
-
+<span class="c1"># Declare randomized search on model using our param grid</span>
 <span class="n">random_search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">classifier</span><span class="p">,</span> 
                                    <span class="n">param_distributions</span> <span class="o">=</span> <span class="n">grid</span><span class="p">,</span> 
                                    <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> 
                                    <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
                                    <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Fit the randomized search model with our data</span>
 <span class="n">random_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 
@@ -1094,7 +1099,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -1126,10 +1131,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best parameters: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">random_search</span>.best_params_)
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Print the best parameters and its best accuracy score</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best parameters: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">random_search</span>.best_params_)
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CV Accuracy of best parameters: </span><span class="si">%.3f</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">random_search</span>.best_score_)
 </pre></div>
 
@@ -1147,8 +1153,8 @@ h6:hover .anchor-link {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Best parameters: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5}
-CV Accuracy of best parameters: 0.967
+<pre>Best parameters: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10}
+CV Accuracy of best parameters: 0.973
 </pre>
 </div>
 </div>
@@ -1179,11 +1185,11 @@ CV Accuracy of best parameters: 0.967
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">cross_val_score</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Baesline with default parameters: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">np</span>.mean(
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Print our current accuracy score using our current parameters</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Baseline with default parameters: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">np</span>.mean(
         <span class="n">cross_val_score</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 
@@ -1201,7 +1207,7 @@ CV Accuracy of best parameters: 0.967
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Baesline with default parameters: 0.967
+<pre>Baseline with default parameters: 0.967
 </pre>
 </div>
 </div>
@@ -1220,11 +1226,11 @@ CV Accuracy of best parameters: 0.967
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The grid scores attribute is now depricated, </span>
-<span class="c1">#but I&#39;ll use it till its completely gone</span>
+<span class="c1"># but I&#39;ll use it till its completely gone</span>
 <span class="n">random_search</span><span class="o">.</span><span class="n">grid_scores_</span>
 </pre></div>
 
@@ -1242,7 +1248,7 @@ CV Accuracy of best parameters: 0.967
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/Kavi/anaconda/envs/tensorflow/lib/python3.6/site-packages/sklearn/model_selection/_search.py:761: DeprecationWarning: The grid_scores_ attribute was deprecated in version 0.18 in favor of the more elaborate cv_results_ attribute. The grid_scores_ attribute will not be available from 0.20
+<pre>/Users/kavi/anaconda3/envs/main/lib/python3.6/site-packages/sklearn/model_selection/_search.py:747: DeprecationWarning: The grid_scores_ attribute was deprecated in version 0.18 in favor of the more elaborate cv_results_ attribute. The grid_scores_ attribute will not be available from 0.20
   DeprecationWarning)
 </pre>
 </div>
@@ -1250,22 +1256,22 @@ CV Accuracy of best parameters: 0.967
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 6},
- mean: 0.94000, std: 0.06289, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 2},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 3},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 8},
+<pre>[mean: 0.96000, std: 0.05333, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 2},
+ mean: 0.97333, std: 0.03266, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10},
+ mean: 0.96000, std: 0.05333, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 1},
  mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 4},
+ mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 8},
+ mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 7},
+ mean: 0.95333, std: 0.06700, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 4},
  mean: 0.95333, std: 0.05207, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 7},
- mean: 0.96000, std: 0.04422, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 10},
- mean: 0.96000, std: 0.05333, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 2}]</pre>
+ mean: 0.94000, std: 0.06289, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 2},
+ mean: 0.97333, std: 0.03266, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 9}]</pre>
 </div>
 
 </div>
@@ -1276,12 +1282,13 @@ CV Accuracy of best parameters: 0.967
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The new cv_results attribute outpute our results in JSON</span>
 <span class="c1"># Throw it in a dataframe to make some sense of it</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">json_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">json_df</span> 
 </pre></div>
 
 </div>
@@ -1294,7 +1301,7 @@ CV Accuracy of best parameters: 0.967
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -1343,75 +1350,75 @@ CV Accuracy of best parameters: 0.967
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.000270</td>
-      <td>0.000036</td>
-      <td>0.000499</td>
-      <td>0.000112</td>
-      <td>uniform</td>
+      <td>0.000292</td>
+      <td>0.000037</td>
+      <td>0.000545</td>
+      <td>0.000114</td>
+      <td>distance</td>
       <td>2</td>
-      <td>5</td>
-      <td>{'weights': 'uniform', 'p': 2, 'n_neighbors': 5}</td>
+      <td>2</td>
+      <td>{'weights': 'distance', 'p': 2, 'n_neighbors': 2}</td>
       <td>1.0</td>
       <td>0.933333</td>
       <td>...</td>
-      <td>0.962963</td>
-      <td>0.970370</td>
-      <td>0.985185</td>
-      <td>0.962963</td>
-      <td>0.977778</td>
-      <td>0.962963</td>
-      <td>0.962963</td>
-      <td>0.97037</td>
-      <td>0.968889</td>
-      <td>0.007258</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.000277</td>
-      <td>0.000020</td>
-      <td>0.000480</td>
-      <td>0.000070</td>
-      <td>uniform</td>
+      <td>0.000293</td>
+      <td>0.000102</td>
+      <td>0.000528</td>
+      <td>0.000087</td>
+      <td>distance</td>
       <td>2</td>
-      <td>6</td>
-      <td>{'weights': 'uniform', 'p': 2, 'n_neighbors': 6}</td>
+      <td>10</td>
+      <td>{'weights': 'distance', 'p': 2, 'n_neighbors':...</td>
       <td>1.0</td>
       <td>0.933333</td>
       <td>...</td>
-      <td>0.970370</td>
-      <td>0.977778</td>
-      <td>0.985185</td>
-      <td>0.955556</td>
-      <td>0.985185</td>
-      <td>0.970370</td>
-      <td>0.970370</td>
-      <td>0.97037</td>
-      <td>0.972593</td>
-      <td>0.008148</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.000273</td>
-      <td>0.000019</td>
-      <td>0.000436</td>
+      <td>0.000265</td>
       <td>0.000024</td>
-      <td>uniform</td>
-      <td>1</td>
+      <td>0.000493</td>
+      <td>0.000094</td>
+      <td>distance</td>
       <td>2</td>
-      <td>{'weights': 'uniform', 'p': 1, 'n_neighbors': 2}</td>
+      <td>1</td>
+      <td>{'weights': 'distance', 'p': 2, 'n_neighbors': 1}</td>
       <td>1.0</td>
       <td>0.933333</td>
       <td>...</td>
-      <td>0.970370</td>
-      <td>0.977778</td>
-      <td>0.970370</td>
-      <td>0.962963</td>
-      <td>0.985185</td>
-      <td>0.970370</td>
-      <td>0.970370</td>
-      <td>0.97037</td>
-      <td>0.972593</td>
-      <td>0.005785</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
     </tr>
   </tbody>
 </table>
@@ -1427,10 +1434,10 @@ CV Accuracy of best parameters: 0.967
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Here is the raw output</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Here is the raw JSON output</span>
 <span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span>
 </pre></div>
 
@@ -1444,95 +1451,90 @@ CV Accuracy of best parameters: 0.967
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[12]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;mean_fit_time&#39;: array([0.00026991, 0.00027733, 0.00027254, 0.00025287, 0.0002615 ,
-        0.00026371, 0.0002893 , 0.00025344, 0.00025284, 0.00027139]),
- &#39;std_fit_time&#39;: array([3.61297300e-05, 2.04961784e-05, 1.91800153e-05, 1.24148105e-05,
-        3.63166831e-05, 2.07953627e-05, 7.74256544e-05, 1.33292832e-05,
-        1.25028894e-05, 4.69197890e-05]),
- &#39;mean_score_time&#39;: array([0.00049944, 0.00047967, 0.00043576, 0.00044491, 0.00044494,
-        0.00049927, 0.0004462 , 0.0004365 , 0.00044463, 0.00045156]),
- &#39;std_score_time&#39;: array([1.11876495e-04, 6.98170411e-05, 2.39042539e-05, 2.31534885e-05,
-        2.36329944e-05, 6.97777868e-05, 2.43472535e-05, 2.11077342e-05,
-        2.22234893e-05, 4.22938700e-05]),
- &#39;param_weights&#39;: masked_array(data=[&#39;uniform&#39;, &#39;uniform&#39;, &#39;uniform&#39;, &#39;uniform&#39;, &#39;distance&#39;,
-                    &#39;distance&#39;, &#39;distance&#39;, &#39;uniform&#39;, &#39;uniform&#39;,
-                    &#39;distance&#39;],
-              mask=[False, False, False, False, False, False, False, False,
-                    False, False],
-        fill_value=&#39;?&#39;,
-             dtype=object),
- &#39;param_p&#39;: masked_array(data=[2, 2, 1, 2, 2, 2, 2, 1, 1, 2],
-              mask=[False, False, False, False, False, False, False, False,
-                    False, False],
-        fill_value=&#39;?&#39;,
-             dtype=object),
- &#39;param_n_neighbors&#39;: masked_array(data=[5, 6, 2, 10, 3, 8, 4, 7, 10, 2],
-              mask=[False, False, False, False, False, False, False, False,
-                    False, False],
-        fill_value=&#39;?&#39;,
-             dtype=object),
- &#39;params&#39;: [{&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 6},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 2},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10},
-  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 3},
-  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 8},
+<pre>{&#39;mean_fit_time&#39;: array([ 0.00029211,  0.00029318,  0.00026453,  0.00026796,  0.00027027,
+         0.00027721,  0.00029645,  0.00026639,  0.00025463,  0.00026634]),
+ &#39;std_fit_time&#39;: array([  3.71983109e-05,   1.02307524e-04,   2.38624127e-05,
+          2.79288718e-05,   3.62967054e-05,   4.16681812e-05,
+          5.36330741e-05,   2.61113629e-05,   1.27668641e-05,
+          4.79880930e-05]),
+ &#39;mean_score_time&#39;: array([ 0.00054541,  0.00052838,  0.00049326,  0.00048833,  0.00048378,
+         0.00047646,  0.00046542,  0.00048676,  0.00046687,  0.00046294]),
+ &#39;std_score_time&#39;: array([  1.14184241e-04,   8.74830381e-05,   9.36912486e-05,
+          6.95798226e-05,   4.37161709e-05,   6.20151611e-05,
+          5.55320274e-05,   1.04900880e-04,   9.93801053e-05,
+          4.81664600e-05]),
+ &#39;param_weights&#39;: masked_array(data = [&#39;distance&#39; &#39;distance&#39; &#39;distance&#39; &#39;distance&#39; &#39;distance&#39; &#39;uniform&#39; &#39;uniform&#39;
+  &#39;uniform&#39; &#39;uniform&#39; &#39;uniform&#39;],
+              mask = [False False False False False False False False False False],
+        fill_value = ?),
+ &#39;param_p&#39;: masked_array(data = [2 2 2 2 2 2 1 1 1 1],
+              mask = [False False False False False False False False False False],
+        fill_value = ?),
+ &#39;param_n_neighbors&#39;: masked_array(data = [2 10 1 4 8 7 4 7 2 9],
+              mask = [False False False False False False False False False False],
+        fill_value = ?),
+ &#39;params&#39;: [{&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 2},
+  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10},
+  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 1},
   {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 4},
+  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 8},
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 7},
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 4},
   {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 7},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 10},
-  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 2}],
- &#39;split0_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
- &#39;split1_test_score&#39;: array([0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.93333333,
-        0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.93333333]),
- &#39;split2_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
- &#39;split3_test_score&#39;: array([1.        , 1.        , 0.93333333, 1.        , 0.93333333,
-        1.        , 0.93333333, 1.        , 0.93333333, 0.93333333]),
- &#39;split4_test_score&#39;: array([0.86666667, 0.86666667, 0.86666667, 1.        , 0.86666667,
-        0.86666667, 0.86666667, 0.86666667, 1.        , 0.86666667]),
- &#39;split5_test_score&#39;: array([0.93333333, 0.93333333, 1.        , 0.86666667, 1.        ,
-        0.93333333, 1.        , 0.86666667, 0.86666667, 1.        ]),
- &#39;split6_test_score&#39;: array([0.93333333, 0.93333333, 0.8       , 0.93333333, 0.93333333,
-        0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.86666667]),
- &#39;split7_test_score&#39;: array([1.        , 1.        , 0.93333333, 0.93333333, 1.        ,
-        1.        , 1.        , 0.93333333, 0.93333333, 1.        ]),
- &#39;split8_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
- &#39;split9_test_score&#39;: array([1.        , 1.        , 0.93333333, 1.        , 1.        ,
-        1.        , 1.        , 1.        , 1.        , 1.        ]),
- &#39;mean_test_score&#39;: array([0.96666667, 0.96666667, 0.94      , 0.96666667, 0.96666667,
-        0.96666667, 0.96666667, 0.95333333, 0.96      , 0.96      ]),
- &#39;std_test_score&#39;: array([0.04472136, 0.04472136, 0.06289321, 0.04472136, 0.04472136,
-        0.04472136, 0.04472136, 0.05206833, 0.04422166, 0.05333333]),
- &#39;rank_test_score&#39;: array([ 1,  1, 10,  1,  1,  1,  1,  9,  7,  7], dtype=int32),
- &#39;split0_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97037037, 1.        ,
-        1.        , 1.        , 0.96296296, 0.95555556, 1.        ]),
- &#39;split1_train_score&#39;: array([0.97037037, 0.97037037, 0.97777778, 0.98518519, 1.        ,
-        1.        , 1.        , 0.97777778, 0.96296296, 1.        ]),
- &#39;split2_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
-        1.        , 1.        , 0.96296296, 0.97037037, 1.        ]),
- &#39;split3_train_score&#39;: array([0.97037037, 0.97777778, 0.97777778, 0.97777778, 1.        ,
-        1.        , 1.        , 0.97037037, 0.96296296, 1.        ]),
- &#39;split4_train_score&#39;: array([0.98518519, 0.98518519, 0.97037037, 0.97777778, 1.        ,
-        1.        , 1.        , 0.98518519, 0.97037037, 1.        ]),
- &#39;split5_train_score&#39;: array([0.96296296, 0.95555556, 0.96296296, 0.97037037, 1.        ,
-        1.        , 1.        , 0.96296296, 0.96296296, 1.        ]),
- &#39;split6_train_score&#39;: array([0.97777778, 0.98518519, 0.98518519, 0.98518519, 1.        ,
-        1.        , 1.        , 0.97037037, 0.97037037, 1.        ]),
- &#39;split7_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
-        1.        , 1.        , 0.97037037, 0.97037037, 1.        ]),
- &#39;split8_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
-        1.        , 1.        , 0.97037037, 0.96296296, 1.        ]),
- &#39;split9_train_score&#39;: array([0.97037037, 0.97037037, 0.97037037, 0.96296296, 1.        ,
-        1.        , 1.        , 0.95555556, 0.94074074, 1.        ]),
- &#39;mean_train_score&#39;: array([0.96888889, 0.97259259, 0.97259259, 0.9762963 , 1.        ,
-        1.        , 1.        , 0.96888889, 0.96296296, 1.        ]),
- &#39;std_train_score&#39;: array([0.00725775, 0.00814815, 0.00578537, 0.00645763, 0.        ,
-        0.        , 0.        , 0.00797802, 0.00876456, 0.        ])}</pre>
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 2},
+  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 9}],
+ &#39;split0_test_score&#39;: array([ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.]),
+ &#39;split1_test_score&#39;: array([ 0.93333333,  0.93333333,  0.93333333,  0.93333333,  0.93333333,
+         0.93333333,  0.93333333,  0.93333333,  0.93333333,  0.93333333]),
+ &#39;split2_test_score&#39;: array([ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.]),
+ &#39;split3_test_score&#39;: array([ 0.93333333,  1.        ,  0.93333333,  0.93333333,  1.        ,
+         1.        ,  0.93333333,  1.        ,  0.93333333,  1.        ]),
+ &#39;split4_test_score&#39;: array([ 0.86666667,  0.93333333,  0.86666667,  0.86666667,  0.86666667,
+         0.86666667,  0.86666667,  0.86666667,  0.86666667,  1.        ]),
+ &#39;split5_test_score&#39;: array([ 1.        ,  0.93333333,  1.        ,  1.        ,  0.93333333,
+         0.93333333,  1.        ,  0.86666667,  1.        ,  0.93333333]),
+ &#39;split6_test_score&#39;: array([ 0.86666667,  0.93333333,  0.86666667,  0.93333333,  0.93333333,
+         0.93333333,  0.8       ,  0.93333333,  0.8       ,  0.93333333]),
+ &#39;split7_test_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         1.        ,  1.        ,  0.93333333,  0.93333333,  0.93333333]),
+ &#39;split8_test_score&#39;: array([ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.]),
+ &#39;split9_test_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         1.        ,  1.        ,  1.        ,  0.93333333,  1.        ]),
+ &#39;mean_test_score&#39;: array([ 0.96      ,  0.97333333,  0.96      ,  0.96666667,  0.96666667,
+         0.96666667,  0.95333333,  0.95333333,  0.94      ,  0.97333333]),
+ &#39;std_test_score&#39;: array([ 0.05333333,  0.03265986,  0.05333333,  0.04472136,  0.04472136,
+         0.04472136,  0.06699917,  0.05206833,  0.06289321,  0.03265986]),
+ &#39;rank_test_score&#39;: array([ 6,  1,  6,  3,  3,  3,  8,  8, 10,  1], dtype=int32),
+ &#39;split0_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.96296296,  0.94814815,  0.96296296,  0.97037037,  0.96296296]),
+ &#39;split1_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97777778,  0.96296296,  0.97777778,  0.97777778,  0.97037037]),
+ &#39;split2_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97037037,  0.95555556,  0.96296296,  0.97037037,  0.97037037]),
+ &#39;split3_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97037037,  0.96296296,  0.97037037,  0.97777778,  0.97777778]),
+ &#39;split4_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.98518519,  0.97037037,  0.98518519,  0.97037037,  0.97037037]),
+ &#39;split5_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97037037,  0.95555556,  0.96296296,  0.96296296,  0.96296296]),
+ &#39;split6_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97777778,  0.97037037,  0.97037037,  0.98518519,  0.97777778]),
+ &#39;split7_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97037037,  0.95555556,  0.97037037,  0.97037037,  0.96296296]),
+ &#39;split8_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97037037,  0.95555556,  0.97037037,  0.97037037,  0.96296296]),
+ &#39;split9_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97777778,  0.95555556,  0.95555556,  0.97037037,  0.94814815]),
+ &#39;mean_train_score&#39;: array([ 1.        ,  1.        ,  1.        ,  1.        ,  1.        ,
+         0.97333333,  0.95925926,  0.96888889,  0.97259259,  0.96666667]),
+ &#39;std_train_score&#39;: array([ 0.        ,  0.        ,  0.        ,  0.        ,  0.        ,
+         0.00592593,  0.00682929,  0.00797802,  0.00578537,  0.00828173])}</pre>
 </div>
 
 </div>
@@ -1610,19 +1612,19 @@ CV Accuracy of best parameters: 0.967
 											<p><p>Modelstacking is the process is using a initial model to preprocess additional feature for both your training and testing set. The initial model..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 10 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Linear Regression.html">Linear Regression</a></h3>
-											<p><p>Below is an example of model using linear regression to predict house prices from a datasets provided on Kaggle. The dataest can be found at the..</p></p>
+											<span class="date">Wed 01 August 2018</span>
+											<h3><a href="https://kavisek.github.io/Tools of a Data Scientist.html">Tools of a Data Scientist</a></h3>
+											<p><p>This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. No..</p></p>
 										</li>
 										<li>
-											<span class="date">Wed 05 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Dropping Features.html">Dropping Features</a></h3>
-											<p><p>Dropping feature is a common and select tasks that is conduct on most datasets before training your model. I use Pandas to drop the majority of ..</p></p>
+											<span class="date">Wed 27 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Train-Test Split.html">Train-Test Split</a></h3>
+											<p><p>Spliting a dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be use..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 03 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Isolation Forest Classifier.html">Isolation Forest Classifier</a></h3>
-											<p><p>The isolation forest algorithm is a simiiar to a random forest alogrithim but is modified to detect the anomolies within the data. The algorithm..</p></p>
+											<span class="date">Mon 25 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Simple Pivot Table.html">Simple Pivot Table</a></h3>
+											<p><p>The panda's crosstab function is really useful for creating when you want to create pivot tables for dimensional features. with one line of code..</p></p>
 										</li>
 									</ul>
 								</section>

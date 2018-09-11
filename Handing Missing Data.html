@@ -68,7 +68,7 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Wed 01 August 2018</div>
+									<div class="pennant pennant-alt date">Fri 25 May 2018</div>
 									<h2>Handing Missing Data</h2>
 									<style type="text/css">/*!
 *
@@ -1047,15 +1047,17 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Handing-Missing-Data">Handing Missing Data<a class="anchor-link" href="#Handing-Missing-Data">&#182;</a></h1><p><span>There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic methods to handle missing data. Again your strategy to handle missing data will different with contextual knowledge around the problem with your domain expertise.</span></p>
-<p><span style="text-decoration:underline">**BasicStategies**</span></p>
+<p><span style="text-decoration:underline">**Basic Strategies**</span></p>
 <ol>
 <li>Removing observations</li>
 <li>Filling in NaN values with certain value</li>
 <li>Filling in NaN values with the mean</li>
 <li>Filling in NaN values with the median</li>
 <li>Dropping columns with missing values</li>
+<li>Dropping Features with NaN</li>
 </ol>
-<h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h3>
+<p>The best strategy will normally be context specific. Therefore the more contextual knowledge you have the better.</p>
+<h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1064,7 +1066,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import modules</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 
@@ -1077,7 +1080,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Generating-Data">Generating Data<a class="anchor-link" href="#Generating-Data">&#182;</a></h3>
+<h3 id="Create-Data">Create Data<a class="anchor-link" href="#Create-Data">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1086,7 +1089,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Justin&#39;</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="s1">&#39;Stephen&#39;</span><span class="p">,</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian&#39;</span><span class="p">,</span><span class="s1">&#39;John&#39;</span><span class="p">],</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create some studend data</span>
+<span class="n">students</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Justin&#39;</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="s1">&#39;Stephen&#39;</span><span class="p">,</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span> <span class="s1">&#39;Jean&#39;</span><span class="p">,</span> <span class="s1">&#39;Brian&#39;</span><span class="p">,</span><span class="s1">&#39;John&#39;</span><span class="p">],</span>
              <span class="s1">&#39;Midterm_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
              <span class="s1">&#39;Final_Score&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
              <span class="p">})</span>
@@ -1094,6 +1098,7 @@ h6:hover .anchor-link {
 <span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">92</span><span class="p">,</span><span class="mi">97</span><span class="p">)),</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
                             <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+<span class="c1"># View our dataframe</span>
 <span class="n">students</span>
 </pre></div>
 
@@ -1139,44 +1144,44 @@ h6:hover .anchor-link {
     <tr>
       <th>0</th>
       <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <td>87</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Kim</td>
-      <td>86</td>
-      <td>NaN</td>
+      <td>84</td>
+      <td>91.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>72</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Paul</td>
-      <td>95</td>
+      <td>94</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Jean</td>
-      <td>75</td>
+      <td>72</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Brian</td>
-      <td>80</td>
-      <td>NaN</td>
+      <td>87</td>
+      <td>99.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <td>70</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -1202,7 +1207,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop null values</span>
+<span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1245,21 +1251,15 @@ h6:hover .anchor-link {
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <th>1</th>
+      <td>Kim</td>
+      <td>84</td>
+      <td>91.0</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>John</td>
-      <td>81</td>
+      <th>5</th>
+      <td>Brian</td>
+      <td>87</td>
       <td>99.0</td>
     </tr>
   </tbody>
@@ -1277,7 +1277,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Filling-NaN-Value-with-Zeros">2. Filling NaN Value with Zeros<a class="anchor-link" href="#2.-Filling-NaN-Value-with-Zeros">&#182;</a></h3>
+<h3 id="2.-Filling-NaN-Value-with-Another-Value">2. Filling NaN Value with Another Value<a class="anchor-link" href="#2.-Filling-NaN-Value-with-Another-Value">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1286,7 +1286,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fill Null values with another value </span>
+<span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1331,44 +1332,44 @@ h6:hover .anchor-link {
     <tr>
       <th>0</th>
       <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <td>87</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Kim</td>
-      <td>86</td>
-      <td>0.0</td>
+      <td>84</td>
+      <td>91.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>72</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Paul</td>
-      <td>95</td>
+      <td>94</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Jean</td>
-      <td>75</td>
+      <td>72</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Brian</td>
-      <td>80</td>
-      <td>0.0</td>
+      <td>87</td>
+      <td>99.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <td>70</td>
+      <td>0.0</td>
     </tr>
   </tbody>
 </table>
@@ -1394,7 +1395,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fill in null values with the mean</span>
+<span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -1439,44 +1441,44 @@ h6:hover .anchor-link {
     <tr>
       <th>0</th>
       <td>Justin</td>
-      <td>90</td>
-      <td>98.000000</td>
+      <td>87</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Kim</td>
-      <td>86</td>
-      <td>98.333333</td>
+      <td>84</td>
+      <td>91.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Stephen</td>
-      <td>86</td>
-      <td>98.000000</td>
+      <td>72</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Paul</td>
-      <td>95</td>
-      <td>98.333333</td>
+      <td>94</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Jean</td>
-      <td>75</td>
-      <td>98.333333</td>
+      <td>72</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Brian</td>
-      <td>80</td>
-      <td>98.333333</td>
+      <td>87</td>
+      <td>99.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>John</td>
-      <td>81</td>
-      <td>99.000000</td>
+      <td>70</td>
+      <td>95.0</td>
     </tr>
   </tbody>
 </table>
@@ -1502,7 +1504,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Fill null values with the median</span>
+<span class="n">students</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">students</span><span class="o">.</span><span class="n">Final_Score</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -1547,44 +1550,44 @@ h6:hover .anchor-link {
     <tr>
       <th>0</th>
       <td>Justin</td>
-      <td>90</td>
-      <td>98.0</td>
+      <td>87</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Kim</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>84</td>
+      <td>91.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Stephen</td>
-      <td>86</td>
-      <td>98.0</td>
+      <td>72</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Paul</td>
-      <td>95</td>
-      <td>98.0</td>
+      <td>94</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Jean</td>
-      <td>75</td>
-      <td>98.0</td>
+      <td>72</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Brian</td>
-      <td>80</td>
-      <td>98.0</td>
+      <td>87</td>
+      <td>99.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>John</td>
-      <td>81</td>
-      <td>99.0</td>
+      <td>70</td>
+      <td>95.0</td>
     </tr>
   </tbody>
 </table>
@@ -1607,10 +1610,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Drop Feature that contain null valuse</span>
+<span class="n">students</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1623,7 +1627,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -1654,37 +1658,37 @@ h6:hover .anchor-link {
     <tr>
       <th>0</th>
       <td>Justin</td>
-      <td>90</td>
+      <td>87</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Kim</td>
-      <td>86</td>
+      <td>84</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Stephen</td>
-      <td>86</td>
+      <td>72</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Paul</td>
-      <td>95</td>
+      <td>94</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Jean</td>
-      <td>75</td>
+      <td>72</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Brian</td>
-      <td>80</td>
+      <td>87</td>
     </tr>
     <tr>
       <th>6</th>
       <td>John</td>
-      <td>81</td>
+      <td>70</td>
     </tr>
   </tbody>
 </table>
@@ -1766,19 +1770,19 @@ h6:hover .anchor-link {
 											<p><p>Modelstacking is the process is using a initial model to preprocess additional feature for both your training and testing set. The initial model..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 10 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Linear Regression.html">Linear Regression</a></h3>
-											<p><p>Below is an example of model using linear regression to predict house prices from a datasets provided on Kaggle. The dataest can be found at the..</p></p>
+											<span class="date">Wed 01 August 2018</span>
+											<h3><a href="https://kavisek.github.io/Tools of a Data Scientist.html">Tools of a Data Scientist</a></h3>
+											<p><p>This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. No..</p></p>
 										</li>
 										<li>
-											<span class="date">Wed 05 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Dropping Features.html">Dropping Features</a></h3>
-											<p><p>Dropping feature is a common and select tasks that is conduct on most datasets before training your model. I use Pandas to drop the majority of ..</p></p>
+											<span class="date">Wed 27 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Train-Test Split.html">Train-Test Split</a></h3>
+											<p><p>Spliting a dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be use..</p></p>
 										</li>
 										<li>
-											<span class="date">Mon 03 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Isolation Forest Classifier.html">Isolation Forest Classifier</a></h3>
-											<p><p>The isolation forest algorithm is a simiiar to a random forest alogrithim but is modified to detect the anomolies within the data. The algorithm..</p></p>
+											<span class="date">Mon 25 June 2018</span>
+											<h3><a href="https://kavisek.github.io/Simple Pivot Table.html">Simple Pivot Table</a></h3>
+											<p><p>The panda's crosstab function is really useful for creating when you want to create pivot tables for dimensional features. with one line of code..</p></p>
 										</li>
 									</ul>
 								</section>
