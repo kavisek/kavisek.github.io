@@ -16,6 +16,9 @@ echo Regenerating Content
 pelican content
 echo Content Updated
 
+# Copy Blog README file to output directory
+cp Documents/Blog/external/output_readme.md Documents/Blog/output/README.md
+
 # Push New  Content to Master Branch on Github Pages
 echo Pushing Content to Master
 ghp-import output -b master

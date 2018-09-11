@@ -1,0 +1,126 @@
+-- Validated
+
+18-09-05 Dropping Features.ipynb
+18-09-03 Using TQDM.ipynb
+18-09-03 Isolation Forest Classifier.ipynb
+18-08-31 Confusion Matrices.ipynb
+18-08-02 Downsampling.ipynb
+18-08-02 Import Matlab Data.ipynb
+18-08-01 K-Nearest Neighbours Classifier.ipynb
+18-08-01 Random Forest Classifier.ipynb
+18-08-01 Decision Tree Classifier.ipynb
+18-08-01 DBSCAN.ipynb
+18-08-01 Tools of a Data Scientist.ipynb
+18-07-31 Fizzbuzz.ipynb
+18-07-31 Regex in Python.ipynb
+18-07-31 Logistic Regression.ipynb
+18-07-29 Iris Analysis.ipynb
+18-07-29 Classification Models.ipynb
+18-07-28 Notebook Snippets.ipynb
+18-07-24 Binning Features.ipynb
+18-07-24 Converting Notebook to Slides.ipynb
+18-07-24 Label Encoding.ipynb
+18-07-07 Styling DataFrames.ipynb
+18-07-07 Resampling Datetime.ipynb
+18-07-04 Select Dtypes.ipynb
+18-07-03 Writing a File to AWS S3.ipynb
+18-07-03 Reading a File from AWS S3.ipynb
+18-07-03 Connecting to a Local Database.ipynb
+18-07-03 Connecting to a Local Database with SHH.ipynb
+18-06-23 Using OS Module.ipynb
+18-06-06 Every Matplotlib Plot Linestyle.ipynb
+18-06-06 Every Matplotlib Plot Marker.ipynb
+18-03-28 Creating Dummy Variables.ipynb
+18-03-08 Removing Outliers.ipynb
+
+
+-- Remaining
+
+18-08-01 Heatmaps.ipynb
+18-08-01 Dimensional Pivot Table.ipynb
+18-08-01 Wordclouds in Python.ipynb
+18-08-01 Plotting Residuals.ipynb
+
+18-08-01 Standardizations.ipynb
+18-08-01 Handling Missing Data.ipynb
+18-08-01 Histograms.ipynb
+
+18-08-01 Cross Validation and K-Folds.ipynb
+18-08-01 Train-Test Split.ipynb
+18-08-01 Recursive Feature Elimination.ipynb
+18-08-01 Random Grid Search.ipynb
+18-08-01 Full Grid Search.ipynb
+18-08-01 Barplots.ipynb
+
+--- Old
+
+17-12-04 Heatmaps.ipynb
+17-11-07 Dimensional Pivot Table.ipynb
+17-10-16 Wordclouds in Python.ipynb
+17-10-15 Plotting Residuals.ipynb
+17-10-15 Correlation Matricesipynb
+17-10-09 Standardizations.ipynb
+17-10-02 Handling Missing Data.ipynb
+
+
+
+Test 1 -- Removed these notebooks - Bug Present
+
+18-08-01 Heatmaps.ipynb
+18-08-01 Dimensional Pivot Table.ipynb
+18-08-01 Wordclouds in Python.ipynb
+18-08-01 Plotting Residuals.ipynb
+
+
+Test 2 -  Removed these notebooks  - Bug Gone
+
+18-08-01 Barplots.ipynb
+18-08-01 Standardizations.ipynb
+18-08-01 Handling Missing Data.ipynb
+18-08-01 Histograms.ipynb
+
+Test 3 - Add these back in - Bug Present
+
+18-08-01 Heatmaps.ipynb
+18-08-01 Dimensional Pivot Table.ipynb
+18-08-01 Wordclouds in Python.ipynb
+18-08-01 Plotting Residuals.ipynb
+
+Test 4 - Add only the bar plot notebook - Bug Present
+
+18-08-01 Barplots.ipynb
+
+
+--------------- Test 5 - DEFAULT_PAGINATION - Bug Present
+DEFAULT_PAGINATION = 36
+Whenever the number documents exceeds line 37 the Bug Appears
+
+--------------- Test 6 - DEFAULT_PAGINATION - Bug Gone
+DEFAULT_PAGINATION = 20
+Whenever the number documents exceeds line 37 the Bug Appears
+
+--------------- Test 7 - Add Handling Missing Data notebook - Bug Gone
+
+18-08-01 Handling Missing Data.ipynb
+
+--------------- Test 8 - Standardizations notebook
+
+18-08-01 Standardizations.ipynb
+
+--------------- Test 9 - Adding One by One
+
+18-08-01 Heatmaps.ipynb
+18-08-01 Dimensional Pivot Table.ipynb - Bug
+18-08-01 Wordclouds in Python.ipynb - Current Testing - Bug
+18-08-01 Plotting Residuals.ipynb - No Bug - Bug
+18-08-01 Barplots.ipynb - Bug
+18-08-01 Standardizations.ipynb - No Bug
+18-08-01 Handling Missing Data.ipynb - No Bug
+
+---------------- Test 10
+
+18-08-01 Heatmaps.ipynb
+18-08-01 Wordclouds in Python.ipynb
+18-08-01 Plotting Residuals.ipynb
+18-08-01 Histograms.ipynb
+18-08-01 Dimensional Pivot Table.ipynb
