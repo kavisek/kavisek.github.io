@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Tue 31 July 2018</div>
-									<h2>Regex in Python</h2>
+									<div class="pennant pennant-alt date">Sat 26 May 2018</div>
+									<h2>Connecting to a Local Database</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,29 +1046,27 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Regex-in-Python">Regex in Python<a class="anchor-link" href="#Regex-in-Python">&#182;</a></h1><p><span>As you deal with more and messier string data, regex starts becoming a very valuable skill that can save you a lot of time. It also has a secondary benefit of making your code a bit more slick (simpler). Below you will find some simple regex that can be very powerful.</span></p>
+<h1 id="Connecting-to-a-Local-Database">Connecting to a Local Database<a class="anchor-link" href="#Connecting-to-a-Local-Database">&#182;</a></h1><p><span>This notebook goes over how to connects to a local database and runs an SQL query to wrangle the data into our notebook. We want to connect to our database using the notebook to make reproducibility easier by removing any manual data wrangling process external to the notebook. The parameters for this notebook are easy to adjust so that you can change the values and connect to your production or slave database.</span></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import modules</span>
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="c1"># Some random text from Wikipedias Feature Articlue  </span>
-<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;The octopus is a soft-bodied, eight-armed mollusc </span><span class="se">\</span>
-<span class="s1">of the order Octopoda, with around 300 known species. Along </span><span class="se">\</span>
-<span class="s1">with squids, cuttlefish and nautiloids, they are classed as </span><span class="se">\</span>
-<span class="s1">cephalopods. The mouth with its hard beak is at the base of </span><span class="se">\</span>
-<span class="s1">the arms, which trail behind the animal as it swims. A siphon </span><span class="se">\</span>
-<span class="s1">is used both for respiration and for locomotion, by expelling </span><span class="se">\</span>
-<span class="s1">a jet of water. Octopuses have a complex nervous system and </span><span class="se">\</span>
-<span class="s1">excellent sight, and are among the most intelligent and </span><span class="se">\</span>
-<span class="s1">behaviourally diverse of all invertebrates.&#39;</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="k">import</span> <span class="n">create_engine</span>
 </pre></div>
 
 </div>
@@ -1080,17 +1078,53 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Regex-Statements">Regex Statements<a class="anchor-link" href="#Regex-Statements">&#182;</a></h3>
+<h3 id="Connect-to-Database">Connect to Database<a class="anchor-link" href="#Connect-to-Database">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for the word octopus in the text</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;octopus&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Set your local database parameters </span>
+<span class="n">db_username</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span>
+<span class="n">db_password</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span>
+<span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="s1">&#39;8889&#39;</span>
+<span class="n">db_name</span> <span class="o">=</span> <span class="s1">&#39;world&#39;</span>
+
+<span class="c1"># Create a MySQLEngine</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;mysql+mysqldb://&#39;</span><span class="o">+</span><span class="n">db_username</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">db_password</span><span class="o">+</span><span class="s1">&#39;@</span><span class="se">\</span>
+<span class="s1">&#39;</span><span class="o">+</span><span class="n">host</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="n">port</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">db_name</span><span class="p">)</span>
+
+<span class="c1"># Connect to database</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">();</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Query-Database">Query Database<a class="anchor-link" href="#Query-Database">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Run a query on your database</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot; SELECT * FROM city&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+
+<span class="c1"># View dataframe </span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1103,154 +1137,80 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;octopus&#39;]</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>CountryCode</th>
+      <th>District</th>
+      <th>Population</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Kabul</td>
+      <td>AFG</td>
+      <td>Kabol</td>
+      <td>1780000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Qandahar</td>
+      <td>AFG</td>
+      <td>Qandahar</td>
+      <td>237500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Herat</td>
+      <td>AFG</td>
+      <td>Herat</td>
+      <td>186800</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Mazar-e-Sharif</td>
+      <td>AFG</td>
+      <td>Balkh</td>
+      <td>127800</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Amsterdam</td>
+      <td>NLD</td>
+      <td>Noord-Holland</td>
+      <td>731200</td>
+    </tr>
+  </tbody>
+</table>
 </div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for a word that start with o and end with r, </span>
-<span class="c1"># with 3 charcater inbetween</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;o...r&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[15]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;order&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Search for a string that start with The</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;^The&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[16]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;The&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Return a compound word with &quot;-&quot; that start with a vowel from a to x</span>
-<span class="c1"># with any number of characters following, then has a &quot;-&quot; present, </span>
-<span class="c1"># then starts with a charcter from a to z then has any number of similar </span>
-<span class="c1"># charcters afterwards</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[a-z]*-[a-z]*&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[17]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;soft-bodied&#39;, &#39;eight-armed&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Return parts of the string that contain 3 numerical digits from charcater</span>
-<span class="c1"># from 3 to 9</span>
-<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[0-9][0-9][0-9]&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[18]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;300&#39;]</pre>
 </div>
 
 </div>
