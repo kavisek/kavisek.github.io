@@ -68,8 +68,8 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Wed 01 August 2018</div>
-									<h2>Randomized Grid Search</h2>
+									<div class="pennant pennant-alt date">Mon 03 September 2018</div>
+									<h2>Using TQDM</h2>
 									<style type="text/css">/*!
 *
 * IPython notebook
@@ -1046,186 +1046,43 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Randomized-Grid-Search">Randomized Grid Search<a class="anchor-link" href="#Randomized-Grid-Search">&#182;</a></h1><p><span>Manual hyperparameter searching? No way. Scikit Learn has a got an amazing random grid search function that can give us a hint into the best parameters by calling its class, setting up a dictionary with all parameters, and letting it fly. This example below his using a K-Nearest Neighbours model for its example. After the Randomize Grid Search is done, you can pull the best parameter for your model, and as well as take a look a the history of the previous combination of parameters.</span></p>
+<h1 id="Using-TQDM">Using TQDM<a class="anchor-link" href="#Using-TQDM">&#182;</a></h1><p><span>TQDM is awesome package. It's really buggy with its progress bar rendering for cells within notebooks, but it work great in Python script that your may be running in terminal. I use the package to track the progress of my for loop and my script as they scrape the internet for data. Below are a view example of the some use TQDM snippets.</span></p>
+<p>Conda Install Command: <a href="https://anaconda.org/conda-forge/tqdm">https://anaconda.org/conda-forge/tqdm</a> <br>
+Documentation: <a href="https://github.com/tqdm/tqdm">https://github.com/tqdm/tqdm</a></p>
 <h3 id="Import-Preliminaries">Import Preliminaries<a class="anchor-link" href="#Import-Preliminaries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_iris</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">RandomizedSearchCV</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
-
-
-
-<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
-
-
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> 
-                                 <span class="n">metric</span> <span class="o">=</span><span class="s1">&#39;minkowski&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_neighbors&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)),</span> <span class="s1">&#39;weights&#39;</span><span class="p">:[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">],</span>
-       <span class="s1">&#39;p&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">}</span>
-
-
-<span class="n">random_search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">classifier</span><span class="p">,</span> 
-                                   <span class="n">param_distributions</span> <span class="o">=</span> <span class="n">grid</span><span class="p">,</span> 
-                                   <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> 
-                                   <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                   <span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-                                   <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">random_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[4]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>RandomizedSearchCV(cv=10, error_score=&#39;raise&#39;,
-          estimator=KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkowski&#39;,
-           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
-           weights=&#39;uniform&#39;),
-          fit_params=None, iid=True, n_iter=10, n_jobs=1,
-          param_distributions={&#39;n_neighbors&#39;: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], &#39;weights&#39;: [&#39;uniform&#39;, &#39;distance&#39;], &#39;p&#39;: [1, 2]},
-          pre_dispatch=&#39;2*n_jobs&#39;, random_state=None, refit=True,
-          return_train_score=True, scoring=&#39;accuracy&#39;, verbose=0)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Randomized-Grid-Search-Score">Randomized Grid Search Score<a class="anchor-link" href="#Randomized-Grid-Search-Score">&#182;</a></h3>
+<h3 id="Simple-Progress-Bar">Simple Progress Bar<a class="anchor-link" href="#Simple-Progress-Bar">&#182;</a></h3><p>The simple progress is bar is only use alongside for loops in Python</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best parameters: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">random_search</span>.best_params_)
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CV Accuracy of best parameters: </span><span class="si">%.3f</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">random_search</span>.best_score_)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Best parameters: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5}
-CV Accuracy of best parameters: 0.967
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>This method is more computationaly visable then a full grid search</li>
-<li>The result will change each time the model is fitted</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Baseline-Cross-Validation-Score">Baseline Cross Validation Score<a class="anchor-link" href="#Baseline-Cross-Validation-Score">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">cross_val_score</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Baesline with default parameters: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="k">np</span>.mean(
-        <span class="n">cross_val_score</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Baesline with default parameters: 0.967
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Viewing-Randomized-Grid-Score">Viewing Randomized Grid Score<a class="anchor-link" href="#Viewing-Randomized-Grid-Score">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The grid scores attribute is now depricated, </span>
-<span class="c1">#but I&#39;ll use it till its completely gone</span>
-<span class="n">random_search</span><span class="o">.</span><span class="n">grid_scores_</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1242,46 +1099,211 @@ CV Accuracy of best parameters: 0.967
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/Kavi/anaconda/envs/tensorflow/lib/python3.6/site-packages/sklearn/model_selection/_search.py:761: DeprecationWarning: The grid_scores_ attribute was deprecated in version 0.18 in favor of the more elaborate cv_results_ attribute. The grid_scores_ attribute will not be available from 0.20
-  DeprecationWarning)
+<pre>100%|██████████| 5/5 [00:05&lt;00:00,  1.00s/it]
 </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 6},
- mean: 0.94000, std: 0.06289, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 2},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 3},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 8},
- mean: 0.96667, std: 0.04472, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 4},
- mean: 0.95333, std: 0.05207, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 7},
- mean: 0.96000, std: 0.04422, params: {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 10},
- mean: 0.96000, std: 0.05333, params: {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 2}]</pre>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 5/5 [00:05&lt;00:00,  1.00s/it]
+</pre>
 </div>
-
 </div>
 
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Manualy-Updating-Progress-Bar">Manualy Updating Progress Bar<a class="anchor-link" href="#Manualy-Updating-Progress-Bar">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span> 
+    <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">counter</span><span class="o">+=</span> <span class="mi">10</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 100/100 [00:10&lt;00:00,  9.95it/s]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Updating-Progress-Bar-Description">Updating Progress Bar Description<a class="anchor-link" href="#Updating-Progress-Bar-Description">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Processing </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">char</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Processing d: 100%|██████████| 4/4 [00:02&lt;00:00,  1.98it/s]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Processing Page: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">char</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Processing Page: 9: 100%|██████████| 10/10 [00:05&lt;00:00,  1.98it/s]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Nested-TQDM-Progress-Bar">Nested TQDM Progress Bar<a class="anchor-link" href="#Nested-TQDM-Progress-Bar">&#182;</a></h3><p>There is current a small bug with nested for loop functions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for i in tqdm(range(2)):</span>
+<span class="c1">#     for i in tqdm(range(2)):</span>
+<span class="c1">#         time.sleep(1)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you run the commented out codef from above you will notice that each time the progress bar updates in your Jupyter notebook a new line for the progress bar is created . We can get around this by using tqdm HTML progress bar that the team created for notebooks.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The new cv_results attribute outpute our results in JSON</span>
-<span class="c1"># Throw it in a dataframe to make some sense of it</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tnrange</span><span class="p">,</span> <span class="n">tqdm_notebook</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">sleep</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tnrange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;1st loop&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">tqdm_notebook</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;2nd loop&#39;</span><span class="p">):</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1294,252 +1316,94 @@ CV Accuracy of best parameters: 0.967
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>mean_fit_time</th>
-      <th>std_fit_time</th>
-      <th>mean_score_time</th>
-      <th>std_score_time</th>
-      <th>param_weights</th>
-      <th>param_p</th>
-      <th>param_n_neighbors</th>
-      <th>params</th>
-      <th>split0_test_score</th>
-      <th>split1_test_score</th>
-      <th>...</th>
-      <th>split2_train_score</th>
-      <th>split3_train_score</th>
-      <th>split4_train_score</th>
-      <th>split5_train_score</th>
-      <th>split6_train_score</th>
-      <th>split7_train_score</th>
-      <th>split8_train_score</th>
-      <th>split9_train_score</th>
-      <th>mean_train_score</th>
-      <th>std_train_score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.000270</td>
-      <td>0.000036</td>
-      <td>0.000499</td>
-      <td>0.000112</td>
-      <td>uniform</td>
-      <td>2</td>
-      <td>5</td>
-      <td>{'weights': 'uniform', 'p': 2, 'n_neighbors': 5}</td>
-      <td>1.0</td>
-      <td>0.933333</td>
-      <td>...</td>
-      <td>0.962963</td>
-      <td>0.970370</td>
-      <td>0.985185</td>
-      <td>0.962963</td>
-      <td>0.977778</td>
-      <td>0.962963</td>
-      <td>0.962963</td>
-      <td>0.97037</td>
-      <td>0.968889</td>
-      <td>0.007258</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.000277</td>
-      <td>0.000020</td>
-      <td>0.000480</td>
-      <td>0.000070</td>
-      <td>uniform</td>
-      <td>2</td>
-      <td>6</td>
-      <td>{'weights': 'uniform', 'p': 2, 'n_neighbors': 6}</td>
-      <td>1.0</td>
-      <td>0.933333</td>
-      <td>...</td>
-      <td>0.970370</td>
-      <td>0.977778</td>
-      <td>0.985185</td>
-      <td>0.955556</td>
-      <td>0.985185</td>
-      <td>0.970370</td>
-      <td>0.970370</td>
-      <td>0.97037</td>
-      <td>0.972593</td>
-      <td>0.008148</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.000273</td>
-      <td>0.000019</td>
-      <td>0.000436</td>
-      <td>0.000024</td>
-      <td>uniform</td>
-      <td>1</td>
-      <td>2</td>
-      <td>{'weights': 'uniform', 'p': 1, 'n_neighbors': 2}</td>
-      <td>1.0</td>
-      <td>0.933333</td>
-      <td>...</td>
-      <td>0.970370</td>
-      <td>0.977778</td>
-      <td>0.970370</td>
-      <td>0.962963</td>
-      <td>0.985185</td>
-      <td>0.970370</td>
-      <td>0.970370</td>
-      <td>0.97037</td>
-      <td>0.972593</td>
-      <td>0.005785</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 33 columns</p>
-</div>
+ 
+ 
+<div id="f207095c-6c10-4885-b139-03b99686cfd1"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#f207095c-6c10-4885-b139-03b99686cfd1');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "bbdaddce77414ef3998f703333122564", "version_major": 2, "version_minor": 0}
+</script>
 </div>
 
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+
+ 
+ 
+<div id="052e4a23-2358-442a-b74a-ffc941b46e16"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#052e4a23-2358-442a-b74a-ffc941b46e16');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "6d530f54d2cb42e5b3adacdbcb54cc2c", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+
+ 
+ 
+<div id="27f99f1c-8bd4-4ffd-99fc-6f41bf199622"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#27f99f1c-8bd4-4ffd-99fc-6f41bf199622');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "76fa034ada7244648047e2a24b340049", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
 </div>
 
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Here is the raw output</span>
-<span class="n">random_search</span><span class="o">.</span><span class="n">cv_results_</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The output from the last cell above dose not render correctly on my website so here is a picture of showing output type. Feel free to run the code above to view the results in Juptyer.</p>
+<p><img src="https://warehouse-camo.cmh1.psfhosted.org/014eb02d3af7cf3d1e389d052333bf434a6921e2/68747470733a2f2f6769746875622e636f6d2f62737472696e65722f6b657261732d7471646d2f7261772f6d61737465722f646f63732f696d616765732f6c656176655f696e6e65725f547275652e706e67" alt="img"></p>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[9]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{&#39;mean_fit_time&#39;: array([0.00026991, 0.00027733, 0.00027254, 0.00025287, 0.0002615 ,
-        0.00026371, 0.0002893 , 0.00025344, 0.00025284, 0.00027139]),
- &#39;std_fit_time&#39;: array([3.61297300e-05, 2.04961784e-05, 1.91800153e-05, 1.24148105e-05,
-        3.63166831e-05, 2.07953627e-05, 7.74256544e-05, 1.33292832e-05,
-        1.25028894e-05, 4.69197890e-05]),
- &#39;mean_score_time&#39;: array([0.00049944, 0.00047967, 0.00043576, 0.00044491, 0.00044494,
-        0.00049927, 0.0004462 , 0.0004365 , 0.00044463, 0.00045156]),
- &#39;std_score_time&#39;: array([1.11876495e-04, 6.98170411e-05, 2.39042539e-05, 2.31534885e-05,
-        2.36329944e-05, 6.97777868e-05, 2.43472535e-05, 2.11077342e-05,
-        2.22234893e-05, 4.22938700e-05]),
- &#39;param_weights&#39;: masked_array(data=[&#39;uniform&#39;, &#39;uniform&#39;, &#39;uniform&#39;, &#39;uniform&#39;, &#39;distance&#39;,
-                    &#39;distance&#39;, &#39;distance&#39;, &#39;uniform&#39;, &#39;uniform&#39;,
-                    &#39;distance&#39;],
-              mask=[False, False, False, False, False, False, False, False,
-                    False, False],
-        fill_value=&#39;?&#39;,
-             dtype=object),
- &#39;param_p&#39;: masked_array(data=[2, 2, 1, 2, 2, 2, 2, 1, 1, 2],
-              mask=[False, False, False, False, False, False, False, False,
-                    False, False],
-        fill_value=&#39;?&#39;,
-             dtype=object),
- &#39;param_n_neighbors&#39;: masked_array(data=[5, 6, 2, 10, 3, 8, 4, 7, 10, 2],
-              mask=[False, False, False, False, False, False, False, False,
-                    False, False],
-        fill_value=&#39;?&#39;,
-             dtype=object),
- &#39;params&#39;: [{&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 5},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 6},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 2},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 10},
-  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 3},
-  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 8},
-  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 4},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 7},
-  {&#39;weights&#39;: &#39;uniform&#39;, &#39;p&#39;: 1, &#39;n_neighbors&#39;: 10},
-  {&#39;weights&#39;: &#39;distance&#39;, &#39;p&#39;: 2, &#39;n_neighbors&#39;: 2}],
- &#39;split0_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
- &#39;split1_test_score&#39;: array([0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.93333333,
-        0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.93333333]),
- &#39;split2_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
- &#39;split3_test_score&#39;: array([1.        , 1.        , 0.93333333, 1.        , 0.93333333,
-        1.        , 0.93333333, 1.        , 0.93333333, 0.93333333]),
- &#39;split4_test_score&#39;: array([0.86666667, 0.86666667, 0.86666667, 1.        , 0.86666667,
-        0.86666667, 0.86666667, 0.86666667, 1.        , 0.86666667]),
- &#39;split5_test_score&#39;: array([0.93333333, 0.93333333, 1.        , 0.86666667, 1.        ,
-        0.93333333, 1.        , 0.86666667, 0.86666667, 1.        ]),
- &#39;split6_test_score&#39;: array([0.93333333, 0.93333333, 0.8       , 0.93333333, 0.93333333,
-        0.93333333, 0.93333333, 0.93333333, 0.93333333, 0.86666667]),
- &#39;split7_test_score&#39;: array([1.        , 1.        , 0.93333333, 0.93333333, 1.        ,
-        1.        , 1.        , 0.93333333, 0.93333333, 1.        ]),
- &#39;split8_test_score&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]),
- &#39;split9_test_score&#39;: array([1.        , 1.        , 0.93333333, 1.        , 1.        ,
-        1.        , 1.        , 1.        , 1.        , 1.        ]),
- &#39;mean_test_score&#39;: array([0.96666667, 0.96666667, 0.94      , 0.96666667, 0.96666667,
-        0.96666667, 0.96666667, 0.95333333, 0.96      , 0.96      ]),
- &#39;std_test_score&#39;: array([0.04472136, 0.04472136, 0.06289321, 0.04472136, 0.04472136,
-        0.04472136, 0.04472136, 0.05206833, 0.04422166, 0.05333333]),
- &#39;rank_test_score&#39;: array([ 1,  1, 10,  1,  1,  1,  1,  9,  7,  7], dtype=int32),
- &#39;split0_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97037037, 1.        ,
-        1.        , 1.        , 0.96296296, 0.95555556, 1.        ]),
- &#39;split1_train_score&#39;: array([0.97037037, 0.97037037, 0.97777778, 0.98518519, 1.        ,
-        1.        , 1.        , 0.97777778, 0.96296296, 1.        ]),
- &#39;split2_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
-        1.        , 1.        , 0.96296296, 0.97037037, 1.        ]),
- &#39;split3_train_score&#39;: array([0.97037037, 0.97777778, 0.97777778, 0.97777778, 1.        ,
-        1.        , 1.        , 0.97037037, 0.96296296, 1.        ]),
- &#39;split4_train_score&#39;: array([0.98518519, 0.98518519, 0.97037037, 0.97777778, 1.        ,
-        1.        , 1.        , 0.98518519, 0.97037037, 1.        ]),
- &#39;split5_train_score&#39;: array([0.96296296, 0.95555556, 0.96296296, 0.97037037, 1.        ,
-        1.        , 1.        , 0.96296296, 0.96296296, 1.        ]),
- &#39;split6_train_score&#39;: array([0.97777778, 0.98518519, 0.98518519, 0.98518519, 1.        ,
-        1.        , 1.        , 0.97037037, 0.97037037, 1.        ]),
- &#39;split7_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
-        1.        , 1.        , 0.97037037, 0.97037037, 1.        ]),
- &#39;split8_train_score&#39;: array([0.96296296, 0.97037037, 0.97037037, 0.97777778, 1.        ,
-        1.        , 1.        , 0.97037037, 0.96296296, 1.        ]),
- &#39;split9_train_score&#39;: array([0.97037037, 0.97037037, 0.97037037, 0.96296296, 1.        ,
-        1.        , 1.        , 0.95555556, 0.94074074, 1.        ]),
- &#39;mean_train_score&#39;: array([0.96888889, 0.97259259, 0.97259259, 0.9762963 , 1.        ,
-        1.        , 1.        , 0.96888889, 0.96296296, 1.        ]),
- &#39;std_train_score&#39;: array([0.00725775, 0.00814815, 0.00578537, 0.00645763, 0.        ,
-        0.        , 0.        , 0.00797802, 0.00876456, 0.        ])}</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
