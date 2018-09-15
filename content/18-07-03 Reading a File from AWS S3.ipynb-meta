@@ -1,10 +1,11 @@
 Title: Reading a File from AWS S3
 Slug: Reading a File from AWS S3
-Date: 2018-6-17
+Date: 2018-7-03 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:This notebook connects to a public bucket on AWS's S3, and pull down CVS file from one of our public buckets. In this case, the code pulls down ..
+Author: Kavi Sekhon
+Summary: This notebook connects to a public bucket on AWS's S3, and pull down CVS file from one of our public buckets. In this case, the code pulls down ..
+
 {
  "cells": [
   {
@@ -179,4 +180,4 @@ Summary:This notebook connects to a public bucket on AWS's S3, and pull down CVS
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-07-03 Reading a File from AWS S3.ipynb.txt
+#35

@@ -1,10 +1,11 @@
 Title: Label Encoding
 Slug: Label Encoding
-Date: 2018-6-19
+Date: 2018-7-24 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Encoding a categorical feature into numeric values before processing the data through your machine learning model is now easier than ever, give..
+Author: Kavi Sekhon
+Summary: Encoding a categorical feature into numeric values before processing the data through your machine learning model is now easier than ever, give..
+
 {
  "cells": [
   {
@@ -377,4 +378,4 @@ Summary:Encoding a categorical feature into numeric values before processing the
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-07-24 Label Encoding.ipynb.txt
+#30

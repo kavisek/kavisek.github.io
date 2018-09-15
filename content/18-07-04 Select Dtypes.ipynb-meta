@@ -1,10 +1,11 @@
 Title: Using Select Dtypes
 Slug: Using Select Dtypes
-Date: 2018-5-22
+Date: 2018-7-04 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Once you get used to using pandas, filtering dataframe for content quickly and efficiently can be a huge asset. Pandas introduced a new feature ..
+Author: Kavi Sekhon
+Summary: Once you get used to using pandas, filtering dataframe for content quickly and efficiently can be a huge asset. Pandas introduced a new feature ..
+
 {
  "cells": [
   {
@@ -988,4 +989,4 @@ Summary:Once you get used to using pandas, filtering dataframe for content quick
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-07-04 Select Dtypes.ipynb.txt
+#33

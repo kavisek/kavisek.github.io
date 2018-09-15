@@ -1,10 +1,11 @@
 Title: Standardization
 Slug: Standardization
-Date: 2018-6-8
+Date: 2018-8-01 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:As I have learned recently from a recent model. Standardization is recommended before training any machine learning model. If you wanted to scal..
+Author: Kavi Sekhon
+Summary: As I have learned recently from a recent model. Standardization is recommended before training any machine learning model. If you wanted to scal..
+
 {
  "cells": [
   {
@@ -495,4 +496,4 @@ Summary:As I have learned recently from a recent model. Standardization is recom
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-01 Standardizations.ipynb.txt
+#15

@@ -1,10 +1,11 @@
 Title: Resampling Datetime
 Slug: Resampling Datetime
-Date: 2018-6-24
+Date: 2018-7-07 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:When plotting times series data it becomes advantageous to reframe and aggregate the data by a period of time. Data Scientists that deal with ti..
+Author: Kavi Sekhon
+Summary: When plotting times series data it becomes advantageous to reframe and aggregate the data by a period of time. Data Scientists that deal with ti..
+
 {
  "cells": [
   {
@@ -937,4 +938,4 @@ Summary:When plotting times series data it becomes advantageous to reframe and a
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-07-07 Resampling Datetime.ipynb.txt
+#32

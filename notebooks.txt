@@ -1,3 +1,5 @@
+18-09-14 Random Forest Classifier.ipynb
+18-09-11 Hierarchical Clustering.ipynb
 18-09-15 Model Stacking.ipynb
 18-09-10 Linear Regression.ipynb
 18-09-05 Dropping Features.ipynb
@@ -12,9 +14,9 @@
 18-08-01 Dimensional Pivot Table.ipynb
 18-08-01 Heatmaps.ipynb
 18-08-01 Standardizations.ipynb
-18-08-01 Handling Missing Data.ipynb
+18-08-01 Null Values.ipynb
 18-08-01 K-Nearest Neighbours Classifier.ipynb
-18-08-01 Random Forest Classifier.ipynb
+18-09-14 Random Forest Classifier.ipynb
 18-08-01 Decision Tree Classifier.ipynb
 18-08-01 Cross Validation and K-Folds.ipynb
 18-08-01 Train-Test Split.ipynb

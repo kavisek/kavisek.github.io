@@ -1,10 +1,11 @@
 Title: Recursive Feature Elimination
 Slug: Recursive Feature Elimination
-Date: 2018-5-2
+Date: 2018-8-01 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Recursive Feature Elimination is a method of reducing the number of features within your model using the coefficients of the linear model. The m..
+Author: Kavi Sekhon
+Summary: Recursive Feature Elimination is a method of reducing the number of features within your model using the coefficients of the linear model. The m..
+
 {
  "cells": [
   {
@@ -167,4 +168,4 @@ Summary:Recursive Feature Elimination is a method of reducing the number of feat
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-01 Recursive Feature Elimination.ipynb.txt
+#22

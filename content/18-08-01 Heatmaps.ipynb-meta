@@ -1,10 +1,11 @@
 Title: Heatmaps
 Slug: Heatmaps
-Date: 2018-6-12
+Date: 2018-8-01 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Heatmaps are crazy useful. I use them as diagnostic plots to take a look at the feature correlation in my data frame and to understand the cro..
+Author: Kavi Sekhon
+Summary: Heatmaps are crazy useful. I use them as diagnostic plots to take a look at the feature correlation in my data frame and to understand the cro..
+
 {
  "cells": [
   {
@@ -225,4 +226,4 @@ Summary:Heatmaps are crazy useful. I use them as diagnostic plots to take a look
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-01 Heatmaps.ipynb.txt
+#14

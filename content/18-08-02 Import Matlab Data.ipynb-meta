@@ -1,10 +1,11 @@
 Title: Import Matlab Data
 Slug: Import Matlab Data
-Date: 2018-5-5
+Date: 2018-8-02 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Some data that is provided by universities appears as a .mat file. These file type is unique to matplotlib and can be imported via the io functi..
+Author: Kavi Sekhon
+Summary: Some data that is provided by universities appears as a .mat file. These file type is unique to matplotlib and can be imported via the io functi..
+
 {
  "cells": [
   {
@@ -246,4 +247,4 @@ Summary:Some data that is provided by universities appears as a .mat file. These
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-02 Import Matlab Data.ipynb.txt
+#10

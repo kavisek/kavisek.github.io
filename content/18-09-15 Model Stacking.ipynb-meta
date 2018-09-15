@@ -1,10 +1,11 @@
 Title: Model Stacking
 Slug: Model Stacking
-Date: 2018-6-26
+Date: 2018-9-15 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Modelstacking is the process is using a initial model to preprocess additional feature for both your training and testing set. The initial model..
+Author: Kavi Sekhon
+Summary: Modelstacking is the process is using a initial model to preprocess additional feature for both your training and testing set. The initial model..
+
 {
  "cells": [
   {
@@ -1418,4 +1419,4 @@ Summary:Modelstacking is the process is using a initial model to preprocess addi
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-09-15 Model Stacking.ipynb.txt
+#3

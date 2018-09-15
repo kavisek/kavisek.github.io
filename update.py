@@ -4,7 +4,7 @@
 # # Update Website Notebook Content
 # ### Find the Path to Specific File (First Match)
 
-# In[1]:
+# In[6]:
 
 
 # Import Modules
@@ -30,7 +30,7 @@ def find_all_lists(list_of_files, path):
 
 # ### Remove all "-meta" and ".ipynb' from the Content Directory
 
-# In[2]:
+# In[7]:
 
 
 # Final all file names within the content folder
@@ -50,11 +50,11 @@ for file in files_for_deletion:
 
 # ### Find and Copy Files
 
-# In[3]:
+# In[9]:
 
 
 # Open Notebook Text File
-with open('notebooks.txt','r') as f:
+with open('/Users/Kavi/Documents/Blog/notebooks.txt','r') as f:
   list_of_files = f.read().splitlines()
 
 # locate the path to all the files in the notebook text file within the DataScience diretory
@@ -77,7 +77,7 @@ for filepaths in tqdm(source_files):
 
 # ### Writing Meta Files
 
-# In[4]:
+# In[10]:
 
 
 counter = 0
@@ -128,7 +128,7 @@ Summary: {summary}
 
 # ### Removing Text Files
 
-# In[5]:
+# In[11]:
 
 
 # Remove all the text files for the txt path

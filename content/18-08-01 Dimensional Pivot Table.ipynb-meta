@@ -1,10 +1,11 @@
 Title: Simple Pivot Table
 Slug: Simple Pivot Table
-Date: 2018-5-16
+Date: 2018-8-01 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:The panda's crosstab function is really useful for creating when you want to create pivot tables for dimensional features. with one line of code..
+Author: Kavi Sekhon
+Summary: The panda's crosstab function is really useful for creating when you want to create pivot tables for dimensional features. with one line of code..
+
 {
  "cells": [
   {
@@ -218,4 +219,4 @@ Summary:The panda's crosstab function is really useful for creating when you wan
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-01 Dimensional Pivot Table.ipynb.txt
+#13

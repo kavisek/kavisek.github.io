@@ -1,10 +1,11 @@
 Title: Using the OS Module
 Slug: Using the OS Module
-Date: 2018-5-27
+Date: 2018-6-23 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:This notebook is a combination of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These t..
+Author: Kavi Sekhon
+Summary: This notebook is a combination of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These t..
+
 {
  "cells": [
   {
@@ -747,4 +748,4 @@ Summary:This notebook is a combination of little snippets of Python code from Py
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-06-23 Using OS Module.ipynb.txt
+#38

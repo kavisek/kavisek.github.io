@@ -1,10 +1,11 @@
 Title: Downsampling
 Slug: Downsampling
-Date: 2018-6-21
+Date: 2018-8-02 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary: In supervised learning, many datasets contain data that is class imbalanced. Therefore you will have to downsample the majority class to match ..
+Author: Kavi Sekhon
+Summary:  In supervised learning, many datasets contain data that is class imbalanced. Therefore you will have to downsample the majority class to match ..
+
 {
  "cells": [
   {
@@ -439,4 +440,4 @@ Summary: In supervised learning, many datasets contain data that is class imbala
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-02 Downsampling.ipynb.txt
+#9

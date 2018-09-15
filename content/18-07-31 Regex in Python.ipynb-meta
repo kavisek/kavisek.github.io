@@ -1,10 +1,11 @@
 Title: Regex in Python
 Slug: Regex in Python
-Date: 2018-5-16
+Date: 2018-7-31 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:As you deal with more and messier string data, regex starts becoming a very valuable skill that can save you a lot of time. It also has a second..
+Author: Kavi Sekhon
+Summary: As you deal with more and messier string data, regex starts becoming a very valuable skill that can save you a lot of time. It also has a second..
+
 {
  "cells": [
   {
@@ -245,4 +246,4 @@ Summary:As you deal with more and messier string data, regex starts becoming a v
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-07-31 Regex in Python.ipynb.txt
+#27

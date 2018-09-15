@@ -1,10 +1,11 @@
 Title: Every Matplotlib Plot Linestyle
 Slug: Every Matplotlib Plot Linestyle
-Date: 2018-5-26
+Date: 2018-6-06 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Matplotlib has many lifestyles for its line plots. Sometimes is hard to visualize each lifestyle from just its line marker. Therefore I created ..
+Author: Kavi Sekhon
+Summary: Matplotlib has many lifestyles for its line plots. Sometimes is hard to visualize each lifestyle from just its line marker. Therefore I created ..
+
 {
  "cells": [
   {
@@ -199,4 +200,4 @@ Summary:Matplotlib has many lifestyles for its line plots. Sometimes is hard to 
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-06-06 Every Matplotlib Plot Linestyle.ipynb.txt
+#39

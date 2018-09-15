@@ -1,10 +1,11 @@
 Title: Confusion Matrices
 Slug: Confusion Matrices
-Date: 2018-5-17
+Date: 2018-8-31 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Confusion matrices are commonly used in most classifications problems. I used constantly in a recent fraud detection challenge to see the potent..
+Author: Kavi Sekhon
+Summary: Confusion matrices are commonly used in most classifications problems. I used constantly in a recent fraud detection challenge to see the potent..
+
 {
  "cells": [
   {
@@ -544,4 +545,4 @@ Summary:Confusion matrices are commonly used in most classifications problems. I
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-31 Confusion Matrices.ipynb.txt
+#8

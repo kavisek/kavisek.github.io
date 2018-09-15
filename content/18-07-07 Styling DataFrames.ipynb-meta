@@ -1,10 +1,11 @@
 Title: Styling a DataFrame
 Slug: Styling a DataFrame
-Date: 2018-6-19
+Date: 2018-7-07 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Styling a data frame is pleasant a surprising amount of times. You can define a coloring function for your data frame then apply the styling whe..
+Author: Kavi Sekhon
+Summary: Styling a data frame is pleasant a surprising amount of times. You can define a coloring function for your data frame then apply the styling whe..
+
 {
  "cells": [
   {
@@ -1551,4 +1552,4 @@ Summary:Styling a data frame is pleasant a surprising amount of times. You can d
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-07-07 Styling DataFrames.ipynb.txt
+#31

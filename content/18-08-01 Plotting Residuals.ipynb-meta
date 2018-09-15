@@ -1,10 +1,11 @@
 Title: Plotting Residuals
 Slug: Plotting Residuals
-Date: 2018-5-18
+Date: 2018-8-01 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Plotting you residuals for regression problems is crazy useful. This is another diagnostic plot that you can use to figure out if you did someth..
+Author: Kavi Sekhon
+Summary: Plotting you residuals for regression problems is crazy useful. This is another diagnostic plot that you can use to figure out if you did someth..
+
 {
  "cells": [
   {
@@ -149,4 +150,4 @@ Summary:Plotting you residuals for regression problems is crazy useful. This is 
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-01 Plotting Residuals.ipynb.txt
+#11

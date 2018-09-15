@@ -1,10 +1,11 @@
 Title: Tools of a Data Scientist
 Slug: Tools of a Data Scientist
-Date: 2018-6-18
+Date: 2018-8-01 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. No..
+Author: Kavi Sekhon
+Summary: This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. No..
+
 {
  "cells": [
   {
@@ -129,4 +130,4 @@ Summary:This is a comprehensive list of the main tools I use in my workflow. Plu
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-08-01 Tools of a Data Scientist.ipynb.txt
+#25

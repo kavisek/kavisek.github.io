@@ -1,10 +1,11 @@
 Title: Dropping Features
 Slug: Dropping Features
-Date: 2018-5-7
+Date: 2018-9-05 00:00
 Category: Novice
 Tags: Python
-author: Kavi Sekhon
-Summary:Dropping feature is a common task in cleaning data. I use Pandas to drop the majority of features and observations in my workflow. Below is an e..
+Author: Kavi Sekhon
+Summary: Dropping feature is a common task in cleaning data. I use Pandas to drop the majority of features and observations in my workflow. Below is an e..
+
 {
  "cells": [
   {
@@ -2327,4 +2328,4 @@ Summary:Dropping feature is a common task in cleaning data. I use Pandas to drop
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#/Users/Kavi/Documents/Blog/content/18-09-05 Dropping Features.ipynb.txt
+#5
