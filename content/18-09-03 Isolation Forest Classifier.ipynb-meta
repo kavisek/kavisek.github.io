@@ -1,12 +1,12 @@
 Title: Isolation Forest Classifier
-Slug: Isolation Forest Classifier
 Date: 2018-9-03 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Isolation Forest Classifier
 Author: Kavi Sekhon
 Summary: The isolation forest algorithm is similar to a random forest algorithm but is modified to detect the anomalies within the data. The algorithm ge..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -496,4 +496,4 @@ Summary: The isolation forest algorithm is similar to a random forest algorithm 
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#7
+#10

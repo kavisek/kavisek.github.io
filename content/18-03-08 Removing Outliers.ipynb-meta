@@ -1,12 +1,12 @@
 Title: Removing Outliers
-Slug: Removing Outliers
 Date: 2018-3-08 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Removing Outliers
 Author: Kavi Sekhon
 Summary: How to handle outliers in a dataset requires a bit of intuition and domain expertise to get right for descriptive and predictive analytics. Yet ..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",

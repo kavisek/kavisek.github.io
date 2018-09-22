@@ -1,12 +1,12 @@
 Title: Heatmaps
-Slug: Heatmaps
 Date: 2018-8-01 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Heatmaps
 Author: Kavi Sekhon
 Summary: Heatmaps are crazy useful. I use them as diagnostic plots to take a look at the feature correlation in my data frame and to understand the cro..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -226,4 +226,4 @@ Summary: Heatmaps are crazy useful. I use them as diagnostic plots to take a loo
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#14
+#18

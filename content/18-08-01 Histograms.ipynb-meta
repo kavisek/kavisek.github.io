@@ -1,12 +1,12 @@
 Title: Histograms
-Slug: Histograms
 Date: 2018-8-01 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Histograms
 Author: Kavi Sekhon
 Summary:  Plotting histograms for distributions is a common task in every dataset. The basic blue histogram can be boring and dull in matplotlib. Therefo..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -701,4 +701,4 @@ Summary:  Plotting histograms for distributions is a common task in every datase
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#12
+#16

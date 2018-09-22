@@ -1,12 +1,12 @@
 Title: Connecting to a Database with SHH
-Slug: Connecting to a Database with SHH
 Date: 2018-7-03 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Connecting to a Database with SHH
 Author: Kavi Sekhon
 Summary: This notebook connects to a local (or remote) database that uses an SSH tunnel and runs an SQL query to wrangle some data that we require for ou..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -296,4 +296,4 @@ Summary: This notebook connects to a local (or remote) database that uses an SSH
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#37
+#39

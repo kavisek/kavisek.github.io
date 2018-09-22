@@ -1,12 +1,12 @@
 Title: Binning Feature
-Slug: Binning Feature
 Date: 2018-7-24 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Binning Feature
 Author: Kavi Sekhon
 Summary: The binning of data into a few categorical groups can help us see the summarize the sparse continuous values to a few data points. This can be u..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -461,10 +461,10 @@ Summary: The binning of data into a few categorical groups can help us see the s
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.6"
+   "version": "3.6.5"
   }
  },
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#28
+#30

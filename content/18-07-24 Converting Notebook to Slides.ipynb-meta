@@ -1,12 +1,12 @@
 Title: Convering Notebook to Slides
-Slug: Convering Notebook to Slides
 Date: 2018-7-24 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Convering Notebook to Slides
 Author: Kavi Sekhon
 Summary: You can convert any notebook to slides using the following commands. Note that scrolling for fragments is now disabled by default. You can enabl..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -58,4 +58,4 @@ Summary: You can convert any notebook to slides using the following commands. No
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#29
+#31

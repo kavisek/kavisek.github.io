@@ -1,12 +1,12 @@
 Title: Randomized Grid Search
-Slug: Randomized Grid Search
 Date: 2018-8-01 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Randomized Grid Search
 Author: Kavi Sekhon
 Summary: Manual hyperparameter searching? No way. Scikit Learn has a got an amazing random grid search function that can give us a hint into the best par..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -548,4 +548,4 @@ Summary: Manual hyperparameter searching? No way. Scikit Learn has a got an amaz
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#23
+#26

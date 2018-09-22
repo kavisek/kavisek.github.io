@@ -1,12 +1,12 @@
 Title: Downsampling
-Slug: Downsampling
 Date: 2018-8-02 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Downsampling
 Author: Kavi Sekhon
 Summary:  In supervised learning, many datasets contain data that is class imbalanced. Therefore you will have to downsample the majority class to match ..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -405,7 +405,7 @@ Summary:  In supervised learning, many datasets contain data that is class imbal
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.6"
+   "version": "3.6.5"
   },
   "varInspector": {
    "cols": {
@@ -440,4 +440,4 @@ Summary:  In supervised learning, many datasets contain data that is class imbal
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#9
+#12

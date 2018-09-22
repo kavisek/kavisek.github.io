@@ -1,12 +1,12 @@
 Title: Create Dummy Variables
-Slug: Create Dummy Variables
 Date: 2018-3-28 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Create Dummy Variables
 Author: Kavi Sekhon
 Summary: Pandas to the rescue again. The pandas \"pd.to_dummies\" function can be operated on dataframe to take one categorical feature and create a one-..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",

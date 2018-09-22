@@ -1,5 +1,13 @@
+18-09-20 Hatch, Linestyle, Marker.ipnb
+18-09-19 Hierarchical Clustering.ipynb
+18-09-16 Sparse Matrix.ipynb
+18-09-16 Reweighting Classes.ipynb
+18-09-16 KMeans Clusteringipynb.ipynb
+18-09-16 Dummy Classifier.ipynb
+18-09-14 Gradient Boosting Tree.ipynb
 18-09-14 Random Forest Classifier.ipynb
-18-09-11 Hierarchical Clustering.ipynb
+18-09-13 Time Zone Conversion.ipynb
+18-09-12 PCA.ipynb
 18-09-15 Model Stacking.ipynb
 18-09-10 Linear Regression.ipynb
 18-09-05 Dropping Features.ipynb
@@ -9,6 +17,7 @@
 18-08-02 Downsampling.ipynb
 18-08-02 Import Matlab Data.ipynb
 18-08-02 Grid Search.ipynb
+18-08-01 DBSCAN.ipynb
 18-08-01 Plotting Residuals.ipynb
 18-08-01 Histograms.ipynb
 18-08-01 Dimensional Pivot Table.ipynb
@@ -16,14 +25,12 @@
 18-08-01 Standardizations.ipynb
 18-08-01 Null Values.ipynb
 18-08-01 K-Nearest Neighbours Classifier.ipynb
-18-09-14 Random Forest Classifier.ipynb
 18-08-01 Decision Tree Classifier.ipynb
 18-08-01 Cross Validation and K-Folds.ipynb
 18-08-01 Train-Test Split.ipynb
 18-08-01 Recursive Feature Elimination.ipynb
 18-08-01 Randomized Grid Search.ipynb
 18-08-01 Full Grid Search.ipynb
-18-08-01 DBSCAN.ipynb
 18-08-01 Tools of a Data Scientist.ipynb
 18-07-31 Fizzbuzz.ipynb
 18-07-31 Regex in Python.ipynb
@@ -38,7 +45,5 @@
 18-07-03 Connecting to a Local Database.ipynb
 18-07-03 Connecting to a Database with SHH.ipynb
 18-06-23 Using OS Module.ipynb
-18-06-06 Every Matplotlib Plot Linestyle.ipynb
-18-06-06 Every Matplotlib Plot Marker.ipynb
 18-03-28 Creating Dummy Variables.ipynb
 18-03-08 Removing Outliers.ipynb

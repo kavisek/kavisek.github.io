@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Kavi Sekhon'
 SITENAME = 'Kavi Sekhon'
-SITEURL = 'https://kavisek.github.io'
+SITEURL = 'https://kavisek.github.io'  # SITEURL = 'https://kavisek.github.io'
 
 PATH = 'content'
 THEME = '/Users/Kavi/Documents/Blog/theme/html5-dopetrope'
@@ -21,7 +21,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Github', 'http://github.com/kavisek'),
+LINKS = (('Github', 'https://github.com/kavisek'),
          ('Kaggle', 'https://www.kaggle.com/kavisek/'),
          ('StackExchange',
           'https://stackexchange.com/users/12639256/kavi-sek'),)
@@ -38,7 +38,7 @@ DEFAULT_PAGINATION = 80
 
 MARKUP = ('md', 'ipynb')
 
-PLUGIN_PATH = './plugins'
+PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['ipynb.markup']
 
 STATIC_PATHS = ['images', 'extra/CNAME', 'pdfs', 'pages']
@@ -47,8 +47,13 @@ EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'}, }
 
 # --------- Additional Pelican Configurations --------
 
-# LOAD_CONTENT_CACHE = False
-
+CACHE_CONTENT = False
+CONTENT_CACHING_LAYER = 'reader'
+CACHE_PATH = 'cache'
+GZIP_CACHE = False
+CHECK_MODIFIED_METHOD = 'mtime'
+LOAD_CONTENT_CACHE = False
+WITH_FUTURE_DATES = False
 
 # --------- Additional HMTL5 Configurations --------
 

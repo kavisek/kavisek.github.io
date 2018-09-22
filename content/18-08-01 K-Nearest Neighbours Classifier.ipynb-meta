@@ -1,12 +1,12 @@
 Title: K-Nearest Neighbours Classifier
-Slug: K-Nearest Neighbours Classifier
 Date: 2018-8-01 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: K-Nearest Neighbours Classifier
 Author: Kavi Sekhon
 Summary: KNN is a very simple machine learning algorithim. Given a distance parameter and nearest neighbours parameter. The algorithim use premise that ..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -794,4 +794,4 @@ Summary: KNN is a very simple machine learning algorithim. Given a distance para
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#17
+#21

@@ -1,12 +1,12 @@
 Title: Using the OS Module
-Slug: Using the OS Module
 Date: 2018-6-23 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Using the OS Module
 Author: Kavi Sekhon
 Summary: This notebook is a combination of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These t..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -748,4 +748,4 @@ Summary: This notebook is a combination of little snippets of Python code from P
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#38
+#40

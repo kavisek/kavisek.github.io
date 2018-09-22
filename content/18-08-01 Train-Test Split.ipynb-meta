@@ -1,12 +1,12 @@
 Title: Train-Test Split
-Slug: Train-Test Split
 Date: 2018-8-01 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Train-Test Split
 Author: Kavi Sekhon
 Summary: Spliting a dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be use..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -389,4 +389,4 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#21
+#24

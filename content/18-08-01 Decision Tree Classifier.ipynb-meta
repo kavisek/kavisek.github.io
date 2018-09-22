@@ -1,12 +1,12 @@
 Title: Decision  Tree Classifier
-Slug: Decision  Tree Classifier
 Date: 2018-8-01 00:00
+Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
+Slug: Decision  Tree Classifier
 Author: Kavi Sekhon
 Summary: A decision tree classier is a very simple tree-like model. The classifier will build a decision tree and split the classes by layer heuristics ..
-
-{
+    {
  "cells": [
   {
    "cell_type": "markdown",
@@ -1171,4 +1171,4 @@ Summary: A decision tree classier is a very simple tree-like model. The classifi
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#19
+#22
