@@ -17,7 +17,12 @@ cd /Users/kavi/Documents/Blog/ && pelican content
 echo Content Updated
 
 # Copy Blog README file to output directory
-cp /Users/kavi/Documents/Blog/external/output_readme.md /Users/kavi/Documents/Blog/output/README.md
+cp /Users/kavi/Documents/Blog/README.md /Users/kavi/Documents/Blog/output/README.md
 
 # Sleep 5 Seconds
 sleep 5
+
+# Push to Github Commands
+# source activate main
+# ghp-import output -b master
+# git push origin master
