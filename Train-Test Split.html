@@ -68,7 +68,7 @@
 										</ul>
 									</div>
 
-									<div class="pennant pennant-alt date">Wed 01 August 2018</div>
+									<div class="pennant pennant-alt date">01 Aug 2018</div>
 									<h2>Train-Test Split</h2>
 									<style type="text/css">/*!
 *
@@ -1053,13 +1053,16 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import Modules</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_boston</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1077,7 +1080,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import the data</span>
@@ -1126,10 +1129,139 @@ Dataframe Target Shape: (500,)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 70% training, 30% testing</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 400 points for training, 100 for testing via train size parameter</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+                                                    <span class="n">train_size</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Print the new shapes of our dataframes</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Feature Shape: </span><span class="si">{X_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Target Shape: </span><span class="si">{y_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Target Shape: </span><span class="si">{y_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training Feature Shape: (400, 13)
+Testing Feature Shape: (100, 13)
+Training Target Shape: (400,)
+Testing Target Shape: (100,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 400 points for training, 100 for testing via test size parameter</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Print the new shapes of our dataframes</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Feature Shape: </span><span class="si">{X_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Target Shape: </span><span class="si">{y_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Target Shape: </span><span class="si">{y_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training Feature Shape: (400, 13)
+Testing Feature Shape: (100, 13)
+Training Target Shape: (400,)
+Testing Target Shape: (100,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 70% training, 30% testing via train size parameter</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+                                                    <span class="n">train_size</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Print the new shapes of our dataframes</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Feature Shape: </span><span class="si">{X_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Feature Shape: </span><span class="si">{X_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training Target Shape: </span><span class="si">{y_train.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;Testing Target Shape: </span><span class="si">{y_test.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training Feature Shape: (150, 13)
+Testing Feature Shape: (350, 13)
+Training Target Shape: (150,)
+Testing Target Shape: (350,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 70% training, 30% testing via test size parameter</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
                                                     <span class="n">test_size</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> 
                                                     <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -1177,16 +1309,15 @@ Testing Target Shape: (150,)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 70% training, 20% testing, 20% validation</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Traing-Test Split: 60% training, 20% testing, 20% validation</span>
 <span class="n">X_remain</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_remain</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
-                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.40</span><span class="p">,</span> 
                                                     <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span> <span class="n">X_remain</span><span class="p">,</span> <span class="n">y_remain</span><span class="p">,</span> 
-                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> 
+                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> 
                                                     <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="c1"># Print the new shapes of our dataframes</span>
@@ -1212,13 +1343,13 @@ Testing Target Shape: (150,)
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training Feature Shape: (300, 13)
-Validation Feature Shape: (100, 13)
-Testing Feature Shape: (300, 13)
+<pre>Training Feature Shape: (240, 13)
+Validation Feature Shape: (200, 13)
+Testing Feature Shape: (240, 13)
 
-Training Target Shape: (300,)
-Validation Target Shape: (100, 13)
-Testing Target Shape: (100,)
+Training Target Shape: (240,)
+Validation Target Shape: (200, 13)
+Testing Target Shape: (60,)
 </pre>
 </div>
 </div>
@@ -1448,27 +1579,27 @@ Testing Target Shape: (100,)
 									</header>
 									<ul class="dates">
 										<li>
-											<span class="date">Wed 19 September 2018</span>
+											<span class="date">19 Sep 2018</span>
 											<h3><a href="https://kavisek.github.io/Hierachical Clustering.html">Hierachical Clustering</a></h3>
 											<p><p>Hierarchical Clustering methods are a group of clustering algorithms that clustering data points into larger clusters based on a similarity metr..
 {</p></p>
 										</li>
 										<li>
-											<span class="date">Sun 16 September 2018</span>
+											<span class="date">16 Sep 2018</span>
 											<h3><a href="https://kavisek.github.io/Dummy Classifer.html">Dummy Classifer</a></h3>
-											<p><p>Dummy classifiers are models that follow a heuristic for classification. Something like always \"classify records as class 1\", or \"classify re..
+											<p><p>IIt is useful when developing machine learning models, to be modeling against a benchmark. If your new model cannot beat your benchmark model, t..
 {</p></p>
 										</li>
 										<li>
-											<span class="date">Sun 16 September 2018</span>
+											<span class="date">16 Sep 2018</span>
 											<h3><a href="https://kavisek.github.io/Rewieghting Classes.html">Rewieghting Classes</a></h3>
-											<p><p>If you have class present in your dataest you should rewieght your classes to accuont for the lack in the data. Sklearns implementation of this ..
+											<p><p>If you have a class present in your dataset, you should reweight them to account for the lack in the data. Sklearns implementation of this allow..
 {</p></p>
 										</li>
 										<li>
-											<span class="date">Fri 14 September 2018</span>
-											<h3><a href="https://kavisek.github.io/Random Forest Classifier.html">Random Forest Classifier</a></h3>
-											<p><p>The Random Forest Classifications algorithim use a ensemble of Decision Trees whent training its model. Each decision tree in the ensemble is tr..
+											<span class="date">15 Sep 2018</span>
+											<h3><a href="https://kavisek.github.io/Grandient Boosting Classifier.html">Grandient Boosting Classifier</a></h3>
+											<p><p>Gradient Boosting Trees follow the same type of logic as Random Forest Classifiers, instead of using one tree lets build a ensemble. The key dif..
 {</p></p>
 										</li>
 									</ul>
