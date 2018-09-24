@@ -7,7 +7,7 @@ Note, I have modified my Pelican config file, theme, and file system dramaticall
 
 ### Sources
 
-- Blog Template Instruction: https://towardsdatascience.com/how-to-build-a-data-science-portfolio-5f566517c79c
-- Theme Source (Modified): https://github.com/PierrePaul/html5-dopetrope
-- Making Github Pages HTTPS Secure (Free): https://dev.to/nickymarino/pointing-a-github-pages-repo-to-a-hover-domain-105e
-- Pelican Configuration Documentation: http://docs.getpelican.com/en/stable/settings.html
+- [Blog Template Instruction](https://towardsdatascience.com/how-to-build-a-data-science-portfolio-5f566517c79c)
+- [Theme Source (Modified)](https://github.com/PierrePaul/html5-dopetrope)
+- [Making Github Pages HTTPS Secure (Free)]( https://dev.to/nickymarino/pointing-a-github-pages-repo-to-a-hover-domain-105e)
+- [Pelican Configuration Documentation](http://docs.getpelican.com/en/stable/settings.html)
