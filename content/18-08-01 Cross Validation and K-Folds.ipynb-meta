@@ -1,19 +1,16 @@
 Title: Cross Validation and K-Fold
 Date: 2018-8-01 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Cross Validation and K-Fold
 Author: Kavi Sekhon
-Summary: Cross-Validation is the general scoring technique for the model using only the training data set. The K-Fold cross-validation is a better heuri..
-    {
+Summary: Cross-Validation is the general scoring technique for the model using only the training data set. The K-Fold cross-validation is a better heuri..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
     "\n",
-    "# Cross Validation and K-Fold\n",
     "\n",
     "\n",
     "<span>Cross-Validation is the general scoring technique for the model using only the training data set. The K-Fold cross-validation is a better heuristic for evaluating your model performance by running cross-validation on your training data multiple (K) times. Where each fold is unique from the last. Then taking the scores as the mean from al the cross validation scores.</span>\n",
@@ -210,4 +207,3 @@ Summary: Cross-Validation is the general scoring technique for the model using o
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#23

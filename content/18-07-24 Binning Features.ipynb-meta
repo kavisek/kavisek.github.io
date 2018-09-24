@@ -1,18 +1,15 @@
 Title: Binning Feature
 Date: 2018-7-24 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Binning Feature
 Author: Kavi Sekhon
-Summary: The binning of data into a few categorical groups can help us see the summarize the sparse continuous values to a few data points. This can be u..
-    {
+Summary: The binning of data into a few categorical groups can help us see the summarize the sparse continuous values to a few data points. This can be u..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Binning Feature\n",
     "\n",
     "<span>The binning of data into a few categorical groups can help us see the summarize the sparse continuous values to a few data points. This can be useful in a few machine learning problems and makes it easy to plot data into a few points in a barplot. I use pandas' cut function to bin the data.</span>\n",
     "\n",
@@ -467,4 +464,3 @@ Summary: The binning of data into a few categorical groups can help us see the s
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#30

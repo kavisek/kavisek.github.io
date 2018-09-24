@@ -1,18 +1,15 @@
 Title: Linear Regression
 Date: 2018-9-10 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Linear Regression
 Author: Kavi Sekhon
-Summary: Below is an example of a regression problem using linear regression to predict house prices from a dataset provided on Kaggle. The dataset can b..
-    {
+Summary: Below is an example of a regression problem using linear regression to predict house prices from a dataset provided on Kaggle. The dataset can b..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Linear Regression\n",
     "\n",
     "<span>Below is an example of a regression problem using linear regression to predict house prices from a dataset provided on Kaggle. The dataset can be found at the link below. Note that I have tried to reduce the amount of regularization found in sklearn's implementation of the model. As well as attempting to compare and contrast the performance of both statsmodel's linear regression model and sklearn's linear regression model. I try to avoid a lot of feature engineering here, as this notebook is just an example of the models.</span>\n",
     "\n",
@@ -606,7 +603,7 @@ Summary: Below is an example of a regression problem using linear regression to 
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.5"
+   "version": "3.6.6"
   },
   "varInspector": {
    "cols": {
@@ -641,4 +638,3 @@ Summary: Below is an example of a regression problem using linear regression to 
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#7

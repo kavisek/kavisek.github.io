@@ -1,18 +1,15 @@
 Title: Train-Test Split
 Date: 2018-8-01 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Train-Test Split
 Author: Kavi Sekhon
-Summary: Spliting a dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be use..
-    {
+Summary: Spliting a dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be use..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Train-Test Split\n",
     "\n",
     "<span>Spliting a dataset into a train and test set is the requirement for evaluating any machine learning model. Sklearn's train-test-split can be used to split you data into a test and validation set. For kaggle competition since the training and testing data is often provide, I normally just use this function to split my data my training and validation set</span>\n",
     "\n",
@@ -21,7 +18,7 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 5,
    "metadata": {
     "ExecuteTime": {
      "end_time": "2018-09-11T06:20:18.323346Z",
@@ -33,7 +30,10 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
     "# Import Modules\n",
     "import pandas as pd\n",
     "from sklearn.datasets import load_boston\n",
-    "from sklearn.model_selection import train_test_split"
+    "from sklearn.model_selection import train_test_split\n",
+    "import warnings\n",
+    "\n",
+    "warnings.simplefilter(\"ignore\")"
    ]
   },
   {
@@ -45,7 +45,7 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 6,
    "metadata": {
     "ExecuteTime": {
      "end_time": "2018-09-11T06:20:18.333218Z",
@@ -84,13 +84,100 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 7,
    "metadata": {
     "ExecuteTime": {
      "end_time": "2018-09-11T06:20:18.341295Z",
      "start_time": "2018-09-11T06:20:18.335894Z"
     }
    },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Training Feature Shape: (400, 13)\n",
+      "Testing Feature Shape: (100, 13)\n",
+      "Training Target Shape: (400,)\n",
+      "Testing Target Shape: (100,)\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Traing-Test Split: 400 points for training, 100 for testing via train size parameter\n",
+    "X_train, X_test, y_train, y_test = train_test_split( X, y, \n",
+    "                                                    train_size = 400, \n",
+    "                                                    random_state=5)\n",
+    "\n",
+    "# Print the new shapes of our dataframes\n",
+    "print (f'Training Feature Shape: {X_train.shape}')\n",
+    "print (f'Testing Feature Shape: {X_test.shape}')\n",
+    "print (f'Training Target Shape: {y_train.shape}')\n",
+    "print (f'Testing Target Shape: {y_test.shape}')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Training Feature Shape: (400, 13)\n",
+      "Testing Feature Shape: (100, 13)\n",
+      "Training Target Shape: (400,)\n",
+      "Testing Target Shape: (100,)\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Traing-Test Split: 400 points for training, 100 for testing via test size parameter\n",
+    "X_train, X_test, y_train, y_test = train_test_split( X, y, \n",
+    "                                                    test_size = 100, \n",
+    "                                                    random_state=5)\n",
+    "\n",
+    "# Print the new shapes of our dataframes\n",
+    "print (f'Training Feature Shape: {X_train.shape}')\n",
+    "print (f'Testing Feature Shape: {X_test.shape}')\n",
+    "print (f'Training Target Shape: {y_train.shape}')\n",
+    "print (f'Testing Target Shape: {y_test.shape}')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Training Feature Shape: (150, 13)\n",
+      "Testing Feature Shape: (350, 13)\n",
+      "Training Target Shape: (150,)\n",
+      "Testing Target Shape: (350,)\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Traing-Test Split: 70% training, 30% testing via train size parameter\n",
+    "X_train, X_test, y_train, y_test = train_test_split( X, y, \n",
+    "                                                    train_size=0.30, \n",
+    "                                                    random_state=5)\n",
+    "\n",
+    "# Print the new shapes of our dataframes\n",
+    "print (f'Training Feature Shape: {X_train.shape}')\n",
+    "print (f'Testing Feature Shape: {X_test.shape}')\n",
+    "print (f'Training Target Shape: {y_train.shape}')\n",
+    "print (f'Testing Target Shape: {y_test.shape}')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
    "outputs": [
     {
      "name": "stdout",
@@ -104,7 +191,7 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
     }
    ],
    "source": [
-    "# Traing-Test Split: 70% training, 30% testing\n",
+    "# Traing-Test Split: 70% training, 30% testing via test size parameter\n",
     "X_train, X_test, y_train, y_test = train_test_split( X, y, \n",
     "                                                    test_size=0.30, \n",
     "                                                    random_state=5)\n",
@@ -125,7 +212,7 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 11,
    "metadata": {
     "ExecuteTime": {
      "end_time": "2018-09-11T06:20:18.347787Z",
@@ -137,24 +224,23 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Training Feature Shape: (300, 13)\n",
-      "Validation Feature Shape: (100, 13)\n",
-      "Testing Feature Shape: (300, 13)\n",
+      "Training Feature Shape: (240, 13)\n",
+      "Validation Feature Shape: (200, 13)\n",
+      "Testing Feature Shape: (240, 13)\n",
       "\n",
-      "Training Target Shape: (300,)\n",
-      "Validation Target Shape: (100, 13)\n",
-      "Testing Target Shape: (100,)\n"
+      "Training Target Shape: (240,)\n",
+      "Validation Target Shape: (200, 13)\n",
+      "Testing Target Shape: (60,)\n"
      ]
     }
    ],
    "source": [
-    "# Traing-Test Split: 70% training, 20% testing, 20% validation\n",
+    "# Traing-Test Split: 60% training, 20% testing, 20% validation\n",
     "X_remain, X_val, y_remain, y_val = train_test_split( X, y, \n",
-    "                                                    test_size=0.20, \n",
+    "                                                    test_size=0.40, \n",
     "                                                    random_state=5)\n",
-    "\n",
     "X_train, X_test, y_train, y_test = train_test_split( X_remain, y_remain, \n",
-    "                                                    test_size=0.25, \n",
+    "                                                    test_size=0.20, \n",
     "                                                    random_state=5)\n",
     "\n",
     "# Print the new shapes of our dataframes\n",
@@ -354,7 +440,7 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.6"
+   "version": "3.6.5"
   },
   "varInspector": {
    "cols": {
@@ -389,4 +475,3 @@ Summary: Spliting a dataset into a train and test set is the requirement for eva
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#24

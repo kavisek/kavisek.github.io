@@ -1,18 +1,15 @@
 Title: Resampling Datetime
 Date: 2018-7-07 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Resampling Datetime
 Author: Kavi Sekhon
-Summary: When plotting times series data it becomes advantageous to reframe and aggregate the data by a period of time. Data Scientists that deal with ti..
-    {
+Summary: When plotting times series data it becomes advantageous to reframe and aggregate the data by a period of time. Data Scientists that deal with ti..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Resampling Datetime\n",
     "\n",
     "<span>When plotting times series data it becomes advantageous to reframe and aggregate the data by a period of time. Data Scientists that deal with time series data prefer Pandas because resampling the data become really easy when your data is formatted in the correct manner. To resample a dataframe your datetime values should be in datetime data type and be set t the index of the dataframe.</span>\n",
     "    \n",
@@ -938,4 +935,3 @@ Summary: When plotting times series data it becomes advantageous to reframe and 
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#34

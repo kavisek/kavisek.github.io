@@ -1,18 +1,15 @@
 Title: Randomized Grid Search
 Date: 2018-8-01 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Randomized Grid Search
 Author: Kavi Sekhon
-Summary: Manual hyperparameter searching? No way. Scikit Learn has a got an amazing random grid search function that can give us a hint into the best par..
-    {
+Summary: Manual hyperparameter searching? No way. Scikit Learn has a got an amazing random grid search function that can give us a hint into the best par..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Randomized Grid Search\n",
     "\n",
     "<span>Manual hyperparameter searching? No way. Scikit Learn has a got an amazing random grid search function that can give us a hint into the best parameters by calling its class, setting up a dictionary with all parameters, and letting it fly. This example below his using a K-Nearest Neighbours model for its example. After the Randomize Grid Search is done, you can pull the best parameter for your model, and as well as take a look a the history of the previous combination of parameters.</span>\n",
     "    \n",
@@ -85,7 +82,6 @@ Summary: Manual hyperparameter searching? No way. Scikit Learn has a got an amaz
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "### Randomized Grid Search Score"
    ]
   },
   {
@@ -548,4 +544,3 @@ Summary: Manual hyperparameter searching? No way. Scikit Learn has a got an amaz
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#26

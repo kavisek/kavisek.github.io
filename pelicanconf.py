@@ -31,7 +31,7 @@ LINKS = (('Github', 'https://github.com/kavisek'),
 SOCIAL = (('http://twitter.com/kavisekh', '#'),
           ('Another social link', '#'),)
 
-DEFAULT_PAGINATION = 80
+DEFAULT_PAGINATION = 15
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
@@ -54,6 +54,8 @@ GZIP_CACHE = False
 CHECK_MODIFIED_METHOD = 'mtime'
 LOAD_CONTENT_CACHE = False
 WITH_FUTURE_DATES = False
+DEFAULT_DATE_FORMAT = '%d %b %Y'
+GOOGLE_ANALYTICS = 'UA-126270550-1'
 
 # --------- Additional HMTL5 Configurations --------
 

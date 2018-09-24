@@ -1,18 +1,15 @@
 Title: Dropping Features
 Date: 2018-9-05 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Dropping Features
 Author: Kavi Sekhon
-Summary: Dropping feature is a common task in cleaning data. I use Pandas to drop the majority of features and observations in my workflow. Below is an e..
-    {
+Summary: Dropping feature is a common task in cleaning data. I use Pandas to drop the majority of features and observations in my workflow. Below is an e..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Dropping Features\n",
     "\n",
     "<span>Dropping feature is a common task in cleaning data. I use Pandas to drop the majority of features and observations in my workflow. Below is an example of a column of drop statements in Python. You can find the full documentation on dropping null value on Pandas' documents (link below).</span>\n",
     "\n",
@@ -2328,4 +2325,3 @@ Summary: Dropping feature is a common task in cleaning data. I use Pandas to dro
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#8

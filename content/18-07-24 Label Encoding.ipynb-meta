@@ -1,18 +1,15 @@
 Title: Label Encoding
 Date: 2018-7-24 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Label Encoding
 Author: Kavi Sekhon
-Summary: Encoding a categorical feature into numeric values before processing the data through your machine learning model is now easier than ever, give..
-    {
+Summary: Encoding a categorical feature into numeric values before processing the data through your machine learning model is now easier than ever, give..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Label Encoding\n",
     "\n",
     "<span>Encoding a categorical feature into numeric values before processing the data through your machine learning model is now easier than ever, given that two methods now exist for a data scientist. You can use Pandas category datatype to quickly encode your data, or use the Skearn LabelEncoding class to encode your data. I generally prefer going the Pandas route as Pandas is involved in my main workflow.</span>\n",
     "\n",
@@ -139,7 +136,6 @@ Summary: Encoding a categorical feature into numeric values before processing th
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "### Label Encoding with Pandas"
    ]
   },
   {
@@ -231,7 +227,6 @@ Summary: Encoding a categorical feature into numeric values before processing th
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "### Label Encoding with SkLearn"
    ]
   },
   {
@@ -378,4 +373,3 @@ Summary: Encoding a categorical feature into numeric values before processing th
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#32

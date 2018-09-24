@@ -1,20 +1,16 @@
 Title: PCA
 Date: 2018-9-12 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: PCA
 Author: Kavi Sekhon
-Summary: PCA basically take your feature and compress them into lower feature space while spreading the variance in the data across all the remaining com..
-    {
+Summary: PCA basically take your feature and compress them into lower feature space while spreading the variance in the data across all the remaining com..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# PCA\n",
     "\n",
-    "<span>PCA basically take your feature and compress them into lower feature space while spreading the variance in the data across all the remaining components (features). Intially I found the math behind the  PCA a bit confusing, therefore I have included documentation from sklearn documenation page in thes notebook as well. You can find the link to the documentaton below.</span>\n",
     "\n",
     "Documentation: http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html\n",
     "\n",
@@ -43,7 +39,6 @@ Summary: PCA basically take your feature and compress them into lower feature sp
     "\n",
     "# Import Model Selection \n",
     "from sklearn.datasets import load_iris\n",
-    "from sklearn.decomposition import PCA\n",
     "from sklearn.model_selection import train_test_split, cross_val_score\n",
     "\n",
     "# Set pandas options\n",
@@ -184,7 +179,6 @@ Summary: PCA basically take your feature and compress them into lower feature sp
     }
    ],
    "source": [
-    "# Plot feature map pre PCA\n",
     "sns.heatmap(df, cmap='cividis');\n",
     "plt.title('Iris Feature Heatmap');\n",
     "plt.xticks(rotation=20)\n",
@@ -287,7 +281,6 @@ Summary: PCA basically take your feature and compress them into lower feature sp
    ],
    "source": [
     "# Initialize principal component analysis\n",
-    "pca = PCA().fit(X)\n",
     "pca_train_x = pca.transform(X)\n",
     "pca_train_x_df = pd.DataFrame(data = pca_train_x, \n",
     "                              columns=['component_1','component_2',\n",
@@ -317,7 +310,6 @@ Summary: PCA basically take your feature and compress them into lower feature sp
     }
    ],
    "source": [
-    "# Plot feature map post PCA\n",
     "sns.heatmap(pca_train_x_df, cmap='cividis');\n",
     "plt.title('Iris Feature Heatmap');\n",
     "plt.xticks(rotation=20)\n",
@@ -422,7 +414,6 @@ Summary: PCA basically take your feature and compress them into lower feature sp
     }
    ],
    "source": [
-    "# View PCA components_\n",
     "results = pd.DataFrame(pca.components_, columns = iris.feature_names)\n",
     "results"
    ]
@@ -517,7 +508,6 @@ Summary: PCA basically take your feature and compress them into lower feature sp
    ],
    "source": [
     "# principal component analysis with dimension reduction\n",
-    "pca = PCA(n_components=2).fit(X)\n",
     "pca_train_x = pca.transform(X)\n",
     "pca_train_x_df = pd.DataFrame(data = pca_train_x, columns=['component_1','component_2'])\n",
     "pca_train_x_df.head(5)"
@@ -634,7 +624,6 @@ Summary: PCA basically take your feature and compress them into lower feature sp
     }
    ],
    "source": [
-    "# View PCA components_\n",
     "results = pd.DataFrame(pca.components_, columns = iris.feature_names)\n",
     "results"
    ]
@@ -645,8 +634,6 @@ Summary: PCA basically take your feature and compress them into lower feature sp
    "source": [
     "### General Notes\n",
     "\n",
-    "- If you conduct PCA on a dataset you lose interpretability in your model\n",
-    "- PCA rotates features that are statistically uncorrelated\n",
     "- First find the direction of the feature of the maximum variance\n",
     "- Then find the second feature that is orthogonal to the first feature\n",
     "- Principal components are list from most importanct to least from left to right (respectively)"
@@ -711,4 +698,3 @@ Summary: PCA basically take your feature and compress them into lower feature sp
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#6

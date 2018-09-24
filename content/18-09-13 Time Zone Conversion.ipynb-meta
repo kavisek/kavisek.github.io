@@ -1,20 +1,17 @@
 Title: Time Zone Conversion
 Date: 2018-9-13 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Time Zone Conversion
 Author: Kavi Sekhon
-Summary: Data will not always be in the right format. Most time data is stored in a database in UTC time. Therefore after exporting the data you might ne..
-    {
+Summary: Data will not always be in the right format. Most time data it is stored in a database under the UTC timezone. Therefore after exporting the inf..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Time Zone Conversion\n",
     "\n",
-    "<span>Data will not always be in the right format. Most time data is stored in a database in UTC time. Therefore after exporting the data you might need to change the time to a local or different times zone for some descriptive analysis.</span>\n",
+    "<span>Data will not always be in the right format. Most time data it is stored in a database under the UTC timezone. Therefore after exporting the information, you might need to change the time to a local or different times zone for some descriptive analysis.</span>\n",
     "\n",
     "### Import Preliminaries"
    ]
@@ -51,7 +48,7 @@ Summary: Data will not always be in the right format. Most time data is stored i
     "mpl.rcParams['figure.figsize'] = (8.0, 7.0)\n",
     "\n",
     "# Set warning options\n",
-    "warnings.filterwarnings('ignore');\n"
+    "warnings.filterwarnings('ignore');"
    ]
   },
   {
@@ -183,6 +180,13 @@ Summary: Data will not always be in the right format. Most time data is stored i
    ]
   },
   {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Timezone Modification"
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": 55,
    "metadata": {},
@@ -290,13 +294,6 @@ Summary: Data will not always be in the right format. Most time data is stored i
     "# Convert all time information into Pacific Standard Time\n",
     "timezones.date_time = timezones.date_time.apply(lambda x: x.tz_convert('America/Los_Angeles'))\n",
     "timezones"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "### Strip Timezones"
    ]
   },
   {
@@ -550,4 +547,3 @@ Summary: Data will not always be in the right format. Most time data is stored i
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#5

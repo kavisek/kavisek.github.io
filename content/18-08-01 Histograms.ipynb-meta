@@ -1,18 +1,15 @@
 Title: Histograms
 Date: 2018-8-01 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Histograms
 Author: Kavi Sekhon
-Summary:  Plotting histograms for distributions is a common task in every dataset. The basic blue histogram can be boring and dull in matplotlib. Therefo..
-    {
+Summary:  Plotting histograms for distributions is a common task in every dataset. The basic blue histogram can be boring and dull in matplotlib. Therefo..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Histograms\n",
     "\n",
     "<span> Plotting histograms for distributions is a common task in every dataset. The basic blue histogram can be boring and dull in matplotlib. Therefore I went plotting some histograms using a bunch of packages, attempting to make the plot a bit nicer.</span>\n",
     "\n",
@@ -701,4 +698,3 @@ Summary:  Plotting histograms for distributions is a common task in every datase
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#16

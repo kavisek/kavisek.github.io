@@ -1,18 +1,15 @@
 Title: Null Values
 Date: 2018-8-01 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Null Values
 Author: Kavi Sekhon
-Summary: There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic method..
-    {
+Summary: There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic method..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Null Values\n",
     "\n",
     "<span>There are multiple ways to handle missing data. Some people come up with some very creative solutions. This notebook contains some basic methods to handle missing data. Again your strategy to handle missing data will different with contextual knowledge around the problem with your domain expertise.</span> \n",
     "\n",
@@ -963,4 +960,3 @@ Summary: There are multiple ways to handle missing data. Some people come up wit
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#20

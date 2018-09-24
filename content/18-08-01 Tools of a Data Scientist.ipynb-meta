@@ -1,18 +1,15 @@
 Title: Tools of a Data Scientist
 Date: 2018-8-01 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Tools of a Data Scientist
 Author: Kavi Sekhon
-Summary: This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. No..
-    {
+Summary: This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. No..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Tools of a Data Scientist\n",
     "\n",
     "<span>This is a comprehensive list of the main tools I use in my workflow. Plus an addition section on client related tools I have been exposed to. Note that some of these tools are paid tools, but most are free. Feel free to tackle them in what ever method your wish. For context I mainly work on mac</span>"
    ]
@@ -30,7 +27,7 @@ Summary: This is a comprehensive list of the main tools I use in my workflow. Pl
     "\n",
     "- Docker\n",
     "- Anaconda/Conda\n",
-    "- Apache Spark\n",
+    "- Apache Spark (Learning)\n",
     "- Atom\n",
     "- AWS\n",
     "- Excel\n",
@@ -65,7 +62,7 @@ Summary: This is a comprehensive list of the main tools I use in my workflow. Pl
     "- Scipy\n",
     "- Sklearn\n",
     "- SQL Alchemy\n",
-    "- Tensorflow\n",
+    "- Tensorflow (Learning)\n",
     "- TQDM\n",
     "\n",
     "### Other\n",
@@ -95,7 +92,7 @@ Summary: This is a comprehensive list of the main tools I use in my workflow. Pl
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.6"
+   "version": "3.6.5"
   },
   "varInspector": {
    "cols": {
@@ -130,4 +127,3 @@ Summary: This is a comprehensive list of the main tools I use in my workflow. Pl
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#27

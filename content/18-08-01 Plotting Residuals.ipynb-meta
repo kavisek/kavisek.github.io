@@ -1,18 +1,15 @@
 Title: Plotting Residuals
 Date: 2018-8-01 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Plotting Residuals
 Author: Kavi Sekhon
-Summary: Plotting you residuals for regression problems is crazy useful. This is another diagnostic plot that you can use to figure out if you did someth..
-    {
+Summary: Plotting you residuals for regression problems is crazy useful. This is another diagnostic plot that you can use to figure out if you did someth..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Plotting Residuals\n",
     "\n",
     "<span>Plotting you residuals for regression problems is crazy useful. This is another diagnostic plot that you can use to figure out if you did something incorrectly. Your residuals should look random, if they are not, you probably have an error in your model somewhere. I use the Seaborn residplot to plot all my residuals, the plot works really well with Scikit Learn models and Numpy arrays making it flexible.</span>\n",
     "\n",
@@ -150,4 +147,3 @@ Summary: Plotting you residuals for regression problems is crazy useful. This is
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#15

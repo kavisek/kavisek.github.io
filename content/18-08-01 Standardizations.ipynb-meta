@@ -1,20 +1,16 @@
 Title: Standardization
 Date: 2018-8-01 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Standardization
 Author: Kavi Sekhon
-Summary: As I have learned recently from a recent model. Standardization is recommended before training any machine learning model. If you wanted to scal..
-    {
+Summary: As I have learned recently from a recent model. Standardization is recommended before training any machine learning model. If you wanted to scal..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Standardization\n",
     "\n",
-    "<span>As I have learned recently from a recent model. Standardization is recommended before training any machine learning model. If you wanted to scale your data in unique methods, check out the documentation over in Scikit Learn's documentation. I usually just use the standard scaler in my model unless I notice something that makes me think different.</span>\n",
     "\n",
     "### Import Modules"
    ]
@@ -496,4 +492,3 @@ Summary: As I have learned recently from a recent model. Standardization is reco
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#19

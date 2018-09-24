@@ -1,18 +1,15 @@
 Title: Downsampling
 Date: 2018-8-02 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Downsampling
 Author: Kavi Sekhon
-Summary:  In supervised learning, many datasets contain data that is class imbalanced. Therefore you will have to downsample the majority class to match ..
-    {
+Summary:  In supervised learning, many datasets contain data that is class imbalanced. Therefore you will have to downsample the majority class to match ..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Downsampling\n",
     "\n",
     "<span> In supervised learning, many datasets contain data that is class imbalanced. Therefore you will have to downsample the majority class to match the minority class shape. Below I have created a function that can downsample numpy data.</span>"
    ]
@@ -229,7 +226,6 @@ Summary:  In supervised learning, many datasets contain data that is class imbal
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "### Downsampling Data"
    ]
   },
   {
@@ -292,19 +288,27 @@ Summary:  In supervised learning, many datasets contain data that is class imbal
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "### Creating a Function for Downsampling"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
+   "execution_count": 1,
    "metadata": {
     "ExecuteTime": {
      "end_time": "2018-09-11T07:43:34.637477Z",
      "start_time": "2018-09-11T07:43:34.632375Z"
     }
    },
-   "outputs": [],
+   "outputs": [
+    {
+     "ename": "SyntaxError",
+     "evalue": "invalid syntax (<ipython-input-1-92cca87187bd>, line 1)",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-1-92cca87187bd>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    def binary_random_downsample(X->str, y->int):\u001b[0m\n\u001b[0m                                   ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+     ]
+    }
+   ],
    "source": [
     "def binary_random_downsample(X, y):\n",
     "    '''\n",
@@ -440,4 +444,3 @@ Summary:  In supervised learning, many datasets contain data that is class imbal
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#12

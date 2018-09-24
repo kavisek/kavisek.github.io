@@ -1,18 +1,15 @@
 Title: Fizzbuzz
 Date: 2018-7-31 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Fizzbuzz
 Author: Kavi Sekhon
-Summary: The fizzbuzz question is an basic interview question for coders. Basically write some code that says 'Fizzbuzz' when a value is divisible by 15,..
-    {
+Summary: The fizzbuzz question is an basic interview question for coders. Basically write some code that says 'Fizzbuzz' when a value is divisible by 15,..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Fizzbuzz\n",
     "\n",
     "<span>The fizzbuzz question is an basic interview question for coders. Basically write some code that says 'Fizzbuzz' when a value is divisible by 15, 'fizz' when its divisible by 3, and 'buzz' when the value is divisible by 3. Here is my response.</span>\n",
     "\n",
@@ -156,4 +153,3 @@ Summary: The fizzbuzz question is an basic interview question for coders. Basica
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#28

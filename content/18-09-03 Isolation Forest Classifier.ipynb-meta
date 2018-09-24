@@ -1,18 +1,15 @@
 Title: Isolation Forest Classifier
 Date: 2018-9-03 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Isolation Forest Classifier
 Author: Kavi Sekhon
-Summary: The isolation forest algorithm is similar to a random forest algorithm but is modified to detect the anomalies within the data. The algorithm ge..
-    {
+Summary: The isolation forest algorithm is similar to a random forest algorithm but is modified to detect the anomalies within the data. The algorithm ge..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Isolation Forest Classifier\n",
     "\n",
     "<span>The isolation forest algorithm is similar to a random forest algorithm but is modified to detect the anomalies within the data. The algorithm generates an ensemble of decisions tree that each train on one feature from the training data and are randomly split on a value between the max and min value of that feature. Deep in the tree, random splitting continues. The go of an individual tree is to isolate each value in the data into a node. Once the tree has been fitted we can notice that anomalies are normally segmented into their noted very early on in the splitting process. What the model measures are the number of splits it took to push the anomalies down to its end node. For anomalies, it is common for its value to be segmented early on. Since isolation forest conduct this random over an ensemble of trees its common that on average anomalies with have the shorter path from the center. Therefore isolation forest uses a contamination rate to label points within the shorter pats anomalies.</span>\n",
     "\n",
@@ -461,7 +458,7 @@ Summary: The isolation forest algorithm is similar to a random forest algorithm 
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.6.6"
+   "version": "3.6.5"
   },
   "varInspector": {
    "cols": {
@@ -496,4 +493,3 @@ Summary: The isolation forest algorithm is similar to a random forest algorithm 
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#10

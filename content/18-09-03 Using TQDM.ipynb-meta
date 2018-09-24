@@ -1,18 +1,15 @@
 Title: Using TQDM
 Date: 2018-9-03 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Using TQDM
 Author: Kavi Sekhon
-Summary: TQDM is awesome package. It's really buggy with its progress bar rendering for cells within notebooks, but it work great in Python script that y..
-    {
+Summary: TQDM is awesome package. It's really buggy with its progress bar rendering for cells within notebooks, but it work great in Python script that y..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Using TQDM\n",
     "\n",
     "<span>TQDM is awesome package. It's really buggy with its progress bar rendering for cells within notebooks, but it work great in Python script that your may be running in terminal. I use the package to track the progress of my for loop and my script as they scrape the internet for data. Below are a view example of the some use TQDM snippets.</span>\n",
     "\n",
@@ -362,4 +359,3 @@ Summary: TQDM is awesome package. It's really buggy with its progress bar render
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#9

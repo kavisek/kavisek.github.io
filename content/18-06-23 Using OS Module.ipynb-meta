@@ -1,18 +1,15 @@
 Title: Using the OS Module
 Date: 2018-6-23 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Using the OS Module
 Author: Kavi Sekhon
-Summary: This notebook is a combination of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These t..
-    {
+Summary: This notebook is a combination of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These t..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Using the OS Module\n",
     "\n",
     "<span>This notebook is a combination of little snippets of Python code from Python's OS module that can I found useful for a variety of tasks. These tasks include removing files from directories, moving files from directories, parsing content from the notebook, appending content to files, changing file types, etc. Hopefully, you find some useful code below.</span>\n",
     "\n",
@@ -748,4 +745,3 @@ Summary: This notebook is a combination of little snippets of Python code from P
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#40

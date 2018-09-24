@@ -1,18 +1,15 @@
 Title: Using Select Dtypes
 Date: 2018-7-04 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Using Select Dtypes
 Author: Kavi Sekhon
-Summary: Once you get used to using pandas, filtering dataframe for content quickly and efficiently can be a huge asset. Pandas introduced a new feature ..
-    {
+Summary: Once you get used to using pandas, filtering dataframe for content quickly and efficiently can be a huge asset. Pandas introduced a new feature ..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Using Select Dtypes\n",
     "\n",
     "<span>Once you get used to using pandas, filtering dataframe for content quickly and efficiently can be a huge asset. Pandas introduced a new feature \".select_dtypes\" function that allows you to filter dataframe quickly by dtype values. You can really get create and use this function to operate over you dataframe in more flexible ways, with this code. Check out some of the examples below.</span>\n",
     "\n",
@@ -989,4 +986,3 @@ Summary: Once you get used to using pandas, filtering dataframe for content quic
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#35

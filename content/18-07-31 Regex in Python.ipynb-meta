@@ -1,18 +1,15 @@
 Title: Regex in Python
 Date: 2018-7-31 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Regex in Python
 Author: Kavi Sekhon
-Summary: As you deal with more and messier string data, regex starts becoming a very valuable skill that can save you a lot of time. It also has a second..
-    {
+Summary: As you deal with more and messier string data, regex starts becoming a very valuable skill that can save you a lot of time. It also has a second..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Regex in Python\n",
     "\n",
     "<span>As you deal with more and messier string data, regex starts becoming a very valuable skill that can save you a lot of time. It also has a secondary benefit of making your code a bit more slick (simpler). Below you will find some simple regex that can be very powerful.</span>\n",
     "\n",
@@ -294,4 +291,3 @@ Summary: As you deal with more and messier string data, regex starts becoming a 
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#29

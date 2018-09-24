@@ -1,18 +1,15 @@
 Title: Import Matlab Data
 Date: 2018-8-02 00:00
-Modified: 2018-9-21 00:00
 Category: Novice
 Tags: Python
 Slug: Import Matlab Data
 Author: Kavi Sekhon
-Summary: Some data that is provided by universities appears as a .mat file. These file type is unique to matplotlib and can be imported via the io functi..
-    {
+Summary: Some data that is provided by universities appears as a .mat file. These file type is unique to matplotlib and can be imported via the io functi..{
  "cells": [
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Import Matlab Data\n",
     "\n",
     "<span>Some data that is provided by universities appears as a .mat file. These file type is unique to matplotlib and can be imported via the io function in the Scipy Python package. See an example below using the Forset Cover dataset.</span>\n",
     "    \n",
@@ -247,4 +244,3 @@ Summary: Some data that is provided by universities appears as a .mat file. Thes
  "nbformat": 4,
  "nbformat_minor": 2
 }
-#13
