@@ -1,8 +1,10 @@
-18-09-23 Time Series Forecasting.ipynb
-18-09-21 XG Boost Classifier.ipynb
+18-09-26 Collaborative Based Recommender.ipynb
+18-09-25 Hierarchical Clustering.ipynb
+18-08-24 Grid Search.ipynb
+18-09-23 Isolation Forest Classifier.ipynb
+18-09-22 XG Boost Classifier.ipynb
 18-09-21 Connecting to Databases.ipynb
 18-09-20 Hatch, Linestyle, Marker.ipynb
-18-09-19 Hierarchical Clustering.ipynb
 18-09-16 Sparse Matrix.ipynb
 18-09-16 Reweighting Classes.ipynb
 18-09-16 KMeans Clusteringipynb.ipynb
@@ -13,10 +15,8 @@
 18-09-13 Time Zone Conversion.ipynb
 18-09-12 PCA.ipynb
 18-09-10 Linear Regression.ipynb
-18-09-06 Grid Search.ipynb
 18-09-05 Dropping Features.ipynb
 18-09-03 Using TQDM.ipynb
-18-09-03 Isolation Forest Classifier.ipynb
 18-09-01 Decision Tree Classifier.ipynb
 18-08-31 Confusion Matrices.ipynb
 18-08-02 Downsampling.ipynb

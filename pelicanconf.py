@@ -54,7 +54,7 @@ GZIP_CACHE = False
 CHECK_MODIFIED_METHOD = 'mtime'
 LOAD_CONTENT_CACHE = False
 WITH_FUTURE_DATES = False
-DEFAULT_DATE_FORMAT = '%d %b %Y'
+DEFAULT_DATE_FORMAT = '%d %b'
 GOOGLE_ANALYTICS = 'UA-126270550-1'
 
 # --------- Additional HMTL5 Configurations --------
