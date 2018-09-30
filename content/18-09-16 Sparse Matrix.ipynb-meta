@@ -23,11 +23,11 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
   },
   {
    "cell_type": "code",
-   "execution_count": 23,
+   "execution_count": 1,
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2018-09-17T16:17:30.481685Z",
-     "start_time": "2018-09-17T16:17:30.468375Z"
+     "end_time": "2018-09-29T08:31:39.487202Z",
+     "start_time": "2018-09-29T08:31:37.114097Z"
     }
    },
    "outputs": [],
@@ -69,11 +69,11 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
   },
   {
    "cell_type": "code",
-   "execution_count": 24,
+   "execution_count": 2,
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2018-09-17T16:17:30.990433Z",
-     "start_time": "2018-09-17T16:17:30.980761Z"
+     "end_time": "2018-09-29T08:31:39.551166Z",
+     "start_time": "2018-09-29T08:31:39.500347Z"
     }
    },
    "outputs": [
@@ -108,13 +108,13 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "      <th>0</th>\n",
        "      <td>Group A</td>\n",
        "      <td>1</td>\n",
-       "      <td>1</td>\n",
+       "      <td>0</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>Group B</td>\n",
        "      <td>1</td>\n",
-       "      <td>1</td>\n",
+       "      <td>0</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>2</th>\n",
@@ -125,14 +125,14 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "    <tr>\n",
        "      <th>3</th>\n",
        "      <td>Group B</td>\n",
-       "      <td>0</td>\n",
-       "      <td>0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
        "      <td>Group A</td>\n",
        "      <td>1</td>\n",
-       "      <td>0</td>\n",
+       "      <td>1</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>5</th>\n",
@@ -143,8 +143,8 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "    <tr>\n",
        "      <th>6</th>\n",
        "      <td>Group A</td>\n",
-       "      <td>1</td>\n",
-       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>7</th>\n",
@@ -155,8 +155,8 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "    <tr>\n",
        "      <th>8</th>\n",
        "      <td>Group A</td>\n",
-       "      <td>1</td>\n",
        "      <td>0</td>\n",
+       "      <td>1</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>9</th>\n",
@@ -170,19 +170,19 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
       ],
       "text/plain": [
        "      name  number  value\n",
-       "0  Group A       1      1\n",
-       "1  Group B       1      1\n",
+       "0  Group A       1      0\n",
+       "1  Group B       1      0\n",
        "2  Group A       1      1\n",
-       "3  Group B       0      0\n",
-       "4  Group A       1      0\n",
+       "3  Group B       1      1\n",
+       "4  Group A       1      1\n",
        "5  Group B       1      0\n",
-       "6  Group A       1      1\n",
+       "6  Group A       0      0\n",
        "7  Group B       0      1\n",
-       "8  Group A       1      0\n",
+       "8  Group A       0      1\n",
        "9  Group B       1      0"
       ]
      },
-     "execution_count": 24,
+     "execution_count": 2,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -206,11 +206,11 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
   },
   {
    "cell_type": "code",
-   "execution_count": 28,
+   "execution_count": 3,
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2018-09-17T16:18:26.680664Z",
-     "start_time": "2018-09-17T16:18:26.667053Z"
+     "end_time": "2018-09-29T08:31:41.124397Z",
+     "start_time": "2018-09-29T08:31:41.107135Z"
     }
    },
    "outputs": [
@@ -245,14 +245,14 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "    <tr>\n",
        "      <th>0</th>\n",
        "      <td>1</td>\n",
-       "      <td>1</td>\n",
+       "      <td>0</td>\n",
        "      <td>1</td>\n",
        "      <td>0</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>1</td>\n",
-       "      <td>1</td>\n",
+       "      <td>0</td>\n",
        "      <td>0</td>\n",
        "      <td>1</td>\n",
        "    </tr>\n",
@@ -265,15 +265,15 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "    </tr>\n",
        "    <tr>\n",
        "      <th>3</th>\n",
-       "      <td>0</td>\n",
-       "      <td>0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
        "      <td>0</td>\n",
        "      <td>1</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
        "      <td>1</td>\n",
-       "      <td>0</td>\n",
+       "      <td>1</td>\n",
        "      <td>1</td>\n",
        "      <td>0</td>\n",
        "    </tr>\n",
@@ -283,14 +283,14 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
       ],
       "text/plain": [
        "   number  value  name_Group A  name_Group B\n",
-       "0       1      1             1             0\n",
-       "1       1      1             0             1\n",
+       "0       1      0             1             0\n",
+       "1       1      0             0             1\n",
        "2       1      1             1             0\n",
-       "3       0      0             0             1\n",
-       "4       1      0             1             0"
+       "3       1      1             0             1\n",
+       "4       1      1             1             0"
       ]
      },
-     "execution_count": 28,
+     "execution_count": 3,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -314,11 +314,11 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
   },
   {
    "cell_type": "code",
-   "execution_count": 43,
+   "execution_count": 4,
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2018-09-17T16:21:36.504658Z",
-     "start_time": "2018-09-17T16:21:36.499840Z"
+     "end_time": "2018-09-29T08:31:43.532798Z",
+     "start_time": "2018-09-29T08:31:43.526495Z"
     }
    },
    "outputs": [
@@ -326,10 +326,10 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
      "data": {
       "text/plain": [
        "<10000x4 sparse matrix of type '<class 'numpy.int64'>'\n",
-       "\twith 20013 stored elements in Compressed Sparse Row format>"
+       "\twith 19980 stored elements in Compressed Sparse Row format>"
       ]
      },
-     "execution_count": 43,
+     "execution_count": 4,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -349,11 +349,11 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
   },
   {
    "cell_type": "code",
-   "execution_count": 44,
+   "execution_count": 5,
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2018-09-17T16:21:45.172299Z",
-     "start_time": "2018-09-17T16:21:45.163910Z"
+     "end_time": "2018-09-29T08:31:44.324181Z",
+     "start_time": "2018-09-29T08:31:44.313082Z"
     }
    },
    "outputs": [
@@ -378,24 +378,24 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "  <thead>\n",
        "    <tr style=\"text-align: right;\">\n",
        "      <th></th>\n",
-       "      <th>0</th>\n",
-       "      <th>1</th>\n",
-       "      <th>2</th>\n",
-       "      <th>3</th>\n",
+       "      <th>number</th>\n",
+       "      <th>value</th>\n",
+       "      <th>name_Group A</th>\n",
+       "      <th>name_Group B</th>\n",
        "    </tr>\n",
        "  </thead>\n",
        "  <tbody>\n",
        "    <tr>\n",
        "      <th>0</th>\n",
        "      <td>1</td>\n",
-       "      <td>1</td>\n",
+       "      <td>0</td>\n",
        "      <td>1</td>\n",
        "      <td>0</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>1</td>\n",
-       "      <td>1</td>\n",
+       "      <td>0</td>\n",
        "      <td>0</td>\n",
        "      <td>1</td>\n",
        "    </tr>\n",
@@ -408,15 +408,15 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "    </tr>\n",
        "    <tr>\n",
        "      <th>3</th>\n",
-       "      <td>0</td>\n",
-       "      <td>0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
        "      <td>0</td>\n",
        "      <td>1</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
        "      <td>1</td>\n",
-       "      <td>0</td>\n",
+       "      <td>1</td>\n",
        "      <td>1</td>\n",
        "      <td>0</td>\n",
        "    </tr>\n",
@@ -429,8 +429,8 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "    </tr>\n",
        "    <tr>\n",
        "      <th>6</th>\n",
-       "      <td>1</td>\n",
-       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
        "      <td>1</td>\n",
        "      <td>0</td>\n",
        "    </tr>\n",
@@ -443,8 +443,8 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "    </tr>\n",
        "    <tr>\n",
        "      <th>8</th>\n",
-       "      <td>1</td>\n",
        "      <td>0</td>\n",
+       "      <td>1</td>\n",
        "      <td>1</td>\n",
        "      <td>0</td>\n",
        "    </tr>\n",
@@ -460,20 +460,20 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
        "</div>"
       ],
       "text/plain": [
-       "   0  1  2  3\n",
-       "0  1  1  1  0\n",
-       "1  1  1  0  1\n",
-       "2  1  1  1  0\n",
-       "3  0  0  0  1\n",
-       "4  1  0  1  0\n",
-       "5  1  0  0  1\n",
-       "6  1  1  1  0\n",
-       "7  0  1  0  1\n",
-       "8  1  0  1  0\n",
-       "9  1  0  0  1"
+       "   number  value  name_Group A  name_Group B\n",
+       "0       1      0             1             0\n",
+       "1       1      0             0             1\n",
+       "2       1      1             1             0\n",
+       "3       1      1             0             1\n",
+       "4       1      1             1             0\n",
+       "5       1      0             0             1\n",
+       "6       0      0             1             0\n",
+       "7       0      1             0             1\n",
+       "8       0      1             1             0\n",
+       "9       1      0             0             1"
       ]
      },
-     "execution_count": 44,
+     "execution_count": 5,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -484,11 +484,11 @@ Summary: A sparse matrix is a different approach to hold dataframes that are con
    ]
   },
   {
-   "cell_type": "code",
-   "execution_count": null,
+   "cell_type": "markdown",
    "metadata": {},
-   "outputs": [],
-   "source": []
+   "source": [
+    "Author: Kavi Sekhon"
+   ]
   }
  ],
  "metadata": {
