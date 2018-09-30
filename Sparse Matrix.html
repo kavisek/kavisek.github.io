@@ -1053,7 +1053,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -1099,7 +1099,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -1121,7 +1121,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -1154,13 +1154,13 @@ h6:hover .anchor-link {
       <th>0</th>
       <td>Group A</td>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Group B</td>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1171,14 +1171,14 @@ h6:hover .anchor-link {
     <tr>
       <th>3</th>
       <td>Group B</td>
-      <td>0</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Group A</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1189,8 +1189,8 @@ h6:hover .anchor-link {
     <tr>
       <th>6</th>
       <td>Group A</td>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1201,8 +1201,8 @@ h6:hover .anchor-link {
     <tr>
       <th>8</th>
       <td>Group A</td>
-      <td>1</td>
       <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>9</th>
@@ -1231,7 +1231,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -1248,7 +1248,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[28]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -1281,14 +1281,14 @@ h6:hover .anchor-link {
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
       <td>1</td>
       <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>1</td>
     </tr>
@@ -1301,15 +1301,15 @@ h6:hover .anchor-link {
     </tr>
     <tr>
       <th>3</th>
-      <td>0</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
       <td>0</td>
       <td>1</td>
     </tr>
     <tr>
       <th>4</th>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
     </tr>
@@ -1334,7 +1334,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sparse_matrix</span> <span class="o">=</span> <span class="n">csr_matrix</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -1352,14 +1352,14 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[43]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>&lt;10000x4 sparse matrix of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;
-	with 20013 stored elements in Compressed Sparse Row format&gt;</pre>
+	with 19980 stored elements in Compressed Sparse Row format&gt;</pre>
 </div>
 
 </div>
@@ -1378,7 +1378,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sparse_matrix</span><span class="o">.</span><span class="n">todense</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
@@ -1395,7 +1395,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[44]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -1418,24 +1418,24 @@ h6:hover .anchor-link {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
+      <th>number</th>
+      <th>value</th>
+      <th>name_Group A</th>
+      <th>name_Group B</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
       <td>1</td>
       <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>1</td>
     </tr>
@@ -1448,15 +1448,15 @@ h6:hover .anchor-link {
     </tr>
     <tr>
       <th>3</th>
-      <td>0</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
       <td>0</td>
       <td>1</td>
     </tr>
     <tr>
       <th>4</th>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
     </tr>
@@ -1469,8 +1469,8 @@ h6:hover .anchor-link {
     </tr>
     <tr>
       <th>6</th>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
       <td>0</td>
     </tr>
@@ -1483,8 +1483,8 @@ h6:hover .anchor-link {
     </tr>
     <tr>
       <th>8</th>
-      <td>1</td>
       <td>0</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
     </tr>
@@ -1505,6 +1505,15 @@ h6:hover .anchor-link {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Author: Kavi Sekhon</p>
+
+</div>
+</div>
 </div>
  
 
@@ -1566,14 +1575,14 @@ h6:hover .anchor-link {
 											<p><p>Collaborative Recommendations Systems work under the assumptions that user tastes are similar to each other. If that is the case then users reco..{</p></p>
 										</li>
 										<li>
+											<span class="date">26 Sep</span>
+											<h3><a href="https://kavisek.github.io/Time Series Forecasting.html">Time Series Forecasting</a></h3>
+											<p><p>This notebook demonstrates my solution to a time series problem posted on Kaggle. In the dataset, we have near 1 million training records from 1..{</p></p>
+										</li>
+										<li>
 											<span class="date">25 Sep</span>
 											<h3><a href="https://kavisek.github.io/Hierachical Clustering.html">Hierachical Clustering</a></h3>
 											<p><p>Hierarchical Clustering methods are a group of clustering algorithms that clustering data points into larger clusters based on a similarity metr..{</p></p>
-										</li>
-										<li>
-											<span class="date">23 Sep</span>
-											<h3><a href="https://kavisek.github.io/Isolation Forest Classifier.html">Isolation Forest Classifier</a></h3>
-											<p><p>The isolation forest algorithm is similar to a random forest algorithm but is modified to detect the anomalies within the data. The algorithm ge..{</p></p>
 										</li>
 										<li>
 											<span class="date">22 Sep</span>
