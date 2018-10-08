@@ -47,13 +47,13 @@ EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'}, }
 
 # --------- Additional Pelican Configurations --------
 
-CACHE_CONTENT = False
+CACHE_CONTENT = True
 CONTENT_CACHING_LAYER = 'reader'
 CACHE_PATH = 'cache'
-GZIP_CACHE = False
+GZIP_CACHE = True
 CHECK_MODIFIED_METHOD = 'mtime'
 LOAD_CONTENT_CACHE = False
-WITH_FUTURE_DATES = False
+WITH_FUTURE_DATES = True
 DEFAULT_DATE_FORMAT = '%d %b'
 GOOGLE_ANALYTICS = 'UA-126270550-1'
 

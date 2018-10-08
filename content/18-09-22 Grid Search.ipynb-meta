@@ -1,4 +1,10 @@
-{
+Title: Grid Search
+Date: 2018-9-22 00:00
+Category: Novice
+Tags: Python
+Slug: Grid Search
+Author: Kavi Sekhon
+Summary: Beware full grid search can be more computation intensive depending on your parameters. We use a K-Nearest Neighbours model for its example. Aft..{
  "cells": [
   {
    "cell_type": "markdown",
@@ -859,6 +865,13 @@
     "\n",
     "Author: Kavi Sekhon"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {
