@@ -293,7 +293,7 @@ Summary: Collaborative Recommendations Systems work under the assumptions that u
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Recommendation System 1: User-Item Filtering"
+    "### Recommendation System 1: User-Item Filtering"
    ]
   },
   {
